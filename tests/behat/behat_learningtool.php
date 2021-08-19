@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Behat pulse-related steps definitions.
+ * Behat Learning Tools related steps definitions.
  *
- * @package   mod_pulse
+ * @package   local_learningtools
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ use Behat\Gherkin\Node\TableNode as TableNode,
 /**
  * Course-related steps definitions.
  *
- * @package   mod_pulse
+ * @package   local_learningtools
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -51,28 +51,16 @@ class behat_learningtool extends behat_base {
     }
 
     /**
-     * Check that the activity has the given automatic completion condition.
-     *
-     * @Given the FAB button should exist
-     * @param string $activityname The activity name.
-     * @param string $conditionname The automatic condition name.
-     * @param string $completiontype The completion type text.
+     * Check that the fab button exist condition.
      */
     public function fab_button_should_exist(): void {
         $this->execute("behat_general::should_exist", ['#tool-action-button', 'css_element']);
     }
 
     /**
-     * Check that the activity has the given automatic completion condition.
-     *
-     * @Given I click on FAB button
-     * @param string $activityname The activity name.
-     * @param string $conditionname The automatic condition name.
-     * @param string $completiontype The completion type text.
+     * Check that click the fab button condition.
      */
     public function click_fab_button(): void {
         $this->execute("behat_general::i_click_on", ['#tool-action-button', 'css_element']);
     }
-
-    
 }

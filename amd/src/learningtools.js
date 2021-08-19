@@ -1,8 +1,8 @@
-define(['core/str'], function(str) {
+define([], function() {
     /**
      * Controls learningtools action.
-     * @param {bool} loggedin 
-     * 
+     * @param {bool} loggedin
+     *
      */
     function learning_tools_action(loggedin) {
         // Add fab button.

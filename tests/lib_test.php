@@ -46,8 +46,8 @@ class local_learningtools_lib_testcase extends advanced_testcase {
      * @return void
      */
     public function create_course(): void {
-        $this->course =  $this->generator->create_course();
-        $this->mod =  $this->generator->create_module('page', [
+        $this->course = $this->generator->create_course();
+        $this->mod = $this->generator->create_module('page', [
             'course' => $this->course->id,
             'title' => 'Test page',
             'content' => 'Test page content'
@@ -61,7 +61,7 @@ class local_learningtools_lib_testcase extends advanced_testcase {
      */
     public function test_get_moduleid(): void {
         global $DB;
-        // Create modules
+        // Create modules.
         $this->create_course();
         // Fetch module context id.
         $modulecontext = context_module::instance($this->mod->cmid);
@@ -82,7 +82,7 @@ class local_learningtools_lib_testcase extends advanced_testcase {
      */
     public function test_get_courses_name(): void {
         // Create multiple courses.
-        foreach(range(0, 3) as $count) {
+        foreach (range(0, 3) as $count) {
             $course  = $this->generator->create_course();
             $courseids[] = $course->id;
             $courses[$course->id] = $course;
