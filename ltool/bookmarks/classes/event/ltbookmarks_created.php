@@ -55,7 +55,7 @@ class ltbookmarks_created extends \core\event\base {
      * @return string
      */
     public function get_description() {
-       return "The user with id '$this->userid' has bookmarked for the course with id '$this->courseid'.";
+        return "The user with id '$this->userid' has bookmarked for the course with id '$this->courseid'.";
     }
 
 

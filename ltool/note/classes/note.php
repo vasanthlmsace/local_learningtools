@@ -23,7 +23,8 @@
  */
 
 namespace ltool_note;
-defined("MOODLE_INTERNAL") || die();
+
+defined('MOODLE_INTERNAL') || die();
 require_once(dirname(__DIR__).'/lib.php');
 /**
  *  Note ltool define class

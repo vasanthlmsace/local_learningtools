@@ -58,7 +58,8 @@ class ltbookmarks_deleted extends \core\event\base {
     public function get_description() {
 
         if ($this->relateduserid) {
-            return "The related user with id '$this->relateduserid' has deleted the bookmarks with id '$this->objectid' for the user with id '$this->userid'.";
+            return "The related user with id '$this->relateduserid' has deleted the
+            bookmarks with id '$this->objectid' for the user with id '$this->userid'.";
         }
         return "The user with id '$this->userid' has deleted the bookmarks with id '$this->objectid'.";
     }

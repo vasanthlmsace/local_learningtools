@@ -59,6 +59,5 @@ class ltbookmarks_viewed extends \core\event\base {
             return "The related user with id '$this->relateduserid' has viewed the user with id '$this->userid' bookmarks.";
         }
         return "The user with id '$this->userid' has viewed the bookmarks.";
-        
     }
 }

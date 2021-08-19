@@ -33,7 +33,7 @@ function xmldb_local_learningtools_uninstall() {
     $table = "learningtools_products";
     $dbman = $DB->get_manager();
     if ($dbman->table_exists($table)) {
-    	$droptable = new xmldb_table($table);
+        $droptable = new xmldb_table($table);
         $dbman->drop_table($droptable);
     }
 }
