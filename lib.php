@@ -63,14 +63,12 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     $ltoolsjs = array();
     $fabbuttonhtml = get_learningtools_info();
     $ltoolsjs['disappertimenotify'] = get_config('local_learningtools', 'notificationdisapper');
-    $ltoolsjs['notestrigger'] = optional_param('notes', '', PARAM_TEXT);
-    $PAGE->requires->data_for_js('fabbuttonhtml', $fabbuttonhtml);
     $PAGE->requires->data_for_js('ltools', $ltoolsjs);
     $loggedin = false;
     if (isloggedin() && !isguestuser()) {
         $loggedin = true;
     }
-    $viewcapability = array('loggedin' => $loggedin);
+    $viewcapability = array('loggedin' => $loggedin, 'fabbuttonhtml' => $fabbuttonhtml);
     $PAGE->requires->js_call_amd('local_learningtools/learningtools', 'init', $viewcapability);
 }
 

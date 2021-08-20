@@ -23,14 +23,13 @@
 
 define([], function() {
 
-
     /**
      * Controls learningtools action.
      * @param {bool} loggedin
-     * @global {Array} fabbuttonhtml
+     * @param {string} fabbuttonhtml
      *
      */
-    function learning_tools_action(loggedin) {
+    function learning_tools_action(loggedin, fabbuttonhtml) {
         // Add fab button.
         if (loggedin) {
           var pagewrapper = document.getElementById("page-footer");
@@ -48,8 +47,8 @@ define([], function() {
         });
     }
     return {
-        init: function(loggedin) {
-            learning_tools_action(loggedin);
+        init: function(loggedin, fabbuttonhtml) {
+            learning_tools_action(loggedin, fabbuttonhtml);
         }
     };
 });

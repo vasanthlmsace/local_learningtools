@@ -18,7 +18,6 @@ Feature: Check the learning tools features and manage sub plugins.
       | student1 | C1 | student        |
       | teacher1 | C1 | editingteacher |
 
-
   @javascript
   Scenario: Check the subplugins visibility.
     # Admin view
@@ -44,8 +43,6 @@ Feature: Check the learning tools features and manage sub plugins.
     And I click on "#tool-action-button" "css_element"
     Then "#ltnoteinfo" "css_element" should be visible
     And "#ltbookmarkinfo" "css_element" should be visible
-
-  
 
   @javascript
   Scenario: Test the subplugins order and enable disable methods.
@@ -91,9 +88,4 @@ Feature: Check the learning tools features and manage sub plugins.
     And "Learning Tools Bookmarks" "table_row" should appear before "Learning Tools Note" "table_row"
     And I click on "#tool-action-button" "css_element"
     And "#ltbookmarkinfo" "css_element" should appear before "#ltnoteinfo" "css_element"
-
-
-
-
-
-
+    
