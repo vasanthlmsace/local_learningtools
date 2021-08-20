@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot. '/local/learningtools/lib.php');
 
+define('BOOKMARK_SHORTNAME', 'bookmarks');
+
 /**
  * Defines ltool bookmarks nodes for my profile navigation tree.
  *

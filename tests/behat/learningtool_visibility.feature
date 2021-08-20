@@ -50,7 +50,7 @@ Feature: Check the learning tools features and manage sub plugins.
     And "#tool-action-button" "css_element" should exist
     And I navigate to "Plugins > Local plugins > Manage Learning Tools" in site administration
     Then "table#learningtool-products" "css_element" should exist
-    And I should see "Learning Tools Bookmarks" in the "#learningtools_products_info_r0" "css_element"
+    And I should see "Learning Tools Bookmarks" in the "#learningtool_products_info_r0" "css_element"
     # Disable the learning tools bookmarks.
     And I click on ".fa-eye" "css_element" in the "Learning Tools Bookmarks" "table_row"
     And "#ltbookmarkinfo" "css_element" should not exist

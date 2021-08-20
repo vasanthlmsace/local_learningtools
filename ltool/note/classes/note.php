@@ -32,6 +32,13 @@ require_once(dirname(__DIR__).'/lib.php');
 class note extends \local_learningtools\learningtools {
 
     /**
+     * Tool shortname.
+     *
+     * @var string
+     */
+    public $shortname = 'note';
+
+    /**
      * Note name
      * @return string name
      */
@@ -50,10 +57,10 @@ class note extends \local_learningtools\learningtools {
 
     /**
      * Get the notes content.
-     * @param object $tool note plugin info
+     *
      * @return string display tool note plugin html
      */
-    public function get_tool_records($tool) {
+    public function get_tool_records() {
         global $DB, $PAGE, $USER, $CFG;
         require_once($CFG->dirroot.'/local/learningtools/ltool/note/lib.php');
         $args = [];
@@ -67,8 +74,26 @@ class note extends \local_learningtools\learningtools {
         $data['ltnote'] = true;
         $data['pagenotes'] = get_userpage_countnotes($args);
         $data['notehovername'] = get_string('createnote', 'local_learningtools');
-        // Load notes tool js configuration.
+        return $data;
+    }
+
+    /**
+     * Load the required javascript files for note.
+     *
+     * @return void
+     */
+    public function load_js() {
+        // Load note tool js configuration.
         load_notes_js_config();
+    }
+
+    /**
+     * Return the template of note fab button.
+     *
+     * @return string note tool fab button html.
+     */
+    public function render_template() {
+        $data = $this->get_tool_records();
         return ltool_note_render_template($data);
     }
 

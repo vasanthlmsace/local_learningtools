@@ -27,20 +27,22 @@ namespace local_learningtools;
  * define learningtools base class to overwrite the tools.
  */
 abstract class learningtools {
+
     /**
      * Tool Name.
      */
     abstract public function get_tool_name();
+
     /**
      * Tool icon.
      */
     abstract public function get_tool_icon();
+
     /**
      * Get the tool content.
      * @param object $tool plugin info
      */
-    abstract public function get_tool_records($tool);
-
+    abstract public function get_tool_records();
 
     /**
      * Get tool info.

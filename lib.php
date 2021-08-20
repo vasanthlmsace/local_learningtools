@@ -49,6 +49,7 @@ function local_learningtools_myprofile_navigation(tree $tree, $user, $iscurrentu
     }
     return true;
 }
+
 /**
  * Adds ltools action in each page to the given navigation node if caps are met.
  *
@@ -61,6 +62,7 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     global $PAGE, $USER;
     $context = context_system::instance();
     $ltoolsjs = array();
+    // Content of fab button html.
     $fabbuttonhtml = get_learningtools_info();
     $ltoolsjs['disappertimenotify'] = get_config('local_learningtools', 'notificationdisapper');
     $PAGE->requires->data_for_js('ltools', $ltoolsjs);
@@ -70,6 +72,14 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     }
     $viewcapability = array('loggedin' => $loggedin, 'fabbuttonhtml' => $fabbuttonhtml);
     $PAGE->requires->js_call_amd('local_learningtools/learningtools', 'init', $viewcapability);
+    // List of subplugins.
+    // Load available subplugins javascript.
+    $subplugins = local_learningtools_get_subplugins();
+    foreach ($subplugins as $shortname => $plugin) {
+        if (method_exists($plugin, 'load_js')) {
+            $plugin->load_js();
+        }
+    }
 }
 
 /**
@@ -275,20 +285,16 @@ function get_mod_section($courseid, $modid) {
     return '';
 }
 
+
 /**
- * Display fab button html.
- * @return string fab button html content.
+ * Get list of available sub plugins.
+ *
+ * @return array $plugins List of available subplugins.
  */
-function get_learningtools_info() {
-
-    global $DB, $CFG;
+function local_learningtools_get_subplugins() {
+    global $DB;
     $context = context_system::instance();
-    $content = '';
-
-    $content .= html_writer::start_tag('div', array('class' => 'floating-button'));
-    $content .= html_writer::start_tag('div', array('class' => 'list-learningtools'));
     $learningtools = $DB->get_records('local_learningtools_products', array('status' => 1), 'sort');
-
     if (!empty($learningtools)) {
         foreach ($learningtools as $tool) {
             $capability = 'ltool/'.$tool->shortname.':create'. $tool->shortname;
@@ -296,10 +302,31 @@ function get_learningtools_info() {
                 $plugin = 'ltool_'.$tool->shortname;
                 $classname = "\\$plugin\\$tool->shortname";
                 if (class_exists($classname)) {
-                    $toolobj = new $classname();
-                    $content .= $toolobj->get_tool_records($tool);
+                    $plugins[$tool->shortname] = new $classname();
                 }
             }
+        }
+        return isset($plugins) ? $plugins : [];
+    }
+    return [];
+}
+
+
+/**
+ * Display fab button html.
+ * @return string fab button html content.
+ */
+function get_learningtools_info() {
+    $content = '';
+
+    $content .= html_writer::start_tag('div', array('class' => 'floating-button'));
+    $content .= html_writer::start_tag('div', array('class' => 'list-learningtools'));
+
+    // Get list of ltool sub plugins.
+    $subplugins = local_learningtools_get_subplugins();
+    if (!empty($subplugins)) {
+        foreach ($subplugins as $shortname => $toolobj) {
+            $content .= $toolobj->render_template();
         }
     }
 

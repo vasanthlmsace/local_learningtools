@@ -37,14 +37,16 @@ define([], function() {
         }
 
         var toolaction = document.getElementById("tool-action-button");
-        toolaction.addEventListener("click", function() {
-            var listclass = document.getElementsByClassName("list-learningtools")[0];
-            if (listclass.classList.contains('show')) {
-                listclass.classList.remove('show');
-            } else {
-                listclass.classList.add('show');
-            }
-        });
+        if (toolaction !== null) {
+            toolaction.addEventListener("click", function() {
+                var listclass = document.getElementsByClassName("list-learningtools")[0];
+                if (listclass.classList.contains('show')) {
+                    listclass.classList.remove('show');
+                } else {
+                    listclass.classList.add('show');
+                }
+            });
+        }
     }
     return {
         init: function(loggedin, fabbuttonhtml) {

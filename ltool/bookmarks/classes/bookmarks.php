@@ -26,11 +26,20 @@ namespace ltool_bookmarks;
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/local/learningtools/lib.php');
+
 require_once(dirname(__DIR__).'/lib.php');
+
 /**
  *  The class defines the Bookmarks ltool
  */
 class bookmarks extends \local_learningtools\learningtools {
+
+    /**
+     * Tool shortname.
+     *
+     * @var string
+     */
+    public $shortname = 'bookmarks';
 
     /**
      * Bookmarks name
@@ -51,16 +60,16 @@ class bookmarks extends \local_learningtools\learningtools {
 
     /**
      * Get the bookmarks content.
-     * @param object $tool bookmarks plugin info
+     *
      * @return string display tool bookmarks plugin html.
      */
-    public function get_tool_records($tool) {
+    public function get_tool_records() {
         global $CFG, $USER, $COURSE, $PAGE;
         $data = [];
         $data['name'] = $this->get_tool_name();
         $data['icon'] = $this->get_tool_icon();
-        $data['toolurl'] = "$CFG->wwwroot/local/learningtools/ltool/$tool->shortname/$tool->shortname"."_info.php";
-        $data['id'] = $tool->shortname;
+        $data['toolurl'] = "$CFG->wwwroot/local/learningtools/ltool/".$this->shortname."/".$this->shortname."_info.php";
+        $data['id'] = $this->shortname;
         $data['user'] = $USER->id;
         $data['course'] = $COURSE->id;
         $data['pageurl'] = $PAGE->url->out(false);
@@ -72,8 +81,27 @@ class bookmarks extends \local_learningtools\learningtools {
         $data['ltbookmark'] = true;
         $data['bookmarkhovername'] = get_string('addbookmark', 'local_learningtools');
         $data['pagebookmarks'] = check_page_bookmarks_exist($PAGE->context->id, $PAGE->pagetype, $USER->id);
-        // Load notes tool js configuration.
+        return $data;
+    }
+
+    /**
+     * Load the required javascript files for bookmarks.
+     *
+     * @return void
+     */
+    public function load_js() {
+        $data = $this->get_tool_records();
+        // Load bookmarks tool js configuration.
         load_bookmarks_js_config($data);
+    }
+
+    /**
+     * Return the template of Bookmark fab button.
+     *
+     * @return string Bookmark tool fab button html.
+     */
+    public function render_template() {
+        $data = $this->get_tool_records();
         return ltool_bookmarks_render_template($data);
     }
 

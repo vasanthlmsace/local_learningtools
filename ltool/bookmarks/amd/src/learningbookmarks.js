@@ -32,27 +32,22 @@ define(['core/str', 'core/ajax', 'core/notification'],
      */
     function learning_tool_bookmarks_action(contextid, params) {
 
-        setTimeout(function() {
-
-            var bookmarkmarked = document.getElementById('bookmarks-marked');
-            if (bookmarkmarked) {
-                if (pagebookmarks) {
-                    bookmarkmarked.classList.add('marked');
-                } else {
-                    bookmarkmarked.classList.remove('marked');
-                }
+        var bookmarkmarked = document.getElementById('bookmarks-marked');
+        if (bookmarkmarked) {
+            if (pagebookmarks) {
+                bookmarkmarked.classList.add('marked');
+            } else {
+                bookmarkmarked.classList.remove('marked');
             }
+        }
 
-            var bookmarksform = document.getElementById('ltbookmarks-action');
-            if (bookmarksform) {
-                bookmarksform.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    submitFormdata(contextid, params);
-                });
-            }
-            
-        }, 3000);
-       
+        var bookmarksform = document.getElementById('ltbookmarks-action');
+        if (bookmarksform) {
+            bookmarksform.addEventListener("click", function(e) {
+                e.preventDefault();
+                submitFormdata(contextid, params);
+            });
+        }
         var bookmarkssorttype = document.getElementById("bookmarkssorttype");
 
         if (bookmarkssorttype) {
@@ -79,7 +74,7 @@ define(['core/str', 'core/ajax', 'core/notification'],
         } else if (sorttype == 'desc') {
             sorttype = 'asc';
         }
-        
+
         if (pageurl.indexOf('?') > -1) {
             var para = '&';
         } else {
@@ -131,8 +126,8 @@ define(['core/str', 'core/ajax', 'core/notification'],
         Ajax.call([{
             methodname: 'ltool_bookmarks_save_userbookmarks',
             args: {contextid: contextid, formdata: Formdata},
-            done: function(response) { 
-                
+            done: function(response) {
+
                 notification.addNotification({
                     message: response.bookmarksmsg,
                     type: response.notificationtype
@@ -149,7 +144,7 @@ define(['core/str', 'core/ajax', 'core/notification'],
                     setTimeout(function () {
                         var notifications = document.querySelector("span.notifications").innerHTML = "";
                     }, ltools.disappertimenotify);
-                } 
+                }
 
             },
             fail: handleFailedResponse()

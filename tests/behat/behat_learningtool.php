@@ -32,7 +32,7 @@ use Behat\Gherkin\Node\TableNode as TableNode,
     Behat\Mink\Exception\ElementNotFoundException as ElementNotFoundException;
 
 /**
- * Course-related steps definitions.
+ * Test cases custom function for learning tool FAB buttons.
  *
  * @package   local_learningtools
  * @copyright 2021, bdecent gmbh bdecent.de
@@ -41,17 +41,9 @@ use Behat\Gherkin\Node\TableNode as TableNode,
 class behat_learningtool extends behat_base {
 
     /**
-     * Moodle branch number.
-     *
-     * @return string Moodle branch number.
-     */
-    public function moodle_branch() {
-        global $CFG;
-        return $CFG->branch;
-    }
-
-    /**
      * Check that the fab button exist condition.
+     *
+     * @Given the FAB button should exist
      */
     public function fab_button_should_exist(): void {
         $this->execute("behat_general::should_exist", ['#tool-action-button', 'css_element']);
@@ -59,6 +51,9 @@ class behat_learningtool extends behat_base {
 
     /**
      * Check that click the fab button condition.
+     *
+     * @Given I click on FAB button
+     *
      */
     public function click_fab_button(): void {
         $this->execute("behat_general::i_click_on", ['#tool-action-button', 'css_element']);
