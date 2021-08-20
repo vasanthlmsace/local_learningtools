@@ -227,7 +227,7 @@ function check_page_bookmarks_exist($contextid, $pagetype, $userid) {
  */
 function is_bookmarks_status() {
     global $DB;
-    $bookmarksrecord = $DB->get_record('local_learningtool_products', array('shortname' => 'bookmarks'));
+    $bookmarksrecord = $DB->get_record('local_learningtools_products', array('shortname' => 'bookmarks'));
     if (isset($bookmarksrecord->status) && !empty($bookmarksrecord->status)) {
         return true;
     }

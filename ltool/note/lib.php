@@ -26,6 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir.'/formslib.php');
 require_once($CFG->dirroot. '/local/learningtools/lib.php');
+
 /**
  * Define notes form.
  */
@@ -476,7 +477,7 @@ function ltool_note_render_template($templatecontent) {
  */
 function is_note_status() {
     global $DB;
-    $noterecord = $DB->get_record('local_learningtool_products', array('shortname' => 'note'));
+    $noterecord = $DB->get_record('local_learningtools_products', array('shortname' => 'note'));
     if (isset($noterecord->status) && !empty($noterecord->status)) {
         return true;
     }

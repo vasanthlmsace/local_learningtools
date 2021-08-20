@@ -30,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 function xmldb_local_learningtools_uninstall() {
     global $DB;
-    $table = "local_learningtool_products";
+    $table = "local_learningtools_products";
     $dbman = $DB->get_manager();
     if ($dbman->table_exists($table)) {
         $droptable = new xmldb_table($table);
