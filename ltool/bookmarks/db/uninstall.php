@@ -32,8 +32,8 @@ function xmldb_ltool_bookmarks_uninstall() {
     global $DB;
 
     $plugin = 'bookmarks';
-    if ($DB->record_exists('learningtools_products', array('shortname' => $plugin)) ) {
-        $DB->delete_records('learningtools_products', array('shortname' => $plugin));
+    if ($DB->record_exists('local_learningtool_products', array('shortname' => $plugin)) ) {
+        $DB->delete_records('local_learningtool_products', array('shortname' => $plugin));
     }
 
     $table = "learningtools_bookmarks";

@@ -289,7 +289,7 @@ function get_learningtools_info() {
 
     $content .= html_writer::start_tag('div', array('class' => 'floating-button'));
     $content .= html_writer::start_tag('div', array('class' => 'list-learningtools'));
-    $learningtools = $DB->get_records('learningtools_products', array('status' => 1), 'sort');
+    $learningtools = $DB->get_records('local_learningtool_products', array('status' => 1), 'sort');
 
     if (!empty($learningtools)) {
         foreach ($learningtools as $tool) {

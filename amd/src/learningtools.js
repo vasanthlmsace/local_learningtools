@@ -48,7 +48,6 @@ define([], function() {
             }
         });
     }
-    
     return {
         init: function(loggedin) {
             learning_tools_action(loggedin);

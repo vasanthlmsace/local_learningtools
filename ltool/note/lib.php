@@ -476,7 +476,7 @@ function ltool_note_render_template($templatecontent) {
  */
 function is_note_status() {
     global $DB;
-    $noterecord = $DB->get_record('learningtools_products', array('shortname' => 'note'));
+    $noterecord = $DB->get_record('local_learningtool_products', array('shortname' => 'note'));
     if (isset($noterecord->status) && !empty($noterecord->status)) {
         return true;
     }

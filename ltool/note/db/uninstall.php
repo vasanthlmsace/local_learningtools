@@ -32,8 +32,8 @@ function xmldb_ltool_note_uninstall() {
     global $DB;
 
     $plugin = 'note';
-    if ($DB->record_exists('learningtools_products', array('shortname' => $plugin)) ) {
-        $DB->delete_records('learningtools_products', array('shortname' => $plugin));
+    if ($DB->record_exists('local_learningtool_products', array('shortname' => $plugin)) ) {
+        $DB->delete_records('local_learningtool_products', array('shortname' => $plugin));
     }
     // Delete the table.
     $table = "learningtools_note";

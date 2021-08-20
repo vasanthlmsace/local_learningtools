@@ -33,14 +33,14 @@ function xmldb_ltool_bookmarks_install() {
 
     $plugin = 'bookmarks';
     $strpluginname = get_string('pluginname', 'ltool_' . $plugin);
-    if (!$DB->record_exists('learningtools_products', array('shortname' => $plugin)) ) {
-        $lasttool = $DB->get_record_sql(' SELECT id FROM {learningtools_products} ORDER BY id DESC LIMIT 1', null);
+    if (!$DB->record_exists('local_learningtool_products', array('shortname' => $plugin)) ) {
+        $lasttool = $DB->get_record_sql(' SELECT id FROM {local_learningtool_products} ORDER BY id DESC LIMIT 1', null);
         $record = new stdClass;
         $record->shortname = $plugin;
         $record->name = $strpluginname;
         $record->status = 1;
         $record->sort = (!empty($lasttool)) ? $lasttool->id + 1 : 1;
         $record->timecreated = time();
-        $DB->insert_record('learningtools_products', $record);
+        $DB->insert_record('local_learningtool_products', $record);
     }
 }
