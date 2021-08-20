@@ -222,23 +222,6 @@ class bookmarkstool_table extends \table_sql {
      * @return string view the bookmarks url
      */
     public function col_view(stdclass $row) {
-        global $OUTPUT;
-        $data = check_instanceof_block($row);
-        $viewurl = '';
-        if ($data->instance == 'course') {
-            $courseurl = new moodle_url('/course/view.php', array('id' => $data->courseid));
-            $viewurl = $OUTPUT->single_button($courseurl, get_string('viewcourse', 'local_learningtools'), 'get');
-        } else if ($data->instance == 'user') {
-            $viewurl = 'user';
-        } else if ($data->instance == 'mod') {
-            $modname = get_module_name($data, true);
-            $modurl = new moodle_url("/mod/$modname/view.php", array('id' => $data->coursemodule));
-            $viewurl = $OUTPUT->single_button($modurl, get_string('viewactivity', 'local_learningtools'), 'get');
-        } else if ($data->instance == 'system') {
-             $viewurl = 'system';
-        } else if ($data->instance == 'block') {
-             $viewurl = 'block';
-        }
-        return $viewurl;
+        return get_instance_tool_view_url($row);
     }
 }

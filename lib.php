@@ -369,3 +369,29 @@ function has_viewtool_capability_role($assignedroles, string $capability) {
     $result = array_intersect($roles, array_keys($roleshascaps));
     return !empty($result) ? true : false;
 }
+
+/**
+ * Get the tool instance view url.
+ * @param object $row list of the tool record
+ * @return string view html
+ */
+function get_instance_tool_view_url($row) {
+    global $OUTPUT;
+    $data = check_instanceof_block($row);
+    $viewurl = '';
+    if ($data->instance == 'course') {
+        $courseurl = new moodle_url('/course/view.php', array('id' => $data->courseid));
+        $viewurl = $OUTPUT->single_button($courseurl, get_string('viewcourse', 'local_learningtools'), 'get');
+    } else if ($data->instance == 'user') {
+        $viewurl = 'user';
+    } else if ($data->instance == 'mod') {
+        $modname = get_module_name($data, true);
+        $modurl = new moodle_url("/mod/$modname/view.php", array('id' => $data->coursemodule));
+        $viewurl = $OUTPUT->single_button($modurl, get_string('viewactivity', 'local_learningtools'), 'get');
+    } else if ($data->instance == 'system') {
+        $viewurl = 'system';
+    } else if ($data->instance == 'block') {
+        $viewurl = 'block';
+    }
+    return $viewurl;
+}

@@ -351,33 +351,6 @@ function user_save_notes($contextid, $data) {
     }
 }
 
-/**
- * Get the notes instance.
- * @param object $record page record
- */
-function check_note_instanceof_block($record) {
-    $data = new stdClass;
-    if ($record->contextlevel == 10) {// System level.
-        $data->instance = 'system';
-    } else if ($record->contextlevel == 30) {// User level.
-        $data->instance = 'user';
-    } else if ($record->contextlevel == 50) {// Course level.
-        $data->instance = 'course';
-        $data->courseid = $record->course;
-        $data->contextid = $record->contextid;
-
-    } else if ($record->contextlevel == 70) {// Mod level.
-        $data->instance = 'mod';
-        $data->courseid = $record->course;
-        $data->contextid = $record->contextid;
-        $data->coursemodule = get_coursemodule_id($record);
-
-    } else if ($record->contextlevel == 80) {// Context blocklevel.
-        $data->instance = 'block';
-    }
-    return $data;
-}
-
 
 /**
  * Get notes edit records

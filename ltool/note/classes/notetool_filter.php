@@ -113,7 +113,7 @@ class notetool_filter {
         $records = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE $usersql", $userparams);
         if (!empty($records)) {
             foreach ($records as $record) {
-                $instanceblock = check_note_instanceof_block($record);
+                $instanceblock = check_instanceof_block($record);
                 if (isset($instanceblock->instance) && $instanceblock->instance == 'course' || $instanceblock->instance == 'mod') {
                     $courses[] = $instanceblock->courseid;
                 }
@@ -525,24 +525,7 @@ class notetool_filter {
      * @return string view html
      */
     public function get_view_url($row) {
-        global $OUTPUT;
-        $data = check_instanceof_block($row);
-        $viewurl = '';
-        if ($data->instance == 'course') {
-            $courseurl = new moodle_url('/course/view.php', array('id' => $data->courseid));
-            $viewurl = $OUTPUT->single_button($courseurl, get_string('viewcourse', 'local_learningtools'), 'get');
-        } else if ($data->instance == 'user') {
-            $viewurl = 'user';
-        } else if ($data->instance == 'mod') {
-            $modname = get_module_name($data, true);
-            $modurl = new moodle_url("/mod/$modname/view.php", array('id' => $data->coursemodule));
-            $viewurl = $OUTPUT->single_button($modurl, get_string('viewactivity', 'local_learningtools'), 'get');
-        } else if ($data->instance == 'system') {
-            $viewurl = 'system';
-        } else if ($data->instance == 'block') {
-            $viewurl = 'block';
-        }
-        return $viewurl;
+        return get_instance_tool_view_url($row);
     }
 
     /**
