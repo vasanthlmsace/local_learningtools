@@ -80,7 +80,7 @@ Feature: Check the learning tools features and manage sub plugins.
     And "#ltbookmarkinfo" "css_element" should appear before "#ltnoteinfo" "css_element"
     # Bookmark order changed.
     Then I click on ".fa-arrow-down" "css_element" in the "Learning Tools Bookmarks" "table_row"
-    And "Learning Tools Note" "table_row" should appear before "Learning Tools Bookmarks" "table_row"    
+    And "Learning Tools Note" "table_row" should appear before "Learning Tools Bookmarks" "table_row" 
     And I click on "#tool-action-button" "css_element"
     And "#ltbookmarkinfo" "css_element" should appear after "#ltnoteinfo" "css_element"
     # Note order down.
@@ -88,4 +88,3 @@ Feature: Check the learning tools features and manage sub plugins.
     And "Learning Tools Bookmarks" "table_row" should appear before "Learning Tools Note" "table_row"
     And I click on "#tool-action-button" "css_element"
     And "#ltbookmarkinfo" "css_element" should appear before "#ltnoteinfo" "css_element"
-    
