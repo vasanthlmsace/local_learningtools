@@ -31,7 +31,7 @@ body.scrolled #goto-top-link,
     border: 0;
     border-radius: 50%;
     background: #0f6fc5;
-    box-shadow: 2px 5px 5px rgb(0, 0, 0,.2);
+    box-shadow: 2px 5px 5px rgb(0, 0, 0, .2);
     margin-bottom: 5px;
     position: relative;
 }
@@ -40,7 +40,7 @@ body.scrolled #goto-top-link,
     box-shadow: none;
     outline: none;
 }
-.floating-button  > button i {
+.floating-button > button i {
     font-size: 20px;
     color: #fff;
 }
@@ -63,20 +63,8 @@ body.scrolled #goto-top-link,
     border: 0;
     border-radius: 50%;
     background: #e83e8c;
-    box-shadow: 2px 5px 5px rgb(0, 0, 0,.2);
+    box-shadow: 2px 5px 5px rgb(0, 0, 0, .2);
     position: relative;
-}
-.floating-button .list-learningtools > div.ltbookmarksinfo button {
-    background: #343a40;
-}
-.floating-button .list-learningtools > div.ltnoteinfo button {
-    background: #17a2b8;
-}
-.floating-button .list-learningtools > div.ltnoteinfo button span{
-    display: none;
-}
-.floating-button .list-learningtools > div.ltnoteinfo button span.ticked{
-    display: block;
 }
 .floating-button .list-learningtools > div button span {
     width: 25px;
@@ -88,7 +76,7 @@ body.scrolled #goto-top-link,
     border-radius: 40%;
     position: absolute;
     top: 0;
-    right: -5px;    
+    right: -5px;
 }
 .floating-button .list-learningtools > div button:focus {
     border: 0;
@@ -113,29 +101,9 @@ body.scrolled #goto-top-link,
     margin-top: 13px;
 }
 
-.floating-button .list-learningtools > div.ltbookmarksinfo button:hover p {
-    background: #343a40;
-}
-.floating-button .list-learningtools > div.ltnoteinfo button:hover p {
-    background: #17a2b8;
-}
 .floating-button .list-learningtools > div button i,
 .floating-button .list-learningtools + button i {
     font-size: 26px;
     line-height: 43px;
     color: #fff;
-}
-.floating-button .list-learningtools > div.ltbookmarksinfo button i + span {
-    display: none;
-}
-.floating-button .list-learningtools > div.ltbookmarksinfo button i.marked + span {
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
-    font-size: 10px;
-    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    background: #2e9f7f;
-    display: block;
-    right: -7px;
 }

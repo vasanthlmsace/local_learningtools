@@ -40,7 +40,7 @@
     margin-bottom: 20px;
 }
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select {
-display: inline-block;
+    display: inline-block;
 }
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select:focus,
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select:active,
@@ -171,4 +171,27 @@ display: inline-block;
         margin-right: 0;
         display: block;
     }
+}
+
+
+/*floating button*/
+.floating-button .list-learningtools > div.ltbookmarksinfo button {
+    background: #343a40;
+}
+.floating-button .list-learningtools > div.ltbookmarksinfo button:hover p {
+    background: #343a40;
+}
+.floating-button .list-learningtools > div.ltbookmarksinfo button i + span {
+    display: none;
+}
+.floating-button .list-learningtools > div.ltbookmarksinfo button i.marked + span {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 10px;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    background: #2e9f7f;
+    display: block;
+    right: -7px;
 }

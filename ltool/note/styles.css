@@ -163,7 +163,7 @@
     color: #000;
     display: inline-block;
 }
-.learningtool-note .modal .modal-body .ltoolusernotes form .editor_atto .editor_atto_content_wrap,
+.learningtool-note .modal .modal-body .ltoolusernotes form .editor_atto .editor_atto_content_wrap .editor_atto_content,
 .learningtool-note .modal .modal-body .ltoolusernotes form .editor_atto .editor_atto + textarea {
     border: 1px solid #ccc;
 }
@@ -236,4 +236,19 @@
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
     display: none;
+}
+
+
+/*floating button*/
+.floating-button .list-learningtools > div.ltnoteinfo button {
+    background: #17a2b8;
+}
+.floating-button .list-learningtools > div.ltnoteinfo button span {
+    display: none;
+}
+.floating-button .list-learningtools > div.ltnoteinfo button span.ticked {
+    display: block;
+}
+.floating-button .list-learningtools > div.ltnoteinfo button:hover p {
+    background: #17a2b8;
 }

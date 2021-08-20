@@ -1,6 +1,34 @@
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Notes ltool define js.
+ * @package   ltool_note
+ * @category  Classes - autoloading
+ * @copyright 2021, bdecent gmbh bdecent.de
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal_events', 'core/ajax', 'core/notification'],
     function($, ModalFactory, String, Fragment, ModalEvents, Ajax, notification){
 
+    /**
+     * Controls notes tool action.
+     * @param {int} context id
+     * @param {object} notes info params
+     */
     function learning_tool_note_action(contextid, params) {
         setTimeout(function() {
             show_modal_lttool(contextid, params);
@@ -16,6 +44,12 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
 
     }
 
+    /**
+     * Clean the url parameters.
+     * @param {string} page url.
+     * @param {string} url parameter.
+     * @return {url} sort url
+     */
     function removeURLParameter(url, parameter) {
         //prefer to use l.search if you have a location/link object
         var urlparts= url.split('?');
@@ -39,6 +73,12 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         }
     }
 
+    /**
+     * Display the modal popup.
+     * @param {int} context id
+     * @param {object} notes info params
+     * @return {void} 
+     */
     function show_modal_lttool(contextid, params) {
 
         var notesinfo = document.querySelector(".ltnoteinfo #ltnote-action");
@@ -90,6 +130,11 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         });
     }
 
+    /**
+     * Sort the bookmarks list.
+     * @param {string} sort type
+     * @return {void}
+     */
     function note_sort_action_page(sorttype) {
 
         var pageurl = window.location.href;
@@ -111,15 +156,30 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         window.open(pageurl, '_self');
     }
 
+    /**
+     * Popout url action html.
+     * @param {object} notes params
+     * @return {string} popout html
+     */
     function get_popout_action(params) {
         var popouthtml = "<div class='popout-block'><button type='submit' id='popout-action' name='popoutsubmit'>Pop out</button><i class='fa fa-window-restore'></i></div>";
         return popouthtml;
     }
 
+    /**
+     * Submit the modal form.
+     * @param {object} modal object
+     */
     function submitForm(modal) {
         modal.getRoot().submit();
     }
 
+    /**
+     * Submit the modal data form.
+     * @param {object} modal object
+     * @param {int} context id
+     * @return {void} ajax response.
+     */
     function submitFormData(modal, contextid) {
         
         var modalform = document.querySelector('.ltoolusernotes form');
@@ -161,11 +221,21 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
 
     }
 
+    /**
+     * Submit the modal data form.
+     * @param {int} contextid
+     * @param {object} list of the notes params.
+     */
     function getnoteaction(contextid, params) {
         params.contextid = contextid;
         return Fragment.loadFragment('ltool_note', 'get_note_form', contextid, params);
     }
 
+    /**
+     * Get the form seialize data
+     * @param {object} form object
+     * @return {mixed} list of the form params.
+     */
     function serialize(form) {
         if (!form || form.nodeName !== "FORM") {
                 return;
