@@ -23,12 +23,11 @@
 
 define([], function() {
 
-    // Fab button html.
-    var fabbuttonhtml;
 
     /**
      * Controls learningtools action.
      * @param {bool} loggedin
+     * @global {Array} fabbuttonhtml
      *
      */
     function learning_tools_action(loggedin) {
