@@ -108,6 +108,7 @@
 }
 .ltnotes-mainbody .card .card-body .content-block .title-block {
     text-align: right;
+    margin-bottom: 15px;
 }
 .ltnotes-mainbody .card .card-body .content-block .title-block h4 {
     font-size: 15px;
@@ -225,16 +226,16 @@
     float: right;
     margin-left: 10px;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .edit-action,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .edit-action {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .action-block .edit-action,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .action-block .edit-action {
     display: inline-block;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .delete-action,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .delete-action {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .action-block .delete-action,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .action-block .delete-action {
     display: inline-block;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
     display: none;
 }
 
