@@ -1,4 +1,4 @@
-@ltool @ltool_bookmarks
+@local @local_learningtools @ltool @ltool_bookmarks
 
 Feature: Check the Bookmarks ltool add/edit delete and list viewes.
   In order to check ltools bookmark features works

@@ -1,4 +1,4 @@
-@ltool @ltool_note
+@local @local_learningtools @ltool @ltool_note
 
 Feature: Check the Note ltool add/edit delete and list viewes.
   In order to check ltools features works
