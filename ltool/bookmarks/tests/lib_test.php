@@ -117,7 +117,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
      * @param  mixed $tool
      * @return void
      */
-    function get_bookmarks_info($toolobj, $tool) {
+    public function get_bookmarks_info($toolobj, $tool) {
         global $CFG, $USER, $COURSE;
         $data = $toolobj->get_tool_info();
         $data['toolurl'] = "$CFG->wwwroot/local/learningtools/ltool/$tool->shortname/$tool->shortname"."_info.php";
