@@ -277,13 +277,13 @@ class bookmarkstool_filter {
             }
 
             if (has_capability($capability, $context, $particularuser)) {
-                $strdelete = get_string('delete');
                 $buttons = [];
                 $returnurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php');
                 $deleteparams = array('delete' => $row->id, 'sesskey' => sesskey(),
-                    'courseid' => $this->courseid);
+                'courseid' => $this->courseid);
                 $deleteparams = array_merge($deleteparams, $this->urlparams);
                 $url = new moodle_url($returnurl, $deleteparams);
+                $strdelete = get_string('delete');
                 $buttons[] = \html_writer::link($url, $OUTPUT->pix_icon('t/delete', $strdelete));
                 $buttonhtml = implode(' ', $buttons);
                 return $buttonhtml;

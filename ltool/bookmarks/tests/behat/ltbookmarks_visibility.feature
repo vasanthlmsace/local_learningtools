@@ -26,8 +26,9 @@ Feature: Check the Bookmarks ltool add/edit delete and list viewes.
     Then I should see "This page bookmarked successfully"
     And ".fa-bookmark.marked" "css_element" should exist
     Then I click on "#ltbookmarkinfo" "css_element"
-    And I should see "This page bookmarked removed"
     And ".fa-bookmark.marked" "css_element" should not exist
+    And I should see "This page bookmark removed"
+    And I log out
 
   @javascript
   Scenario: Create and test the list of bookmarks.
