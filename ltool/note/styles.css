@@ -5,14 +5,12 @@
     text-align: right;
     margin-bottom: 20px;
 }
-/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-note .top-block .course-block,
 .path-local-learningtools-ltool-note .top-block #ltnote-coursefilter {
     float: left;
     margin-bottom: 20px;
     margin-right: 15px;
 }
-/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-note .top-block #ltnote-coursefilter,
 .path-local-learningtools-ltool-note .top-block .ltnote-activityfilter {
     display: inline-block;
@@ -57,7 +55,6 @@
     border: 0;
     display: inline-block;
 }
-/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-note .top-block > div.sort-block select:focus,
 .path-local-learningtools-ltool-note .top-block > div.sort-block select:active,
 .path-local-learningtools-ltool-note .top-block > div.sort-block select:focus:active {
@@ -167,7 +164,6 @@
     color: #000;
     display: inline-block;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .ltoolusernotes form .editor_atto .editor_atto_content_wrap .editor_atto_content,
 .learningtool-note .modal .modal-body .ltoolusernotes form .editor_atto .editor_atto + textarea {
     border: 1px solid #ccc;
@@ -203,50 +199,41 @@
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .card-header h5 button.collapsed:after {
     content: '\f103';
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing {
     border: 1px solid #ccc;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .card-body,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .card-body {
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .card-body:last-child,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .card-body:last-child {
     border-bottom: 0;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block {
     width: 70%;
     display: inline-block;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .title-block,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .title-block {
     float: right;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block {
     float: right;
     margin-left: 10px;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .edit-action,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .edit-action {
     display: inline-block;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .delete-action,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .delete-action {
     display: inline-block;
 }
-/* disable-next-line:max-line-length */
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
     display: none;
