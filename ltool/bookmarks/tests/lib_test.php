@@ -63,11 +63,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'bookmarks']);
         $data = $this->get_bookmarks_info($toolobj, $tool);
         $_POST['sesskey'] = sesskey();
-<<<<<<< HEAD
         $data = json_encode($data);
-=======
-        $data = str_replace('amp;', '', http_build_query($data));
->>>>>>> e5f7a7615f891745a211a4941f4fbd3ade784646
         // Redirect all events. Created event must trigger when the note saved.
         $sink = $this->redirectEvents();
         $bookmarks = ltool_bookmarks\external::save_userbookmarks($this->context->id, $data);
