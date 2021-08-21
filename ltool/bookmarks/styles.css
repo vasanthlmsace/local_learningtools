@@ -5,12 +5,14 @@
     text-align: right;
     margin-bottom: 20px;
 }
+/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-bookmarks .top-block .course-block,
 .path-local-learningtools-ltool-bookmarks .top-block #ltnote-coursefilter {
     float: left;
     margin-bottom: 20px;
     margin-right: 15px;
 }
+/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-bookmarks .top-block .ltnote-activityfilter,
 .path-local-learningtools-ltool-bookmarks .top-block .ltnote-activityfilter {
     display: inline-block;
@@ -42,6 +44,7 @@
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select {
     display: inline-block;
 }
+/* disable-next-line:max-line-length */
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select:focus,
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select:active,
 .path-local-learningtools-ltool-bookmarks .top-block > div.sort-block select:focus:active {
