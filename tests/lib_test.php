@@ -101,7 +101,11 @@ class local_learningtools_lib_testcase extends advanced_testcase {
      */
     public function test_get_students_incourse(): void {
         $this->create_course();
-        $teacher = $this->generator->create_and_enrol($this->course, 'editingteacher', ['username' => 'teacher1', 'teacher1@test.com']);
+        $teacher = $this->generator->create_and_enrol(
+            $this->course,
+            'editingteacher',
+            ['username' => 'teacher1', 'teacher1@test.com']
+        );
         $firstuser = $this->generator->create_and_enrol($this->course, 'student', ['username' => 'studnet1', 'student1@test.com']);
         $this->generator->create_and_enrol($this->course, 'student', ['username' => 'studnet2', 'student2@test.com']);
         $this->generator->create_and_enrol($this->course, 'student', ['username' => 'studnet3', 'student3@test.com']);
