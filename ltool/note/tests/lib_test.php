@@ -113,7 +113,7 @@ class ltool_note_testcase extends advanced_testcase {
     public function test_external_test(): void {
         global $CFG, $DB, $USER;
         $data = $this->create_note();
-        $data = str_replace('amp;','', http_build_query($data));
+        $data = str_replace('amp;', '', http_build_query($data));
         // Redirect all events. Created event must trigger when the note saved.
         $sink = $this->redirectEvents();
         $notecount = ltool_note\external::save_usernote($this->context->id, $data);

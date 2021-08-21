@@ -40,7 +40,6 @@ abstract class learningtools {
 
     /**
      * Get the tool content.
-     * @param object $tool plugin info
      */
     abstract public function get_tool_records();
 

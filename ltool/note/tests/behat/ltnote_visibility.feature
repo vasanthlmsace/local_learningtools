@@ -62,4 +62,4 @@ Feature: Check the Note ltool add/edit delete and list viewes.
     Then "Test note 1" "text" should appear after "Test note 2" "text"
 
   # @javascript
-  # Scenario: 
+  # Scenario:
