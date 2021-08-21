@@ -111,7 +111,7 @@ function user_save_bookmarks($contextid, $data) {
     $context = context::instance_by_id($contextid, MUST_EXIST);
     $PAGE->set_context($context);
     if (confirm_sesskey()) {
-        
+
         if (!$DB->record_exists('learningtools_bookmarks', array('contextid' =>
             $contextid, 'pagetype' => $data['pagetype'], 'user' => $data['user']))) {
 
@@ -191,7 +191,7 @@ function check_view_bookmarks() {
 function load_bookmarks_js_config($data) {
     global $PAGE, $USER;
     $pagebookmarks = check_page_bookmarks_exist($PAGE->context->id, $PAGE->pagetype, $USER->id);
-    $PAGE->requires->data_for_js('pagebookmarks', $pagebookmarks);
+    $PAGE->requires->data_for_js('pagebookmarks', $pagebookmarks, true);
     $PAGE->requires->js_call_amd('ltool_bookmarks/learningbookmarks', 'init', array($PAGE->context->id, $data));
 }
 
