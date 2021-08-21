@@ -57,9 +57,8 @@ class ltool_note_testcase extends advanced_testcase {
      */
     public function create_note(): array {
         global $CFG, $DB;
-        require_once($CFG->dirroot.'/local/learningtools/ltool/note/index.php');
-        $toolobj = new note();
-        $tool = $DB->get_record('learningtools_products', ['shortname' => 'note']);
+        $toolobj = new \ltool_note\note();
+        $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'note']);
         $data = $this->get_note_info($toolobj, $tool);
         $data['ltnoteeditor'] = 'Test note';
         $_POST['sesskey'] = sesskey();
@@ -101,7 +100,7 @@ class ltool_note_testcase extends advanced_testcase {
         $count = get_userpage_countnotes($args);
         $this->assertEquals(2, $count);
 
-        $notes = check_note_instanceof_block((object) $data);
+        $notes = check_instanceof_block((object) $data);
         $this->assertEquals('course', $notes->instance);
     }
 

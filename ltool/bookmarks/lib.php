@@ -111,6 +111,7 @@ function user_save_bookmarks($contextid, $data) {
     $context = context::instance_by_id($contextid, MUST_EXIST);
     $PAGE->set_context($context);
     if (confirm_sesskey()) {
+        
         if (!$DB->record_exists('learningtools_bookmarks', array('contextid' =>
             $contextid, 'pagetype' => $data['pagetype'], 'user' => $data['user']))) {
 
@@ -129,7 +130,7 @@ function user_save_bookmarks($contextid, $data) {
             $record->pageurl = $data['pageurl'];
             $record->timecreated = time();
             $bookmarksrecord = $DB->insert_record('learningtools_bookmarks', $record);
-                        // Add event to user create the bookmark.
+            // Add event to user create the bookmark.
             $event = \ltool_bookmarks\event\ltbookmarks_created::create([
                 'objectid' => $bookmarksrecord,
                 'courseid' => $data['course'],

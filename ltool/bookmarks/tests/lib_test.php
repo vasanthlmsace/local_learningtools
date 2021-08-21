@@ -58,12 +58,12 @@ class ltool_bookmarks_testcase extends advanced_testcase {
      */
     public function test_external_test(): void {
         global $CFG, $DB, $USER;
-        require_once($CFG->dirroot.'/local/learningtools/ltool/bookmarks/index.php');
-        $toolobj = new bookmarks();
-        $tool = $DB->get_record('learningtools_products', ['shortname' => 'bookmarks']);
+
+        $toolobj = new \ltool_bookmarks\bookmarks();
+        $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'bookmarks']);
         $data = $this->get_bookmarks_info($toolobj, $tool);
         $_POST['sesskey'] = sesskey();
-        $data = str_replace('amp;','', http_build_query($data));
+        $data = json_encode($data);
         // Redirect all events. Created event must trigger when the note saved.
         $sink = $this->redirectEvents();
         $bookmarks = ltool_bookmarks\external::save_userbookmarks($this->context->id, $data);
@@ -84,10 +84,9 @@ class ltool_bookmarks_testcase extends advanced_testcase {
      */
     public function test_bookmark_save(): void {
         global $CFG, $DB, $USER;
-        
-        require_once($CFG->dirroot.'/local/learningtools/ltool/bookmarks/index.php');
-        $toolobj = new bookmarks();
-        $tool = $DB->get_record('learningtools_products', ['shortname' => 'bookmarks']);
+
+        $toolobj = new \ltool_bookmarks\bookmarks();
+        $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'bookmarks']);
         $data = $this->get_bookmarks_info($toolobj, $tool);
         $_POST['sesskey'] = sesskey();
 
@@ -125,7 +124,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $data['toolurl'] = "$CFG->wwwroot/local/learningtools/ltool/$tool->shortname/$tool->shortname"."_info.php";
         $data['id'] = $tool->shortname;
         $data['user'] = $USER->id;
-        $data['course'] = $COURSE->id;
+        $data['course'] = $this->context->instanceid;
         $data['pageurl'] = $this->page->url->out(false);
         $data['pagetype'] = $this->page->pagetype;
         $data['coursemodule'] = get_moduleid($this->page->context->id, $this->page->context->contextlevel);
