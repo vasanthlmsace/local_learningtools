@@ -5,26 +5,6 @@ Feature: Check the Note ltool add/edit delete and list viewes.
   As a admin
   I should manage subplugins order and enable/disable plugins.
 
-  #   Background:
-  #   Given the following "users" exist:
-  #     | username | firstname | lastname | email |
-  #     | teacher | Teacher | 1 | teacher@example.com |
-  #   And the following "courses" exist:
-  #     | fullname | shortname | format |
-  #     | Course | C | topics |
-  #   And the following "course enrolments" exist:
-  #     | user | course | role |
-  #     | teacher | C | editingteacher |
-  #   And the following config values are set as admin:
-  #     | enablemoodlenet | 0 | tool_moodlenet |
-  #   And I log in as "teacher"
-  #   And I am on "Course" course homepage with editing mode on
-  
-  # @javascript
-  # Scenario: The available activities are displayed to the teacher in the activity chooser
-  #   Given I click on "Add an activity or resource" "button" in the "Topic 1" "section"
-  #   Then I should see "Add an activity or resource" in the ".modal-title" "css_element"
-  #   And I should see "Assignment" in the ".modal-body" "css_element"
 
   Background: Create users to check the visbility.
     Given the following "users" exist:
@@ -45,41 +25,38 @@ Feature: Check the Note ltool add/edit delete and list viewes.
     And I click on FAB button
     And I click on "#ltnoteinfo" "css_element"
     And ".modal-title" "css_element" should be visible
-  #   Then I wait "3" seconds
-  #   And I should see "Take notes" in the ".modal-title" "css_element"
-  #   And I set the field "ltnoteeditor" to "Test note 1"
-  #   # And I set the following fields to these values:
-  #   # | ltnoteeditor | Test note 1 |
-  #   And I press "Save changes"
-  #   Then I should see "Notes added successfully"
-  #   And I should see "1" in the "#ltnote-action" "css_element"
-  #   Then I click on "#ltnoteinfo" "css_element"
-  #   And I should see "Test note 1" in the ".list-context-existnotes" "css_element"
-  #   And I set the field "ltnoteeditor" to "Test note 1"
-  #   And I press "Save changes"
-  #   Then I should see "Notes added successfully"
-  #   And I should see "2" in the "#ltnote-action" "css_element"
-  #   Then I click on "#ltnoteinfo" "css_element"
+    And I should see "Take notes" in the ".modal-title" "css_element"
+    And I set the field "ltnoteeditor" to "Test note 1"
+    # And I set the following fields to these values:
+    # | ltnoteeditor | Test note 1 |
+    And I press "Save changes"
+    Then I should see "Notes added successfully"
+    And I should see "1" in the "#ltnote-action" "css_element"
+    Then I click on "#ltnoteinfo" "css_element"
+    And I should see "Test note 1" in the ".list-context-existnotes" "css_element"
+    And I set the field "ltnoteeditor" to "Test note 1"
+    And I press "Save changes"
+    Then I should see "Notes added successfully"
+    And I should see "2" in the "#ltnote-action" "css_element"
+    Then I click on "#ltnoteinfo" "css_element"
 
-  # @javascript
-  # Scenario: Create and test the list of notes.
-  #   Given I log in as "student1"
-  #   And I click on FAB button
-  #   And I click on "#ltnoteinfo" "css_element"
-  #   Then I wait "3" seconds
-  #   And I should see "Take notes" in the ".modal-title" "css_element"
-  #   And I set the field "ltnoteeditor" to "Test note 1"
-  #   And I press "Save changes"
-  #   # Add second note.
-  #   And I click on "#ltnoteinfo" "css_element"
-  #   Then I wait "3" seconds
-  #   And I should see "Take notes" in the ".modal-title" "css_element"
-  #   And I set the field "ltnoteeditor" to "Test note 2"
-  #   And I press "Save changes"
-  #   Then I follow "Profile" in the user menu
-  #   And I click on "Notes" "link"
-  #   # Then I click on "#notessorttype" "css_element"
-  #   Then I should see "Test note 1"
-  #   And I should see "Test note 2"
-  #   When I click on "#notessorttype" "css_element"
-  #   Then "Test note 1" "text" should appear after "Test note 2" "text"
+  @javascript
+  Scenario: Create and test the list of notes.
+    Given I log in as "student1"
+    And I click on FAB button
+    And I click on "#ltnoteinfo" "css_element"
+    And I should see "Take notes" in the ".modal-title" "css_element"
+    And I set the field "ltnoteeditor" to "Test note 1"
+    And I press "Save changes"
+    # Add second note.
+    And I click on "#ltnoteinfo" "css_element"
+    And I should see "Take notes" in the ".modal-title" "css_element"
+    And I set the field "ltnoteeditor" to "Test note 2"
+    And I press "Save changes"
+    Then I follow "Profile" in the user menu
+    And I click on "Notes" "link"
+    # Then I click on "#notessorttype" "css_element"
+    Then I should see "Test note 1"
+    And I should see "Test note 2"
+    When I click on "#notessorttype" "css_element"
+    Then "Test note 1" "text" should appear after "Test note 2" "text"
