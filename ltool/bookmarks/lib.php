@@ -113,10 +113,10 @@ function user_save_bookmarks($contextid, $data) {
     if (confirm_sesskey()) {
 
         if (!$DB->record_exists('learningtools_bookmarks', array('contextid' =>
-            $contextid, 'pagetype' => $data['pagetype'], 'user' => $data['user']))) {
+            $contextid, 'pagetype' => $data['pagetype'], 'userid' => $data['user']))) {
 
             $record = new stdclass();
-            $record->user = $data['user'];
+            $record->userid = $data['user'];
             $record->course = $data['course'];
             $record->coursemodule = $data['coursemodule'];
             $record->contextlevel = $data['contextlevel'];
@@ -217,7 +217,7 @@ function check_page_bookmarks_exist($contextid, $pagetype, $userid) {
 
     $pagebookmarks = false;
     if ($DB->record_exists('learningtools_bookmarks', array('contextid' => $contextid,
-        'pagetype' => $pagetype, 'user' => $userid))) {
+        'pagetype' => $pagetype, 'userid' => $userid))) {
         $pagebookmarks = true;
     }
     return $pagebookmarks;
