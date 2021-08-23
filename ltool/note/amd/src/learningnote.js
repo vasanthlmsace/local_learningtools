@@ -30,10 +30,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * @param {object} notes info params
      */
     function learning_tool_note_action(contextid, params) {
-        setTimeout(function() {
-            show_modal_lttool(contextid, params);
-        }, 3000);
-
+        show_modal_lttool(contextid, params);
         var sorttypefilter = document.querySelector(".ltnote-sortfilter i#notessorttype");
         if (sorttypefilter) {
             sorttypefilter.addEventListener("click", function() {
