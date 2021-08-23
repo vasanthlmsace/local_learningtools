@@ -186,6 +186,8 @@ function ltool_note_myprofile_navigation(tree $tree, $user, $iscurrentuser, $cou
 function ltool_note_output_fragment_get_note_form($args) {
 
     global $PAGE, $COURSE, $USER, $CFG;
+    
+    $PAGE->set_url(new moodle_url('/'));
 
     require_once($CFG->dirroot.'/lib/form/editor.php');
     require_once($CFG->dirroot . '/lib/editorlib.php');
