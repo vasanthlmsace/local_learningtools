@@ -70,7 +70,7 @@ class ltool_note_testcase extends advanced_testcase {
         $toolobj = new \ltool_note\note();
         $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'note']);
         $data = $this->get_note_info($toolobj, $tool);
-        $test = get_contextuser_notes($data);
+        $test = ltool_note_output_fragment_get_note_form($data);
         
         $this->assertCount(1, $test);
     }
