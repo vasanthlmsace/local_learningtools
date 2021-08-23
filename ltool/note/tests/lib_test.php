@@ -67,6 +67,7 @@ class ltool_note_testcase extends advanced_testcase {
 
     public function test_get_contextuser_notes() {
         $toolobj = new \ltool_note\note();
+        $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'note']);
         $data = $this->get_note_info($toolobj, $tool);
         $test = get_contextuser_notes($data);
         print_r($records);
