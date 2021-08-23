@@ -115,7 +115,7 @@ function user_save_bookmarks($contextid, $data) {
         if (!$DB->record_exists('learningtools_bookmarks', array('contextid' =>
             $contextid, 'pagetype' => $data['pagetype'], 'user' => $data['user']))) {
 
-            $record = new stdClass;
+            $record = new stdclass();
             $record->user = $data['user'];
             $record->course = $data['course'];
             $record->coursemodule = $data['coursemodule'];

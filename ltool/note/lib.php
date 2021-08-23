@@ -319,7 +319,7 @@ function user_save_notes($contextid, $data) {
     $PAGE->set_context($context);
 
     if (confirm_sesskey()) {
-        $record = new stdClass;
+        $record = new stdclass();
         $record->user = $data['user'];
         $record->course = $data['course'];
         $record->contextlevel = $data['contextlevel'];
