@@ -23,7 +23,7 @@ Feature: Check the Bookmarks ltool add/edit delete and list viewes.
     Given I log in as "student1"
     And I click on FAB button
     And I click on "#ltbookmarkinfo" "css_element"
-    Then I wait "1" seconds
+    Then I wait "3" seconds
     And I should see "This page bookmarked successfully"
     And ".fa-bookmark.marked" "css_element" should exist
     Then I click on "#ltbookmarkinfo" "css_element"
@@ -36,13 +36,13 @@ Feature: Check the Bookmarks ltool add/edit delete and list viewes.
     Given I log in as "student1"
     And I click on FAB button
     And I click on "#ltbookmarkinfo" "css_element"
-    Then I wait "1" seconds
+    Then I wait "3" seconds
     And I should see "This page bookmarked successfully"
     # Add second note.
     When I click on "Site home" "link"
     And I click on FAB button
     And I click on "#ltbookmarkinfo" "css_element"
-    Then I wait "1" seconds
+    Then I wait "3" seconds
     And I should see "This page bookmarked successfully"
     # List page.
     Then I follow "Profile" in the user menu
