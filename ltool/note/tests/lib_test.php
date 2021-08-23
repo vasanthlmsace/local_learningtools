@@ -65,6 +65,14 @@ class ltool_note_testcase extends advanced_testcase {
         return $data;
     }
 
+    public function test_get_contextuser_notes() {
+        $toolobj = new \ltool_note\note();
+        $data = $this->get_note_info($toolobj, $tool);
+        $test = get_contextuser_notes($data);
+        print_r($records);
+        $this->assertCount(1, $test);
+    }
+
     /**
      * Test the note save method and the triggered event have correct context.
      *

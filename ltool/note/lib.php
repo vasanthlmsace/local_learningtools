@@ -272,7 +272,7 @@ function get_contextuser_notes($args) {
         GROUP BY FLOOR(timecreated/86400) ORDER BY timecreated DESC";
     $params = ['userid' => $args['user'], 'contextid' => $args['contextid']];
     $records = $DB->get_records_sql($sql, $params);
-
+    return $records;
     $cnt = 1;
     if (!empty($records)) {
         foreach ($records as $record) {
