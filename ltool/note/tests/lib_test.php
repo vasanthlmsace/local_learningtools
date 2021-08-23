@@ -65,16 +65,6 @@ class ltool_note_testcase extends advanced_testcase {
         return $data;
     }
 
-    public function test_get_contextuser_notes() {
-        global $DB;
-        $toolobj = new \ltool_note\note();
-        $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'note']);
-        $data = $this->get_note_info($toolobj, $tool);
-        $test = ltool_note_output_fragment_get_note_form($data);
-        
-        $this->assertCount(1, $test);
-    }
-
     /**
      * Test the note save method and the triggered event have correct context.
      *

@@ -5,45 +5,46 @@ Feature: Check the Note ltool add/edit delete and list viewes.
   As a admin
   I should manage subplugins order and enable/disable plugins.
 
-    Background:
-    Given the following "users" exist:
-      | username | firstname | lastname | email |
-      | teacher | Teacher | 1 | teacher@example.com |
-    And the following "courses" exist:
-      | fullname | shortname | format |
-      | Course | C | topics |
-    And the following "course enrolments" exist:
-      | user | course | role |
-      | teacher | C | editingteacher |
-    And the following config values are set as admin:
-      | enablemoodlenet | 0 | tool_moodlenet |
-    And I log in as "teacher"
-    And I am on "Course" course homepage with editing mode on
-  
-  @javascript
-  Scenario: The available activities are displayed to the teacher in the activity chooser
-    Given I click on "Add an activity or resource" "button" in the "Topic 1" "section"
-    Then I should see "Add an activity or resource" in the ".modal-title" "css_element"
-    And I should see "Assignment" in the ".modal-body" "css_element"
-
-  # Background: Create users to check the visbility.
+  #   Background:
   #   Given the following "users" exist:
-  #     | username | firstname | lastname | email              |
-  #     | student1 | Student   | User 1   | student1@test.com  |
-  #     | teacher1 | Teacher   | User 1   | teacher1@test.com  |
+  #     | username | firstname | lastname | email |
+  #     | teacher | Teacher | 1 | teacher@example.com |
   #   And the following "courses" exist:
-  #     | fullname | shortname | category | enablecompletion | showcompletionconditions |
-  #     | Course 1 | C1        | 0        | 1                | 1                        |
+  #     | fullname | shortname | format |
+  #     | Course | C | topics |
   #   And the following "course enrolments" exist:
-  #     | user | course | role           |
-  #     | student1 | C1 | student        |
-  #     | teacher1 | C1 | editingteacher |
+  #     | user | course | role |
+  #     | teacher | C | editingteacher |
+  #   And the following config values are set as admin:
+  #     | enablemoodlenet | 0 | tool_moodlenet |
+  #   And I log in as "teacher"
+  #   And I am on "Course" course homepage with editing mode on
+  
+  # @javascript
+  # Scenario: The available activities are displayed to the teacher in the activity chooser
+  #   Given I click on "Add an activity or resource" "button" in the "Topic 1" "section"
+  #   Then I should see "Add an activity or resource" in the ".modal-title" "css_element"
+  #   And I should see "Assignment" in the ".modal-body" "css_element"
 
-  # @javascript  
-  # Scenario: Create multiple notes in a page.
-  #   Given I log in as "student1"
-  #   And I click on FAB button
-  #   And I click on "#ltnoteinfo" "css_element"
+  Background: Create users to check the visbility.
+    Given the following "users" exist:
+      | username | firstname | lastname | email              |
+      | student1 | Student   | User 1   | student1@test.com  |
+      | teacher1 | Teacher   | User 1   | teacher1@test.com  |
+    And the following "courses" exist:
+      | fullname | shortname | category | enablecompletion | showcompletionconditions |
+      | Course 1 | C1        | 0        | 1                | 1                        |
+    And the following "course enrolments" exist:
+      | user | course | role           |
+      | student1 | C1 | student        |
+      | teacher1 | C1 | editingteacher |
+
+  @javascript  
+  Scenario: Create multiple notes in a page.
+    Given I log in as "student1"
+    And I click on FAB button
+    And I click on "#ltnoteinfo" "css_element"
+    And ".modal-title" "css_element" should be visible
   #   Then I wait "3" seconds
   #   And I should see "Take notes" in the ".modal-title" "css_element"
   #   And I set the field "ltnoteeditor" to "Test note 1"
