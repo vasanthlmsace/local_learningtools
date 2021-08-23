@@ -38,7 +38,6 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                 note_sort_action_page(sorttype);
             });
         }
-
     }
 
     /**
