@@ -23,7 +23,8 @@ Feature: Check the Note ltool add/edit delete and list viewes.
     Given I log in as "student1"
     And I click on FAB button
     And I click on "#ltnoteinfo" "css_element"
-    Then I should see "Take notes" in the ".modal-title" "css_element"
+    Then I wait "10" seconds
+    And I should see "Take notes" in the ".modal-title" "css_element"
     And I set the field "ltnoteeditor" to "Test note 1"
     # And I set the following fields to these values:
     # | ltnoteeditor | Test note 1 |
@@ -43,12 +44,14 @@ Feature: Check the Note ltool add/edit delete and list viewes.
     Given I log in as "student1"
     And I click on FAB button
     And I click on "#ltnoteinfo" "css_element"
+    Then I wait "10" seconds
     And I should see "Take notes" in the ".modal-title" "css_element"
     And I set the field "ltnoteeditor" to "Test note 1"
     And I press "Save changes"
     # Add second note.
     And I click on "#ltnoteinfo" "css_element"
-    Then I should see "Take notes" in the ".modal-title" "css_element"
+    Then I wait "10" seconds
+    And I should see "Take notes" in the ".modal-title" "css_element"
     And I set the field "ltnoteeditor" to "Test note 2"
     And I press "Save changes"
     Then I follow "Profile" in the user menu
