@@ -267,19 +267,27 @@ function get_contextuser_notes($args) {
     $context = context_system::instance();
     $reports = [];
     $template = [];
-    $sql = "SELECT FLOOR(timecreated/86400) AS duration, GROUP_CONCAT(id) AS notesgroup  FROM {learningtools_note}
-        WHERE userid = :userid AND contextid = :contextid
-        GROUP BY FLOOR(timecreated/86400) ORDER BY timecreated DESC";
+    $listrecords = [];
+    $sql = "SELECT * FROM {learningtools_note}
+        WHERE userid = :userid AND contextid = :contextid ORDER BY timecreated DESC";
+
     $params = ['userid' => $args['user'], 'contextid' => $args['contextid']];
     $records = $DB->get_records_sql($sql, $params);
-    return $records;
     $cnt = 1;
     if (!empty($records)) {
         foreach ($records as $record) {
+            $time = floor($record->timecreated/86400);
+            if (isset($listrecords[$time])) {
+                $listrecords[$time]['notesgroup'][] = $record->id;
+            } else {
+                $listrecords[$time]['notesgroup'] = array($record->id);
+            }
+        }
+        foreach ($listrecords as $time => $listrecord) {
             $res = [];
             $notes = [];
-            if (isset($record->notesgroup)) {
-                list($dbsql, $dbparam) = $DB->get_in_or_equal(explode(",", $record->notesgroup), SQL_PARAMS_NAMED);
+            if (isset($listrecord['notesgroup'])) {
+                list($dbsql, $dbparam) = $DB->get_in_or_equal($listrecord['notesgroup'], SQL_PARAMS_NAMED);
                 $notesrecords = $DB->get_records_sql("SELECT * FROM {learningtools_note}
                 WHERE id $dbsql ORDER BY timecreated desc", $dbparam);
                 if (!empty($notesrecords)) {
@@ -295,7 +303,7 @@ function get_contextuser_notes($args) {
                     }
                 }
                 $res['notes'] = $notes;
-                $res['title'] = userdate(($record->duration * 86400), '%B, %dth %Y', '', false);
+                $res['title'] = userdate(($time * 86400), '%B, %dth %Y', '', false);
                 $res['range'] = $cnt.'-block';
                 $res['active'] = ($cnt == 1) ? true : false;
             }
