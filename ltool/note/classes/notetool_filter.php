@@ -82,17 +82,17 @@ class notetool_filter {
                 $students = get_students_incourse($this->courseid);
                 if (!empty($students)) {
                     list($studentsql, $userparams) = $DB->get_in_or_equal($students, SQL_PARAMS_NAMED);
-                    $usersql .= 'user '. $studentsql;
+                    $usersql .= 'userid '. $studentsql;
                 }
             } else {
-                $usersql = 'user = :userid';
+                $usersql = 'userid = :userid';
                 $userparams = ['userid' => $this->childid];
             }
         } else if ($this->childid) {
-            $usersql = 'user = :userid';
+            $usersql = 'userid = :userid';
             $userparams = ['userid' => $this->childid];
         } else {
-            $usersql = 'user = :userid';
+            $usersql = 'userid = :userid';
             $userparams = ['userid' => $this->userid];
         }
         return ['sql' => $usersql, 'params' => $userparams];
@@ -254,17 +254,17 @@ class notetool_filter {
                 $students = get_students_incourse($this->courseid);
                 if (!empty($students)) {
                     list($studentsql, $params) = $DB->get_in_or_equal($students, SQL_PARAMS_NAMED);
-                    $usersql .= 'user '. $studentsql;
+                    $usersql .= 'userid '. $studentsql;
                 }
             } else if ($this->childid) {
-                    $usersql = 'user = :userid';
+                    $usersql = 'userid = :userid';
                     $params = ['userid' => $this->childid];
             }
         } else if ($this->childid) {
-            $usersql = 'user = :userid';
+            $usersql = 'userid = :userid';
             $params = ['userid' => $this->childid];
         } else {
-            $usersql = 'user = :userid';
+            $usersql = 'userid = :userid';
             $params = ['userid' => $this->userid];
         }
 

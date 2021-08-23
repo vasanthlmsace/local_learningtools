@@ -268,7 +268,7 @@ function get_contextuser_notes($args) {
     $reports = [];
     $template = [];
     $sql = "SELECT FLOOR(timecreated/86400) AS duration, GROUP_CONCAT(id) AS notesgroup  FROM {learningtools_note}
-        WHERE user = :userid AND contextid = :contextid
+        WHERE userid = :userid AND contextid = :contextid
         GROUP BY FLOOR(timecreated/86400) ORDER BY timecreated DESC";
     $params = ['userid' => $args['user'], 'contextid' => $args['contextid']];
     $records = $DB->get_records_sql($sql, $params);
@@ -320,7 +320,7 @@ function user_save_notes($contextid, $data) {
 
     if (confirm_sesskey()) {
         $record = new stdclass();
-        $record->user = $data['user'];
+        $record->userid = $data['user'];
         $record->course = $data['course'];
         $record->contextlevel = $data['contextlevel'];
         $record->contextid = $contextid;
@@ -347,7 +347,7 @@ function user_save_notes($contextid, $data) {
         ]);
         $event->trigger();
         $pageusernotes = $DB->count_records('learningtools_note', array('contextid' =>
-            $contextid, 'pagetype' => $data['pagetype'], 'user' => $data['user']));
+            $contextid, 'pagetype' => $data['pagetype'], 'userid' => $data['user']));
         return $pageusernotes;
     }
 }
@@ -404,7 +404,7 @@ function require_deletenote_cap($id) {
     $returnurl = new moodle_url('/my');
     $currentrecord = $DB->get_record('learningtools_note', array('id' => $id));
     if (!empty($currentrecord)) {
-        if ($currentrecord->user == $USER->id) {
+        if ($currentrecord->userid == $USER->id) {
             if (has_capability('ltool/note:manageownnote', $context)) {
                 return true;
             }
@@ -425,7 +425,7 @@ function require_deletenote_cap($id) {
 function get_userpage_countnotes($args) {
     global $DB;
     return $DB->count_records('learningtools_note', array('contextid' => $args['contextid'],
-        'pagetype' => $args['pagetype'], 'user' => $args['user']));
+        'pagetype' => $args['pagetype'], 'userid' => $args['user']));
 
 }
 

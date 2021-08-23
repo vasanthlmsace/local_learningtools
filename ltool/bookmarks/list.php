@@ -191,13 +191,13 @@ if (!empty($courseid) && !$childid) {
     $students = get_students_incourse($courseid);
     if (!empty($students)) {
         list($studentcondition, $sqlparams) = $DB->get_in_or_equal($students, SQL_PARAMS_NAMED);
-        $sqlconditions .= 'user '. $studentcondition;
+        $sqlconditions .= 'userid '. $studentcondition;
     }
 } else if ($childid) {
-    $sqlconditions .= 'user = :childid';
+    $sqlconditions .= 'userid = :childid';
     $sqlparams['childid'] = $childid;
 } else {
-    $sqlconditions .= 'user = :userid';
+    $sqlconditions .= 'userid = :userid';
     $sqlparams['userid'] = $USER->id;
 }
 
