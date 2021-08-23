@@ -24,7 +24,7 @@
 namespace local_learningtools;
 
 /**
- * define learningtools base class to overwrite the tools.
+ * Define learningtools abstract base class to extend by the tools subplugins..
  */
 abstract class learningtools {
 
@@ -39,17 +39,17 @@ abstract class learningtools {
     abstract public function get_tool_icon();
 
     /**
-     * Get the tool content.
+     * Get the available data records for the ltool.
      */
     abstract public function get_tool_records();
 
     /**
-     * Get tool info.
+     * Fetch available tool data from subplugin. By default it returns the tool icon and name.
+     *
      * @return array tool info
      */
     public function get_tool_info() {
         global $OUTPUT;
-
         $data = [];
         $data['name'] = $this->get_tool_name();
         $data['icon'] = $this->get_tool_icon();

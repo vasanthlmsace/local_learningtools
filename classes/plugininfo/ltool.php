@@ -31,6 +31,7 @@ defined('MOODLE_INTERNAL') || die();
  * Ltools subplugin define classes.
  */
 class ltool extends base {
+
     /**
      * Returns the information about plugin availability
      *

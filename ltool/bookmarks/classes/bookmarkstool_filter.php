@@ -32,6 +32,7 @@ require_once($CFG->dirroot.'/local/learningtools/lib.php');
  * List of the user bookmarks filter action.
  */
 class bookmarkstool_filter {
+
     /**
      * Loads bookmarks tools info.
      * @param int $userid current userid
@@ -240,7 +241,7 @@ class bookmarkstool_filter {
     /**
      * List of the bookmarks get the started time.
      * @param \stdclass $record
-     * @return mixed result
+     * @return string result
      */
     public function get_bookmark_time($record) {
         return userdate($record->timecreated, '%B %d, %Y, %I:%M %p', '', false);
@@ -248,7 +249,7 @@ class bookmarkstool_filter {
 
     /**
      * List of the bookmarks get the delete action.
-     * @param  mixed $row
+     * @param  stdclass $row
      * @return string result
      */
     public function get_bookmark_deleteinfo($row) {
