@@ -271,7 +271,7 @@ class notetool_filter {
         if ($this->sort == 'date') {
             $field = 'date';
             $select = 'FLOOR(timecreated/86400) AS date';
-            $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY timecreated $sorttypesql";
+            $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY FLOOR(timecreated/86400) $sorttypesql";
         } else if ($this->sort == 'course') {
             $field = 'course';
             $select = 'course';
