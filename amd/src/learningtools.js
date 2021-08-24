@@ -32,8 +32,8 @@ define([], function() {
     function learning_tools_action(loggedin, fabbuttonhtml) {
         // Add fab button.
         if (loggedin) {
-          var pagewrapper = document.getElementById("page-footer");
-          pagewrapper.insertAdjacentHTML("beforebegin", fabbuttonhtml);
+            var pagewrapper = document.getElementById("page-footer");
+            pagewrapper.insertAdjacentHTML("beforebegin", fabbuttonhtml);
         }
 
         var toolaction = document.getElementById("tool-action-button");
