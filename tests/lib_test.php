@@ -111,8 +111,6 @@ class local_learningtools_lib_testcase extends advanced_testcase {
         $this->generator->create_and_enrol($this->course, 'student', ['username' => 'studnet3', 'student3@test.com']);
         // Test count of enrolled students.
         $students = get_students_incourse($this->course->id);
-        // Check first enroled user id.
-        $student = reset($students);
-        $this->assertNotEquals($firstuser->id, $student);
+        $this->assertCount(3, $students);
     }
 }

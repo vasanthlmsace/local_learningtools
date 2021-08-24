@@ -269,13 +269,16 @@ class notetool_filter {
         }
 
         if ($this->sort == 'date') {
-            $select = 'FLOOR(timecreated/86400) AS date,';
+            $field = 'date';
+            $select = 'FLOOR(timecreated/86400) AS date';
             $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY timecreated $sorttypesql";
         } else if ($this->sort == 'course') {
-            $select = 'course,';
+            $field = 'course';
+            $select = 'course';
             $sortsql .= "AND course != 1  GROUP BY course ORDER BY course $sorttypesql";
         } else if ($this->sort == 'activity') {
-            $select = 'coursemodule,';
+            $field = 'coursemodule';
+            $select = 'coursemodule';
             $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule ORDER BY coursemodule $sorttypesql";
         }
 
@@ -287,13 +290,31 @@ class notetool_filter {
                 $params['activity'] = $this->activity;
             }
         }
-
-        $sql = "SELECT  $select GROUP_CONCAT(id) AS notesgroup
-        FROM {learningtools_note} WHERE $usersql $coursesql
-        $sortsql";
+        // We can't use group concat in pgsql. We need to fetch the set of notes id by group.
+        $sql = "SELECT  $select FROM {learningtools_note} WHERE $usersql $coursesql $sortsql";
 
         $records = $DB->get_records_sql($sql, $params, $this->urlparams['page']
         * $this->urlparams['perpage'], $this->urlparams['perpage']);
+        // List of available keys.
+        $inkeys = array_keys($records);
+        list($insql, $inparams) = $DB->get_in_or_equal($inkeys);
+        $wherefield = ($field == 'date') ? 'FLOOR(timecreated/86400)' : $field;
+        $sql = "SELECT id, $select FROM {learningtools_note} WHERE $wherefield $insql";
+        $groups = $DB->get_records_sql($sql, $inparams);
+        $notegroups = [];
+        foreach ($groups as $id => $record) {
+            $key = $record->$field;
+            if (isset($notesgroup[$key])) {
+                array_push($notesgroup[$key], $id);
+            } else {
+                $notesgroup[$key][] = $id;
+            }
+        }
+        foreach ($notesgroup as $key => $ids) {
+            if (isset($records[$key])) {
+                $records[$key]->notesgroup = implode(',', $ids);
+            }
+        }
 
         // Get the total notes.
         $countreports = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE $usersql $coursesql $sortsql", $params);
@@ -382,7 +403,7 @@ class notetool_filter {
             $template['coursefilter'] = $this->get_course_selector();
         }
 
-            $template['enableactivityfilter'] = !empty($this->selectcourse) ? true : false;
+        $template['enableactivityfilter'] = !empty($this->selectcourse) ? true : false;
 
         if ($this->selectcourse) {
             $coursefilterparams = array('selectcourse' => $this->selectcourse);
@@ -398,7 +419,6 @@ class notetool_filter {
             $this->urlparams['page'], $this->urlparams['perpage'], $this->pageurl);
 
         return $OUTPUT->render_from_template('ltool_note/ltnote', $template);
-
     }
 
     /**

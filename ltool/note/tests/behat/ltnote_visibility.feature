@@ -3,8 +3,7 @@
 Feature: Check the Note ltool add/edit delete and list viewes.
   In order to check ltools features works
   As a admin
-  I should manage subplugins order and enable/disable plugins.
-
+  I should able to add/delete notes.
 
   Background: Create users to check the visbility.
     Given the following "users" exist:
@@ -19,7 +18,7 @@ Feature: Check the Note ltool add/edit delete and list viewes.
       | student1 | C1 | student        |
       | teacher1 | C1 | editingteacher |
 
-  @javascript  
+  @javascript
   Scenario: Create multiple notes in a page.
     Given I log in as "student1"
     And I click on FAB button

@@ -278,7 +278,7 @@ function get_contextuser_notes($args) {
     $cnt = 1;
     if (!empty($records)) {
         foreach ($records as $record) {
-            $time = floor($record->timecreated/86400);
+            $time = floor($record->timecreated / 86400);
             if (isset($listrecords[$time])) {
                 $listrecords[$time]['notesgroup'][] = $record->id;
             } else {
