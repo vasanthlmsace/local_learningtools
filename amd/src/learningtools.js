@@ -21,12 +21,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 define([], function() {
-    /**
-     * Controls learningtools action.
-     * @param {bool} loggedin
-     * @param {string} fabbuttonhtml
-     *
-     */
+
     function learning_tools_action(loggedin, fabbuttonhtml) {
         // Add fab button.
         if (loggedin) {
