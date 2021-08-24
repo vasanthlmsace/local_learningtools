@@ -20,7 +20,9 @@
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 define([], function() {
+
     /**
      * Controls learningtools action.
      * @param {bool} loggedin
@@ -30,18 +32,18 @@ define([], function() {
     function learning_tools_action(loggedin, fabbuttonhtml) {
         // Add fab button.
         if (loggedin) {
-            var pagewrapper = document.getElementById("page-footer");
-            pagewrapper.insertAdjacentHTML("beforebegin", fabbuttonhtml);
+          var pagewrapper = document.getElementById("page-footer");
+          pagewrapper.insertAdjacentHTML("beforebegin", fabbuttonhtml);
         }
 
         var toolaction = document.getElementById("tool-action-button");
         if (toolaction !== null) {
             toolaction.addEventListener("click", function() {
-                var list = document.getElementsByClassName("list-learningtools")[0];
-                if (list.classList.contains('show')) {
-                    list.classList.remove('show');
+                var listclass = document.getElementsByClassName("list-learningtools")[0];
+                if (listclass.classList.contains('show')) {
+                    listclass.classList.remove('show');
                 } else {
-                    list.classList.add('show');
+                    listclass.classList.add('show');
                 }
             });
         }
