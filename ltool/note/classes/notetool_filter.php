@@ -317,7 +317,8 @@ class notetool_filter {
         }
 
         // Get the total notes.
-        $countreports = $DB->get_records_sql("SELECT $select FROM {learningtools_note} WHERE $usersql $coursesql $sortsql", $params);
+        $countreports = $DB->get_records_sql("SELECT $select FROM {learningtools_note}
+        WHERE $usersql $coursesql $sortsql", $params);
 
         $this->totalnotes = count($countreports);
         return $records;
