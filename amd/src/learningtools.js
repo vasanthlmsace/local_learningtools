@@ -39,11 +39,11 @@ define([], function() {
         var toolaction = document.getElementById("tool-action-button");
         if (toolaction !== null) {
             toolaction.addEventListener("click", function() {
-                var listclass = document.getElementsByClassName("list-learningtools")[0];
-                if (listclass.classList.contains('show')) {
-                    listclass.classList.remove('show');
+                var list = document.getElementsByClassName("list-learningtools")[0];
+                if (list.classList.contains('show')) {
+                    list.classList.remove('show');
                 } else {
-                    listclass.classList.add('show');
+                    list.classList.add('show');
                 }
             });
         }
