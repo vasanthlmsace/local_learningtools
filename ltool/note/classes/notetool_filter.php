@@ -271,15 +271,15 @@ class notetool_filter {
         if ($this->sort == 'date') {
             $field = 'date';
             $select = 'FLOOR(timecreated/86400) AS date';
-            $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY FLOOR(timecreated/86400) $sorttypesql";
+            $sortsql .= "GROUP BY FLOOR(timecreated/86400), id ORDER BY FLOOR(timecreated/86400) $sorttypesql";
         } else if ($this->sort == 'course') {
             $field = 'course';
             $select = 'course';
-            $sortsql .= "AND course != 1  GROUP BY course ORDER BY course $sorttypesql";
+            $sortsql .= "AND course != 1  GROUP BY course, id ORDER BY course $sorttypesql";
         } else if ($this->sort == 'activity') {
             $field = 'coursemodule';
             $select = 'coursemodule';
-            $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule ORDER BY coursemodule $sorttypesql";
+            $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule, id ORDER BY coursemodule $sorttypesql";
         }
 
         if ($this->selectcourse) {
@@ -317,7 +317,7 @@ class notetool_filter {
         }
 
         // Get the total notes.
-        $countreports = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE $usersql $coursesql $sortsql", $params);
+        $countreports = $DB->get_records_sql("SELECT id FROM {learningtools_note} WHERE $usersql $coursesql $sortsql", $params);
 
         $this->totalnotes = count($countreports);
         return $records;
