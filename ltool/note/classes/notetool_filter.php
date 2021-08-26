@@ -297,25 +297,27 @@ class notetool_filter {
         * $this->urlparams['perpage'], $this->urlparams['perpage']);
         // List of available keys.
         $inkeys = array_keys($records);
-        list($insql, $inparams) = $DB->get_in_or_equal($inkeys);
-        $wherefield = ($field == 'date') ? 'FLOOR(timecreated/86400)' : $field;
-        $sql = "SELECT id, $select FROM {learningtools_note} WHERE $wherefield $insql";
-        $groups = $DB->get_records_sql($sql, $inparams);
-        $notegroups = [];
-        foreach ($groups as $id => $record) {
-            $key = $record->$field;
-            if (isset($notesgroup[$key])) {
-                array_push($notesgroup[$key], $id);
-            } else {
-                $notesgroup[$key][] = $id;
+        // Add the notesgroup into grouped contents.
+        if (!empty($inkeys)) {
+            list($insql, $inparams) = $DB->get_in_or_equal($inkeys);
+            $wherefield = ($field == 'date') ? 'FLOOR(timecreated/86400)' : $field;
+            $sql = "SELECT id, $select FROM {learningtools_note} WHERE $wherefield $insql";
+            $groups = $DB->get_records_sql($sql, $inparams);
+            $notegroups = [];
+            foreach ($groups as $id => $record) {
+                $key = $record->$field;
+                if (isset($notesgroup[$key])) {
+                    array_push($notesgroup[$key], $id);
+                } else {
+                    $notesgroup[$key][] = $id;
+                }
+            }
+            foreach ($notesgroup as $key => $ids) {
+                if (isset($records[$key])) {
+                    $records[$key]->notesgroup = implode(',', $ids);
+                }
             }
         }
-        foreach ($notesgroup as $key => $ids) {
-            if (isset($records[$key])) {
-                $records[$key]->notesgroup = implode(',', $ids);
-            }
-        }
-
         // Get the total notes.
         $countreports = $DB->get_records_sql("SELECT $select FROM {learningtools_note}
         WHERE $usersql $coursesql $sortsql", $params);
