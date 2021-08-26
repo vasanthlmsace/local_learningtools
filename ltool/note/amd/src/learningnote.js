@@ -110,7 +110,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                     document.querySelector("#popout-action").addEventListener('click', function() {
                         var url = M.cfg.wwwroot+"/local/learningtools/ltool/note/pop_out.php?contextid="+
                         params.contextid+"&pagetype="+params.pagetype+"&contextlevel="+params.contextlevel+
-                        "&course="+params.course+"&user="+params.user+"&pageurl="+params.pageurl+"&title="+params.title
+                        "&course="+params.course+"&user="+params.user+"&pageurl="+params.pageurl+"&pagetitle="+params.pagetitle
                         +"&heading="+params.heading; 
                         modal.hide();
                         window.open(url, '_blank');
@@ -224,6 +224,9 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      */
     function getnoteaction(contextid, params) {
         params.contextid = contextid;
+        if (params.pagetitle == "") {
+            params.pagetitle = document.querySelector("title").innerHTML;
+        }
         return Fragment.loadFragment('ltool_note', 'get_note_form', contextid, params);
     }
 

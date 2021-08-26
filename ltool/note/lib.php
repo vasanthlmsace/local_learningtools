@@ -41,6 +41,7 @@ class editorform extends moodleform {
         $pagetype = $this->_customdata['pagetype'];
         $pageurl = $this->_customdata['pageurl'];
         $user = $this->_customdata['user'];
+        $pagetitle = $this->_customdata['pagetitle'];
         $popoutaction = isset($this->_customdata['popoutaction']) ?
         $this->_customdata['popoutaction'] : '';
 
@@ -55,6 +56,10 @@ class editorform extends moodleform {
         $mform->addElement('hidden', 'pagetype');
         $mform->setDefault('pagetype', $pagetype);
         $mform->setType('pagetype', PARAM_TEXT);
+
+        $mform->addElement('hidden', 'pagetitle');
+        $mform->setDefault('pagetitle', $pagetitle);
+        $mform->setType('pagetitle', PARAM_TEXT);
 
         $mform->addElement('hidden', 'pageurl');
         $mform->setDefault('pageurl', $pageurl);
@@ -227,6 +232,12 @@ function ltool_note_output_fragment_get_note_form($args) {
 
     $editorhtml .= html_writer::tag('input', '', array(
         'type' => 'hidden',
+        'name' => 'pagetitle',
+        'value' => $args['pagetitle'],
+    ));
+
+    $editorhtml .= html_writer::tag('input', '', array(
+        'type' => 'hidden',
         'name' => 'pageurl',
         'value' => $args['pageurl'],
     ));
@@ -339,7 +350,7 @@ function user_save_notes($contextid, $data) {
         } else {
             $record->coursemodule = 0;
         }
-
+        $record->pagetitle = $data['pagetitle'];
         $record->pagetype = $data['pagetype'];
         $record->pageurl = $data['pageurl'];
         $record->note = format_text($data['ltnoteeditor'], FORMAT_HTML);
@@ -462,6 +473,7 @@ function load_notes_js_config() {
     $params['course'] = $COURSE->id;
     $params['contextlevel'] = $PAGE->context->contextlevel;
     $params['pagetype'] = $PAGE->pagetype;
+    $params['pagetitle'] = $PAGE->title;
     $params['pageurl'] = $PAGE->url->out(false);
     $params['user'] = $USER->id;
     $params['contextid'] = $PAGE->context->id;

@@ -60,6 +60,7 @@ function local_learningtools_myprofile_navigation(tree $tree, $user, $iscurrentu
 function local_learningtools_extend_settings_navigation($settingnav, $context) {
 
     global $PAGE, $USER, $COURSE;
+
     $context = context_system::instance();
     $ltoolsjs = array();
     // Content of fab button html.
