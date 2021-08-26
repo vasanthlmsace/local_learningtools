@@ -74,6 +74,7 @@ class bookmarks extends \local_learningtools\learningtools {
         $data['course'] = $COURSE->id;
         $data['pageurl'] = $PAGE->url->out(false);
         $data['pagetype'] = $PAGE->pagetype;
+        $data['pagetitle'] = $PAGE->title;
         $data['coursemodule'] = get_moduleid($PAGE->context->id, $PAGE->context->contextlevel);
         $data['contextlevel'] = $PAGE->context->contextlevel;
         $data['contextid'] = $PAGE->context->id;

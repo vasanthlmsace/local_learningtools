@@ -131,6 +131,7 @@ function user_save_bookmarks($contextid, $data) {
                 $record->coursemodule = 0;
             }
             $record->pagetype = $data['pagetype'];
+            $record->pagetitle = $data['pagetitle'];
             $record->pageurl = $data['pageurl'];
             $record->timecreated = time();
             $bookmarksrecord = $DB->insert_record('learningtools_bookmarks', $record);
