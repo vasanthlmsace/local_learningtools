@@ -46,6 +46,7 @@ function ltool_bookmarks_myprofile_navigation(tree $tree, $user, $iscurrentuser,
     $userid = optional_param('id', 0, PARAM_INT);
     if (is_bookmarks_status()) {
         if ($iscurrentuser) {
+            
             if (!empty($course)) {
                 $coursecontext = context_course::instance($course->id);
                 if (has_capability('ltool/bookmarks:viewbookmarks', $coursecontext)) {
@@ -72,7 +73,6 @@ function ltool_bookmarks_myprofile_navigation(tree $tree, $user, $iscurrentuser,
                 }
             }
         } else {
-
             if (is_parentforchild($user->id, 'ltool/bookmarks:viewbookmarks')) {
                 $params = ['userid' => $user->id];
                 $title = get_string('bookmarks', 'local_learningtools');
@@ -85,13 +85,17 @@ function ltool_bookmarks_myprofile_navigation(tree $tree, $user, $iscurrentuser,
                 $bookmarksnode = new core_user\output\myprofile\node('learningtools', 'bookmarks', $title, null, $bookmarksurl);
                 $tree->add_node($bookmarksnode);
                 return true;
-            } else if (!empty($course)) {
+            } else if (!empty($course) && !empty($userid)) {
                 $coursecontext = context_course::instance($course->id);
                 if (has_capability('ltool/bookmarks:viewbookmarks', $coursecontext)) {
-                    $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/userslist.php',
-                        array('courseid' => $course->id));
-                    $bookmarksnode = new core_user\output\myprofile\node('learningtools', 'bookmarks',
-                    get_string('coursebookmarks', 'local_learningtools'), null, $bookmarksurl);
+
+                    $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php', array('courseid' => $course->id,
+                        'userid' => $userid,
+                        'teacher' => 1
+                    ));
+                    $bookmarksnode = new core_user\output\myprofile\node('learningtools',
+                        'bookmarks', get_string('coursebookmarks', 'local_learningtools'),
+                    null, $bookmarksurl);
                     $tree->add_node($bookmarksnode);
                 }
             }
