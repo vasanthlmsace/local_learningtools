@@ -117,7 +117,7 @@ function user_save_bookmarks($contextid, $data) {
     if (confirm_sesskey()) {
 
         if (!$DB->record_exists('learningtools_bookmarks', array('contextid' =>
-            $contextid, 'pagetype' => $data['pagetype'], 'userid' => $data['user']))) {
+            $contextid, 'pageurl' => $data['pageurl'], 'userid' => $data['user']))) {
 
             $record = new stdclass();
             $record->userid = $data['user'];
@@ -150,8 +150,8 @@ function user_save_bookmarks($contextid, $data) {
             $bookmarksstatus = !empty($bookmarksrecord) ? true : false;
             $notificationtype = 'success';
         } else {
-            $deleterecord = $DB->get_record('learningtools_bookmarks', array('contextid' => $contextid));
-            $DB->delete_records('learningtools_bookmarks', array('contextid' => $contextid));
+            $deleterecord = $DB->get_record('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
+            $DB->delete_records('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
              // Add event to user delete the bookmark.
             $event = \ltool_bookmarks\event\ltbookmarks_deleted::create([
                 'objectid' => $deleterecord->id,
@@ -195,7 +195,7 @@ function check_view_bookmarks() {
  */
 function load_bookmarks_js_config($data) {
     global $PAGE, $USER;
-    $pagebookmarks = check_page_bookmarks_exist($PAGE->context->id, $PAGE->pagetype, $USER->id);
+    $pagebookmarks = $data['pagebookmarks'];
     $PAGE->requires->data_for_js('pagebookmarks', $pagebookmarks, true);
     $PAGE->requires->js_call_amd('ltool_bookmarks/learningbookmarks', 'init', array($PAGE->context->id, $data));
 }
@@ -213,16 +213,16 @@ function ltool_bookmarks_render_template($templatecontent) {
 /**
  * Check the page bookmarks exists or not.
  * @param int $contextid page context id
- * @param string $pagetype page type
+ * @param string $pageurl page url
  * @param int $userid user id
  * @return bool page bookmarks status
  */
-function check_page_bookmarks_exist($contextid, $pagetype, $userid) {
+function check_page_bookmarks_exist($contextid, $pageurl, $userid) {
     global $DB;
 
     $pagebookmarks = false;
     if ($DB->record_exists('learningtools_bookmarks', array('contextid' => $contextid,
-        'pagetype' => $pagetype, 'userid' => $userid))) {
+        'pageurl' => $pageurl, 'userid' => $userid))) {
         $pagebookmarks = true;
     }
     return $pagebookmarks;

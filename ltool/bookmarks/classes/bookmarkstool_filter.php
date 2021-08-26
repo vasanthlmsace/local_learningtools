@@ -180,7 +180,7 @@ class bookmarkstool_filter {
             foreach ($records as $row) {
                 $list = [];
                 $data = check_instanceof_block($row);
-                $list['instance'] = $this->get_instance_bookmark($data);
+                $list['instance'] = $row->pagetitle;
                 $list['instanceinfo'] = $this->get_instance_bookmarkinfo($data);
                 $list['courseinstance'] = ($data->instance == 'course') ? true : false;
                 $list['time'] = $this->get_bookmark_time($row);
@@ -312,7 +312,6 @@ class bookmarkstool_filter {
      * @return mixed result
      */
     public function get_bookmark_viewinfo($row) {
-
         return get_instance_tool_view_url($row);
     }
 
