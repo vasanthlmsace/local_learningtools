@@ -253,3 +253,15 @@
 .floating-button .list-learningtools > div.ltnoteinfo button:hover p {
     background: #17a2b8;
 }
+
+#page-local-learningtools-ltool-note-editlist .mform .form-group {
+    margin-right: 1rem;
+}
+
+#page-local-learningtools-ltool-note-editlist .mform .femptylabel .col-form-label {
+    display: none !important;
+}
+
+#page-local-learningtools-ltool-note-editlist .mform {
+    margin-top: 2rem;
+}
