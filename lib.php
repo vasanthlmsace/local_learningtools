@@ -225,21 +225,6 @@ function get_module_name($data, $mod = false) {
     return $report->name;
 }
 
-/**
- * Get the course module include with section.
- * @param object $data instance of the page.
- * @param string $type ltool type.
- * @return string instance of coursemodule name.
- */
-function get_module_coursesection($data, $type = '') {
-    $coursename = get_course_name($data->courseid);
-    $section = get_mod_section($data->courseid, $data->coursemodule);
-    if ($type == 'note') {
-        $modulename = get_module_name($data);
-        return $coursename.' / '. $section. ' / '. $modulename;
-    }
-    return $coursename.' / '. $section;
-}
 
 /**
  * Get the course module current section.
