@@ -135,6 +135,7 @@ function user_save_bookmarks($contextid, $data) {
             $record->pageurl = $data['pageurl'];
             $record->timecreated = time();
             $bookmarksrecord = $DB->insert_record('learningtools_bookmarks', $record);
+            
             // Add event to user create the bookmark.
             $event = \ltool_bookmarks\event\ltbookmarks_created::create([
                 'objectid' => $bookmarksrecord,
@@ -153,9 +154,10 @@ function user_save_bookmarks($contextid, $data) {
             $deleterecord = $DB->get_record('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
             $DB->delete_records('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
              // Add event to user delete the bookmark.
+            $eventcourseid = get_eventlevel_courseid($context, $data['course']);
             $event = \ltool_bookmarks\event\ltbookmarks_deleted::create([
                 'objectid' => $deleterecord->id,
-                'courseid' => $data['course'],
+                'courseid' => $eventcourseid,
                 'context' => $context,
                 'other' => [
                     'pagetype' => $data['pagetype'],

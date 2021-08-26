@@ -59,7 +59,7 @@ function local_learningtools_myprofile_navigation(tree $tree, $user, $iscurrentu
  */
 function local_learningtools_extend_settings_navigation($settingnav, $context) {
 
-    global $PAGE, $USER;
+    global $PAGE, $USER, $COURSE;
     $context = context_system::instance();
     $ltoolsjs = array();
     // Content of fab button html.
@@ -398,4 +398,19 @@ function get_instance_tool_view_url($row) {
         $viewurl = $OUTPUT->single_button($row->pageurl, get_string('viewpage', 'local_learningtools'), 'get');
     }
     return $viewurl;
+}
+
+/**
+ * Get the event level course id.
+ * @param object $contextid context object
+ * @param int $courseid related course id 
+ * @return string view html
+ */
+function get_eventlevel_courseid($context, $courseid) {
+    $course = 0;
+    if ($context->contextlevel == 50 || $context->contextlevel == 70) {
+        return $courseid;
+    } else {
+        return $course;
+    }
 }

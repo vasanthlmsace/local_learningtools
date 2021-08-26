@@ -227,13 +227,13 @@ class bookmarkstool_filter {
         if ($data->instance == 'course') {
             $bookmarkinfo = get_course_categoryname($data->courseid);
         } else if ($data->instance == 'user') {
-            $bookmarkinfo = 'user';
+            $bookmarkinfo = '';
         } else if ($data->instance == 'mod') {
             $bookmarkinfo = get_bookmarks_module_coursesection($data);
         } else if ($data->instance == 'system') {
-             $bookmarkinfo = 'system';
+             $bookmarkinfo = '';
         } else if ($data->instance == 'block') {
-             $bookmarkinfo = 'block';
+             $bookmarkinfo = '';
         }
         return $bookmarkinfo;
     }
