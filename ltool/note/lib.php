@@ -88,8 +88,7 @@ class edit_noteinfo extends moodleform {
 
         $note = $DB->get_record('learningtools_note', array('id' => $noteid));
         $usernote = !empty($note->note) ? $note->note : '';
-        $mform->addElement('editor', 'noteeditor', get_string('note',
-            'local_learningtools'))->setValue( array('text' => $usernote));
+        $mform->addElement('editor', 'noteeditor', '')->setValue( array('text' => $usernote));
         $mform->setType('noteeditor', PARAM_RAW);
         $mform->addElement('hidden', 'edit');
         $mform->setType('edit', PARAM_INT);
