@@ -163,10 +163,11 @@ function ltool_note_myprofile_navigation(tree $tree, $user, $iscurrentuser, $cou
                 $notenode = new core_user\output\myprofile\node('learningtools', 'note', $title, null, $noteurl);
                 $tree->add_node($notenode);
                 return true;
-            } else if (!empty($course)) {
+            } else if (!empty($course) && !empty($userid)) {
                 $coursecontext = context_course::instance($course->id);
                 if (has_capability('ltool/note:viewnote', $coursecontext)) {
-                    $noteurl = new moodle_url('/local/learningtools/ltool/note/userslist.php', array('courseid' => $course->id));
+                    $noteurl = new moodle_url('/local/learningtools/ltool/note/list.php',
+                        array('courseid' => $course->id, 'userid' => $userid, 'teacher' => 1));
                     $notenode = new core_user\output\myprofile\node('learningtools', 'note',
                         get_string('coursenotes', 'local_learningtools'), null, $noteurl);
                     $tree->add_node($notenode);
