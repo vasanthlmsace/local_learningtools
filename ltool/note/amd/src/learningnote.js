@@ -101,8 +101,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                         modal.destroy();
                     });
         
-                    modal.getRoot().on(ModalEvents.save, function(e) { 
-
+                    modal.getRoot().on(ModalEvents.save, function(e) {
                         e.preventDefault();
                         submitForm(modal);
                     });
@@ -158,7 +157,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * @return {string} popout html
      */
     function get_popout_action(params) {
-        var popouthtml = "<div class='popout-block'><button type='submit' id='popout-action' name='popoutsubmit'>Pop out</button><i class='fa fa-window-restore'></i></div>";
+        var popouthtml = "<div class='popout-block'><a href='javascript::void(0);' id='popout-action' name='popoutsubmit'>Pop out</a><i class='fa fa-window-restore'></i></div>";
         return popouthtml;
     }
 
