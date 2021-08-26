@@ -35,7 +35,10 @@ require_capability('ltool/note:viewnote', $context);
 $PAGE->set_context($context);
 $PAGE->set_url('/local/learningtools/ltool/note/userslist.php');
 $PAGE->set_title($title);
-$PAGE->set_heading($SITE->fullname);
+$courseelement = get_course($courseid);
+$courselistelement = new core_course_list_element($courseelement);
+$PAGE->set_course($courseelement);
+$PAGE->set_heading($courselistelement->get_formatted_name());
 
 // Participants table filterset.
 $filterset = new \core_user\table\participants_filterset;

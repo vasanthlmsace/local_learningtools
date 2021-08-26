@@ -529,3 +529,15 @@ function delete_module_note($module) {
     }
 }
 
+/**
+ * Get the Notes course module include with section.
+ * @param object $data instance of the page.
+ * @param string $type ltool type.
+ * @return string instance of coursemodule name.
+ */
+function get_note_module_coursesection($data) {
+    $coursename = get_course_name($data->courseid);
+    $section = get_mod_section($data->courseid, $data->coursemodule);
+    $modulename = get_module_name($data);
+    return $coursename.' / '. $section. ' / '. $modulename;
+}

@@ -273,3 +273,15 @@ function delete_module_bookmarks($module) {
         $DB->delete_records('learningtools_bookmarks', array('coursemodule' => $module));
     }
 }
+
+/**
+ * Get the bookmarks course module include with section.
+ * @param object $data instance of the page.
+ * @param string $type ltool type.
+ * @return string instance of coursemodule name.
+ */
+function get_bookmarks_module_coursesection($data) {
+    $coursename = get_course_name($data->courseid);
+    $section = get_mod_section($data->courseid, $data->coursemodule);
+    return $coursename.' / '. $section;
+}
