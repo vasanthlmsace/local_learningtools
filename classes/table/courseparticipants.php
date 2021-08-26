@@ -121,16 +121,13 @@ class courseparticipants extends \core_user\table\participants {
      * @return string HTML fragment
      */
     public function get_viewreport_url($userid) {
-        global $OUTPUT;
-
-        if ($this->ltool == 'bookmarks') {
-            $url = '/local/learningtools/ltool/bookmarks/list.php';
-        } else if ($this->ltool == 'note') {
-            $url = '/local/learningtools/ltool/note/list.php';
+        global $OUTPUT, $CFG;
+        $url = '/local/learningtools/ltool/'.$this->ltool.'/list.php';
+        if (file_exists("$CFG->dirroot"."$url")) {
+            $viewreporturl = new moodle_url($url, array('userid' => $userid, 'courseid' => $this->course->id, 'teacher' => true));
+            $viewreportbutton = $OUTPUT->single_button($viewreporturl, get_string('viewreports', 'local_learningtools'), 'get');
+            return $viewreportbutton;
         }
-        $viewreporturl = new moodle_url($url, array('userid' => $userid, 'courseid' => $this->course->id, 'teacher' => true));
-        $viewreportbutton = $OUTPUT->single_button($viewreporturl, get_string('viewreports', 'local_learningtools'), 'get');
-        return $viewreportbutton;
     }
 
     /**

@@ -585,7 +585,7 @@ class notetool_filter {
         } else if ($data->instance == 'user') {
             $title = 'user';
         } else if ($data->instance == 'mod') {
-            $title = get_module_coursesection($data, 'note');
+            $title = get_note_module_coursesection($data, 'note');
         } else if ($data->instance == 'system') {
             $title = 'system';
         } else if ($data->instance == 'block') {

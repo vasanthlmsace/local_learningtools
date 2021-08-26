@@ -31,11 +31,15 @@ require_bookmarks_status();
 $title = get_string('courseparticipants', 'local_learningtools');
 $courseid = required_param('courseid', PARAM_INT);
 $context = context_course::instance($courseid);
+$courseelement = get_course($courseid);
+$courselistelement = new core_course_list_element($courseelement);
+$PAGE->set_course($courseelement);
+
 require_capability('ltool/bookmarks:viewbookmarks', $context);
 $PAGE->set_context($context);
 $PAGE->set_url('/local/learningtools/ltool/bookmarks/userslist.php');
 $PAGE->set_title($title);
-$PAGE->set_heading($SITE->fullname);
+$PAGE->set_heading($courselistelement->get_formatted_name());
 
 // Participants table filterset.
 $filterset = new \core_user\table\participants_filterset;
