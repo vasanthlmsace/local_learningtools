@@ -172,7 +172,6 @@ function ltool_note_myprofile_navigation(tree $tree, $user, $iscurrentuser, $cou
 
         }
     }
-    
     return true;
 }
 
@@ -275,7 +274,7 @@ function get_contextuser_notes($args) {
     $template = [];
     $listrecords = [];
     $sql = "SELECT * FROM {learningtools_note}
-        WHERE userid = :userid AND contextid = :contextid ORDER BY timecreated DESC";
+    WHERE userid = :userid AND contextid = :contextid ORDER BY timecreated DESC";
 
     $params = ['userid' => $args['user'], 'contextid' => $args['contextid']];
     $records = $DB->get_records_sql($sql, $params);
@@ -295,7 +294,7 @@ function get_contextuser_notes($args) {
             if (isset($listrecord['notesgroup'])) {
                 list($dbsql, $dbparam) = $DB->get_in_or_equal($listrecord['notesgroup'], SQL_PARAMS_NAMED);
                 $notesrecords = $DB->get_records_sql("SELECT * FROM {learningtools_note}
-                WHERE id $dbsql ORDER BY timecreated desc", $dbparam);
+                    WHERE id $dbsql ORDER BY timecreated desc", $dbparam);
                 if (!empty($notesrecords)) {
                     foreach ($notesrecords as $note) {
                         $list['note'] = !empty($note->note) ? $note->note : '';
@@ -537,7 +536,6 @@ function delete_module_note($module) {
 /**
  * Get the Notes course module include with section.
  * @param object $data instance of the page.
- * @param string $type ltool type.
  * @return string instance of coursemodule name.
  */
 function get_note_module_coursesection($data) {

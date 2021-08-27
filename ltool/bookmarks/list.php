@@ -158,7 +158,6 @@ if ($delete && confirm_sesskey()) {
             if ($childid) {
                 $deleteeventparams = array_merge($deleteeventparams, ['relateduserid' => $childid]);
             }
-            
             // Add event to user delete the bookmark.
             $event = \ltool_bookmarks\event\ltbookmarks_deleted::create($deleteeventparams);
 

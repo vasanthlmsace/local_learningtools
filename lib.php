@@ -403,8 +403,8 @@ function get_instance_tool_view_url($row) {
 
 /**
  * Get the event level course id.
- * @param object $contextid context object
- * @param int $courseid related course id 
+ * @param object $context context object
+ * @param int $courseid related course id
  * @return string view html
  */
 function get_eventlevel_courseid($context, $courseid) {

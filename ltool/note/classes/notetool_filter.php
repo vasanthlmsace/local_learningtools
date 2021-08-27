@@ -149,6 +149,7 @@ class notetool_filter {
         $usercondition = $this->get_user_sql($this->courseid, $this->childid);
         $usersql = $usercondition['sql'];
         $userparams = $usercondition['params'];
+
         $sql = "SELECT * FROM {learningtools_note}
         WHERE $usersql AND course = :course AND coursemodule != 0 GROUP BY coursemodule";
         $params = [
@@ -320,7 +321,7 @@ class notetool_filter {
         }
         // Get the total notes.
         $countreports = $DB->get_records_sql("SELECT $select FROM {learningtools_note}
-        WHERE $usersql $coursesql $sortsql", $params);
+            WHERE $usersql $coursesql $sortsql", $params);
 
         $this->totalnotes = count($countreports);
         return $records;

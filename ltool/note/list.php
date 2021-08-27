@@ -165,7 +165,6 @@ if ($delete && confirm_sesskey()) {
                     'pagetype' => $deleterecord->pagetype,
                 ]
             ];
-            
             if ($childid) {
                 $deleteeventparams = array_merge($deleteeventparams, ['relateduserid' => $childid]);
             }

@@ -54,7 +54,6 @@ function ltool_bookmarks_myprofile_navigation(tree $tree, $user, $iscurrentuser,
                     'bookmarks', get_string('coursebookmarks', 'local_learningtools'),
                 null, $bookmarksurl);
                 $tree->add_node($bookmarksnode);
-                
             } else {
                 if (has_capability('ltool/bookmarks:viewownbookmarks', $context)) {
                     $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php');
@@ -142,8 +141,10 @@ function user_save_bookmarks($contextid, $data) {
             $bookmarksstatus = !empty($bookmarksrecord) ? true : false;
             $notificationtype = 'success';
         } else {
-            $deleterecord = $DB->get_record('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
-            $DB->delete_records('learningtools_bookmarks', array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
+            $deleterecord = $DB->get_record('learningtools_bookmarks',
+                array('contextid' => $contextid, 'pageurl' => $data['pageurl']));
+            $DB->delete_records('learningtools_bookmarks', array('contextid' => $contextid,
+                'pageurl' => $data['pageurl']));
              // Add event to user delete the bookmark.
             $eventcourseid = get_eventlevel_courseid($context, $data['course']);
             $event = \ltool_bookmarks\event\ltbookmarks_deleted::create([
@@ -275,7 +276,6 @@ function delete_module_bookmarks($module) {
 /**
  * Get the bookmarks course module include with section.
  * @param object $data instance of the page.
- * @param string $type ltool type.
  * @return string instance of coursemodule name.
  */
 function get_bookmarks_module_coursesection($data) {
