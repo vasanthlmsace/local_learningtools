@@ -458,7 +458,7 @@ class notetool_filter {
                 $data = check_instanceof_block($record);
                 $list['id'] = $record->id;
                 $list['instance'] = $this->get_instance_note($data);
-                $list['base'] = $this->get_title_note($data);
+                $list['base'] = $this->get_title_note($data, $record);
                 $list['note'] = !empty($record->note) ? $record->note : '';
                 $list['time'] = userdate($record->timecreated, '%B %d, %Y, %I:%M', '', false);
                 $list['viewurl'] = $this->get_view_url($record);
@@ -575,21 +575,17 @@ class notetool_filter {
     /**
      * Gets the notes title instance
      * @param object $data instance data
+     * @param object $record note record
      * @return string instance title name
      */
-    public function get_title_note($data) {
+    public function get_title_note($data, $record) {
 
-        $title = '';
         if ($data->instance == 'course') {
             $title = get_course_name($data->courseid);
-        } else if ($data->instance == 'user') {
-            $title = 'user';
         } else if ($data->instance == 'mod') {
             $title = get_note_module_coursesection($data, 'note');
-        } else if ($data->instance == 'system') {
-            $title = 'system';
-        } else if ($data->instance == 'block') {
-            $title = 'block';
+        } else {
+            $title = $record->pagetitle;
         }
         return $title;
     }

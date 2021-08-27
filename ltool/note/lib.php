@@ -133,20 +133,12 @@ function ltool_note_myprofile_navigation(tree $tree, $user, $iscurrentuser, $cou
         if ($iscurrentuser) {
             if (!empty($course)) {
                 $coursecontext = context_course::instance($course->id);
-                if (has_capability('ltool/note:viewnote', $coursecontext)) {
-                    $noteurl = new moodle_url('/local/learningtools/ltool/note/userslist.php', array('courseid' => $course->id));
-                    $notenode = new core_user\output\myprofile\node('learningtools', 'note',
-                        get_string('coursenotes', 'local_learningtools'), null, $noteurl);
-                    $tree->add_node($notenode);
-                } else {
-                    $noteurl = new moodle_url('/local/learningtools/ltool/note/list.php',
-                        array('courseid' => $course->id, 'userid' => $userid));
-                    $notenode = new core_user\output\myprofile\node('learningtools', 'note',
-                        get_string('coursenotes', 'local_learningtools'), null, $noteurl);
-                    $tree->add_node($notenode);
-                }
+                $noteurl = new moodle_url('/local/learningtools/ltool/note/list.php',
+                    array('courseid' => $course->id, 'userid' => $userid));
+                $notenode = new core_user\output\myprofile\node('learningtools', 'note',
+                    get_string('coursenotes', 'local_learningtools'), null, $noteurl);
+                $tree->add_node($notenode);
             } else {
-
                 if (has_capability('ltool/note:viewownnote', $context)) {
                     $noteurl = new moodle_url('/local/learningtools/ltool/note/list.php');
                     $notenode = new core_user\output\myprofile\node('learningtools', 'note',
@@ -180,6 +172,7 @@ function ltool_note_myprofile_navigation(tree $tree, $user, $iscurrentuser, $cou
 
         }
     }
+    
     return true;
 }
 
@@ -357,10 +350,11 @@ function user_save_notes($contextid, $data) {
         $record->timecreated = time();
 
         $notesrecord = $DB->insert_record('learningtools_note', $record);
+        $eventcourseid = get_eventlevel_courseid($context, $data['course']);
         // Add event to user create the note.
         $event = \ltool_note\event\ltnote_created::create([
             'objectid' => $notesrecord,
-            'courseid' => $data['course'],
+            'courseid' => $eventcourseid,
             'context' => $context,
             'other' => [
                 'pagetype' => $data['pagetype'],
@@ -469,7 +463,6 @@ function check_view_notes() {
  */
 function load_notes_js_config() {
     global $COURSE, $PAGE, $USER;
-
     $params['course'] = $COURSE->id;
     $params['contextlevel'] = $PAGE->context->contextlevel;
     $params['pagetype'] = $PAGE->pagetype;

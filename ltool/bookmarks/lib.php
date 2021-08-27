@@ -46,24 +46,15 @@ function ltool_bookmarks_myprofile_navigation(tree $tree, $user, $iscurrentuser,
     $userid = optional_param('id', 0, PARAM_INT);
     if (is_bookmarks_status()) {
         if ($iscurrentuser) {
-            
             if (!empty($course)) {
                 $coursecontext = context_course::instance($course->id);
-                if (has_capability('ltool/bookmarks:viewbookmarks', $coursecontext)) {
-                    $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/userslist.php',
-                        array('courseid' => $course->id));
-                    $bookmarksnode = new core_user\output\myprofile\node('learningtools', 'bookmarks',
-                    get_string('coursebookmarks', 'local_learningtools'), null, $bookmarksurl);
-                    $tree->add_node($bookmarksnode);
-                } else {
-                    $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php', array('courseid' => $course->id,
-                        'userid' => $userid));
-                    $bookmarksnode = new core_user\output\myprofile\node('learningtools',
-                        'bookmarks', get_string('coursebookmarks', 'local_learningtools'),
-                    null, $bookmarksurl);
-                    $tree->add_node($bookmarksnode);
-                }
-
+                $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php', array('courseid' => $course->id,
+                    'userid' => $userid));
+                $bookmarksnode = new core_user\output\myprofile\node('learningtools',
+                    'bookmarks', get_string('coursebookmarks', 'local_learningtools'),
+                null, $bookmarksurl);
+                $tree->add_node($bookmarksnode);
+                
             } else {
                 if (has_capability('ltool/bookmarks:viewownbookmarks', $context)) {
                     $bookmarksurl = new moodle_url('/local/learningtools/ltool/bookmarks/list.php');
@@ -135,11 +126,11 @@ function user_save_bookmarks($contextid, $data) {
             $record->pageurl = $data['pageurl'];
             $record->timecreated = time();
             $bookmarksrecord = $DB->insert_record('learningtools_bookmarks', $record);
-            
+            $eventcourseid = get_eventlevel_courseid($context, $data['course']);
             // Add event to user create the bookmark.
             $event = \ltool_bookmarks\event\ltbookmarks_created::create([
                 'objectid' => $bookmarksrecord,
-                'courseid' => $data['course'],
+                'courseid' => $eventcourseid,
                 'context' => $context,
                 'other' => [
                     'pagetype' => $data['pagetype'],

@@ -125,7 +125,7 @@ define(['core/str', 'core/ajax', 'core/notification'],
         if (formData.pagetitle == "")  {
             formData.pagetitle = document.querySelector('title').innerHTML;
         }
-
+        formData.pageurl = window.location.href;
         var Formdata = JSON.stringify(formData);
         Ajax.call([{
             methodname: 'ltool_bookmarks_save_userbookmarks',
