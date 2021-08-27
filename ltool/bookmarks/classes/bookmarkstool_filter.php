@@ -190,7 +190,6 @@ class bookmarkstool_filter {
                 $reports[] = $list;
             }
         }
-
         $res['pageingbar'] = $pageingbar;
         $res['bookmarks'] = $reports;
         return $res;
