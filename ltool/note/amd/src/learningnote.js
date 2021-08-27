@@ -224,7 +224,6 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      */
     function getnoteaction(contextid, params) {
         params.contextid = contextid;
-        params.pageurl = window.location.href;
         if (params.pagetitle == "") {
             params.pagetitle = document.querySelector("title").innerHTML;
         }
