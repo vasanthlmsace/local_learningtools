@@ -47,6 +47,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $page->set_course($course);
         $page->set_pagelayout('standard');
         $page->set_pagetype('course-view');
+        $page->set_title('Course: Course 1');
         $page->set_url(new moodle_url('/course/view.php', ['id' => $course->id]));
         $this->page = $page;
     }
@@ -131,7 +132,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $data['contextid'] = $this->page->context->id;
         $data['sesskey'] = sesskey();
         $data['ltbookmark'] = true;
-        $data['pagetitle'] = $PAGE->title;
+        $data['pagetitle'] = $this->page->title;
         $data['bookmarkhovername'] = get_string('addbookmark', 'local_learningtools');
         $data['pagebookmarks'] = check_page_bookmarks_exist($this->page->context->id, $this->page->pagetype, $USER->id);
         return $data;
