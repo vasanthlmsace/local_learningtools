@@ -105,7 +105,7 @@ class ltool_note_testcase extends advanced_testcase {
     }
 
     /**
-     * Case to test the external method to create/delete bookmarks.
+     * Case to test the external method to create/delete notes.
      *
      * @return void
      */

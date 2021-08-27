@@ -127,7 +127,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
     }
 
     /**
-     * Sort the bookmarks list.
+     * Sort the notes list.
      * @param {string} sort type
      * @return {void}
      */

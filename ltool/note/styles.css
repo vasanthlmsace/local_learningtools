@@ -20,7 +20,7 @@
 .path-local-learningtools-ltool-note .top-block > div:last-child {
     display: inline-block;
 }
-.path-local-learningtools-ltool-note .top-block > div.ltbookmarks-coursefilter {
+.path-local-learningtools-ltool-note .top-block > div.ltnote-coursefilter {
     text-align: left;
     float: none;
     display: block;

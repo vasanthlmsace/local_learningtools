@@ -298,7 +298,7 @@ function get_contextuser_notes($args) {
                 if (!empty($notesrecords)) {
                     foreach ($notesrecords as $note) {
                         $list['note'] = !empty($note->note) ? $note->note : '';
-                        $list['time'] = userdate(($note->timecreated), '%B %d, %Y, %I:%M', '', false);
+                        $list['time'] = userdate(($note->timecreated), '%B %d, %Y, %I:%M %p', '', false);
                         if (has_capability('ltool/note:manageownnote', $context)) {
                             $returnparams = array('returnurl' => $args['pageurl']);
                             $list['delete'] = delete_note_record($note, $returnparams);
@@ -536,11 +536,12 @@ function delete_module_note($module) {
 /**
  * Get the Notes course module include with section.
  * @param object $data instance of the page.
+ * @param object $record notes record
  * @return string instance of coursemodule name.
  */
-function get_note_module_coursesection($data) {
+function get_note_module_coursesection($data, $record) {
     $coursename = get_course_name($data->courseid);
     $section = get_mod_section($data->courseid, $data->coursemodule);
-    $modulename = get_module_name($data);
+    $modulename = $record->pagetitle;
     return $coursename.' / '. $section. ' / '. $modulename;
 }

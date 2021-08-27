@@ -247,6 +247,7 @@ class notetool_filter {
         $coursesql = '';
         $sortsql = '';
         $usersql = '';
+        $ordersql = '';
 
         $sorttypesql = $this->urlparams['sorttype'];
 
@@ -273,14 +274,17 @@ class notetool_filter {
             $field = 'date';
             $select = 'FLOOR(timecreated/86400) AS date';
             $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY FLOOR(timecreated/86400) $sorttypesql";
+            $ordersql .= "ORDER BY FLOOR(timecreated/86400) $sorttypesql";
         } else if ($this->sort == 'course') {
             $field = 'course';
             $select = 'course';
             $sortsql .= "AND course != 1  GROUP BY course ORDER BY course $sorttypesql";
+            $ordersql .= "ORDER BY course $sorttypesql";
         } else if ($this->sort == 'activity') {
             $field = 'coursemodule';
             $select = 'coursemodule';
             $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule ORDER BY coursemodule $sorttypesql";
+            $ordersql .= "ORDER BY coursemodule $sorttypesql";
         }
 
         if ($this->selectcourse) {
@@ -292,7 +296,7 @@ class notetool_filter {
             }
         }
         // We can't use group concat in pgsql. We need to fetch the set of notes id by group.
-        $sql = "SELECT  $select FROM {learningtools_note} WHERE $usersql $coursesql $sortsql";
+        $sql = "SELECT  $select FROM {learningtools_note} WHERE $usersql $coursesql $sortsql ";
 
         $records = $DB->get_records_sql($sql, $params, $this->urlparams['page']
         * $this->urlparams['perpage'], $this->urlparams['perpage']);
@@ -300,10 +304,11 @@ class notetool_filter {
         $inkeys = array_keys($records);
         // Add the notesgroup into grouped contents.
         if (!empty($inkeys)) {
-            list($insql, $inparams) = $DB->get_in_or_equal($inkeys);
+            list($insql, $inparams) = $DB->get_in_or_equal($inkeys, SQL_PARAMS_NAMED);
             $wherefield = ($field == 'date') ? 'FLOOR(timecreated/86400)' : $field;
-            $sql = "SELECT id, $select FROM {learningtools_note} WHERE $wherefield $insql";
-            $groups = $DB->get_records_sql($sql, $inparams);
+            $sql = "SELECT id, $select FROM {learningtools_note} WHERE $usersql $coursesql AND $wherefield $insql $ordersql";
+            $groupparams = array_merge($params, $inparams);
+            $groups = $DB->get_records_sql($sql, $groupparams);
             $notegroups = [];
             foreach ($groups as $id => $record) {
                 $key = $record->$field;
@@ -461,7 +466,7 @@ class notetool_filter {
                 $list['instance'] = $this->get_instance_note($data);
                 $list['base'] = $this->get_title_note($data, $record);
                 $list['note'] = !empty($record->note) ? $record->note : '';
-                $list['time'] = userdate($record->timecreated, '%B %d, %Y, %I:%M', '', false);
+                $list['time'] = userdate($record->timecreated, '%B %d, %Y, %I:%M %p', '', false);
                 $list['viewurl'] = $this->get_view_url($record);
 
                 if (!empty($this->courseid) && !$this->childid) {
@@ -584,7 +589,7 @@ class notetool_filter {
         if ($data->instance == 'course') {
             $title = get_course_name($data->courseid);
         } else if ($data->instance == 'mod') {
-            $title = get_note_module_coursesection($data, 'note');
+            $title = get_note_module_coursesection($data, $record);
         } else {
             $title = $record->pagetitle;
         }
