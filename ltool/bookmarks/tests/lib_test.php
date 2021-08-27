@@ -131,6 +131,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $data['contextid'] = $this->page->context->id;
         $data['sesskey'] = sesskey();
         $data['ltbookmark'] = true;
+        $data['pagetitle'] = $PAGE->title;
         $data['bookmarkhovername'] = get_string('addbookmark', 'local_learningtools');
         $data['pagebookmarks'] = check_page_bookmarks_exist($this->page->context->id, $this->page->pagetype, $USER->id);
         return $data;
