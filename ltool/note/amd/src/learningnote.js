@@ -73,14 +73,14 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * Display the modal popup.
      * @param {int} context id
      * @param {object} notes info params
-     * @return {void} 
+     * @return {void}
      */
     function show_modal_lttool(contextid, params) {
 
         var notesinfo = document.querySelector(".ltnoteinfo #ltnote-action");
         notesinfo.addEventListener("click", function() {
             var newnote = String.get_string('newnote', 'local_learningtools');
-            
+
             $.when(newnote).done(function(localizedEditString) {
                 // add class.
                 var ltoolnotebody  = document.getElementsByTagName('body')[0];
@@ -96,12 +96,12 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                 }).then(function(modal){
 
                     modal.show();
-                    
+
                     modal.getRoot().on(ModalEvents.hidden, function() {
                         modal.destroy();
                     });
-        
-                    modal.getRoot().on(ModalEvents.save, function(e) { 
+
+                    modal.getRoot().on(ModalEvents.save, function(e) {
 
                         e.preventDefault();
                         submitForm(modal);
@@ -111,7 +111,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                         var url = M.cfg.wwwroot+"/local/learningtools/ltool/note/pop_out.php?contextid="+
                         params.contextid+"&pagetype="+params.pagetype+"&contextlevel="+params.contextlevel+
                         "&course="+params.course+"&user="+params.user+"&pageurl="+params.pageurl+"&pagetitle="+params.pagetitle
-                        +"&heading="+params.heading; 
+                        +"&heading="+params.heading;
                         modal.hide();
                         window.open(url, '_blank');
                     });
@@ -141,7 +141,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         } else if (sorttype == 'desc') {
             sorttype = 'asc';
         }
-        
+
         if (pageurl.indexOf('?') > -1) {
             var para = '&';
         } else {
@@ -177,7 +177,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * @return {void} ajax response.
      */
     function submitFormData(modal, contextid) {
-        
+
         var modalform = document.querySelector('.ltoolusernotes form');
         var formData = serialize(modalform);
         var notesuccess = String.get_string('successnotemessage', 'local_learningtools');
@@ -193,7 +193,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                     }
                     noteinfo.innerHTML = response;
                 }
-                
+
                 modal.hide();
                // window.location.reload();
                 $.when(notesuccess).done(function(localizedEditString){
@@ -201,16 +201,16 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                         message: localizedEditString,
                         type: "success"
                     });
-                }); 
+                });
 
                 if (ltools.disappertimenotify != 0) {
                     setTimeout(function () {
                         document.querySelector("span.notifications").innerHTML = "";
                     }, ltools.disappertimenotify);
-                }  
+                }
             },
             fail: handleFailedResponse()
-        }]); 
+        }]);
     }
 
     function handleFailedResponse() {
@@ -261,12 +261,12 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                         case 'radio':
                             if (form.elements[i].checked) {
                                     q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                            }                                               
+                            }
                             break;
                     }
                     break;
                     case 'file':
-                    break; 
+                    break;
                 case 'TEXTAREA':
                         q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
                         break;
