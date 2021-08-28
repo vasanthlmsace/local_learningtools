@@ -45,7 +45,7 @@ if (is_array($jsonurlparams)) {
         if ($cnt > 1) {
             $pageurl .= '&';
         }
-        $pageurl .= $urlparam; 
+        $pageurl .= $urlparam;
         $cnt++;
     }
 } else {
