@@ -221,20 +221,20 @@
     text-align: right;
     margin-left: 10px;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .edit-action,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .edit-action {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .action-block .edit-action,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .action-block .edit-action {
     display: inline-block;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .action-block .delete-action,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .action-block .delete-action {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .action-block .delete-action,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .action-block .delete-action {
     display: inline-block;
 }
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block,
 .learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block {
     margin-top: 15px;
 }
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
-.learningtool-note .modal .modal-body .list-context-existnotes .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapse .content-block .desc-block p:empty,
+.learningtool-note .modal .modal-body .usernotes-mainbody .card .collapsing .content-block .desc-block p:empty {
     display: none;
 }
 
