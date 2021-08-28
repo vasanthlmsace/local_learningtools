@@ -33,9 +33,24 @@ $courseid = optional_param('course', 0, PARAM_INT);
 $user = optional_param('user', 0, PARAM_INT);
 $contextlevel = optional_param('contextlevel', 0, PARAM_INT);
 $pagetype = optional_param('pagetype', '', PARAM_TEXT);
-$pageurl = optional_param('pageurl', '', PARAM_RAW);
+$urlparams = optional_param('pageurl', '', PARAM_RAW);
 $pagetitle = optional_param('pagetitle', '', PARAM_TEXT);
 $pageheading = optional_param('heading' , '', PARAM_TEXT);
+$jsonurlparams = json_decode($urlparams);
+
+if (is_array($jsonurlparams)) {
+    $pageurl = '';
+    $cnt = 1;
+    foreach ($jsonurlparams as $urlparam) {
+        if ($cnt > 1) {
+            $pageurl .= '&';
+        }
+        $pageurl .= $urlparam; 
+        $cnt++;
+    }
+} else {
+    $pageurl = $urlparams;
+}
 
 $params = [];
 $params['contextid'] = $contextid;
@@ -46,7 +61,6 @@ $params['pagetype'] = $pagetype;
 $params['pageurl'] = $pageurl;
 $params['pagetitle'] = $pagetitle;
 $params['pageheading'] = $pageheading;
-
 
 list($context, $course, $cm) = get_context_info_array($contextid);
 
@@ -70,7 +84,6 @@ sesskey();
 
 if ($contextid && $courseid && $user && $contextlevel
     && $pagetype && $pageurl) {
-
     $params['popoutaction'] = true;
     $actionurl = $url->out(false);
     $mform = new editorform($actionurl, $params);
