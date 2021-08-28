@@ -70,7 +70,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $bookmarks = ltool_bookmarks\external::save_userbookmarks($this->context->id, $data);
         $events = $sink->get_events();
         $event = reset($events);
-        $exist = check_page_bookmarks_exist($this->context->id, 'course-view', $USER->id);
+        $exist = check_page_bookmarks_exist($this->context->id, $this->page->url->out(), $USER->id);
         $bookmarksmsg = get_string('successbookmarkmessage', 'local_learningtools');
         $this->assertEquals($bookmarks['bookmarksmsg'], $bookmarksmsg);
         $this->assertTrue($exist);
@@ -96,7 +96,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $events = $sink->get_events();
         $event = reset($events);
 
-        $exist = check_page_bookmarks_exist($this->context->id, 'course-view', $USER->id);
+        $exist = check_page_bookmarks_exist($this->context->id, $this->page->url->out(), $USER->id);
         $this->assertTrue($exist);
         $this->assertInstanceOf('\ltool_bookmarks\event\ltbookmarks_created', $event);
         $this->assertEquals($this->context, $event->get_context());
@@ -106,7 +106,7 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $events = $sink->get_events();
         $event = reset($events);
 
-        $exist = check_page_bookmarks_exist($this->context->id, 'course-view', $USER->id);
+        $exist = check_page_bookmarks_exist($this->context->id, $this->page->url->out(), $USER->id);
         $this->assertFalse($exist);
         $this->assertInstanceOf('\ltool_bookmarks\event\ltbookmarks_deleted', $event);
         $this->assertEquals($this->context, $event->get_context());

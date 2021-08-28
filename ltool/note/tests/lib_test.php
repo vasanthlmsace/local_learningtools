@@ -142,7 +142,7 @@ class ltool_note_testcase extends advanced_testcase {
         $data['pagetype'] = $this->page->pagetype;
         $data['contextlevel'] = $this->page->context->contextlevel;
         $data['contextid'] = $this->page->context->id;
-        $params['pagetitle'] = $this->page->title;
+        $data['pagetitle'] = $this->page->title;
         $data['user'] = $USER->id;
         $data['ltnote'] = true;
         return $data;
