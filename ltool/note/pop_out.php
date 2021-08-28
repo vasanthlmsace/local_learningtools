@@ -63,7 +63,6 @@ $params['pagetitle'] = $pagetitle;
 $params['pageheading'] = $pageheading;
 
 list($context, $course, $cm) = get_context_info_array($contextid);
-
 $url = new moodle_url('/local/learningtools/ltool/note/pop_out.php');
 $pagetitle = !empty($pagetitle) ? $pagetitle : $SITE->shortname;
 $pageheading = !empty($pageheading) ? $pageheading : $SITE->fullname;
