@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_ltool_note_upgrade($oldversion) {
-	global $DB;
+    global $DB;
     $dbman = $DB->get_manager();
     $table = new xmldb_table('learningtools_note');
     $field = new xmldb_field('pagetitle', XMLDB_TYPE_CHAR, '500', null,

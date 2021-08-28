@@ -330,7 +330,6 @@ function user_save_notes($contextid, $data) {
     global $DB, $PAGE;
     $context = context::instance_by_id($contextid, MUST_EXIST);
     $PAGE->set_context($context);
-
     if (confirm_sesskey()) {
         $record = new stdclass();
         $record->userid = $data['user'];
