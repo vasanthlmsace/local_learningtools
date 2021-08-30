@@ -24,6 +24,8 @@
 define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal_events', 'core/ajax', 'core/notification'],
     function($, ModalFactory, String, Fragment, ModalEvents, Ajax, notification) {
 
+    /* global ltools */
+
     /**
      * Controls notes tool action.
      * @param {int} contextid context id
@@ -35,7 +37,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         if (sorttypefilter) {
             sorttypefilter.addEventListener("click", function() {
                 var sorttype = this.getAttribute('data-type');
-                note_sort_action_page(sorttype);
+                noteSortActionPage(sorttype);
             });
         }
     }
@@ -90,7 +92,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                     }
 
                     ModalFactory.create({
-                        title: localizedEditString + get_popout_action(params),
+                        title: localizedEditString + getPopoutAction(),
                         type: ModalFactory.types.SAVE_CANCEL,
                         body: getnoteaction(contextid, params),
                         large: true
@@ -113,13 +115,14 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                             var pageurlobj = params.pageurl.split("&");
                             var pageurljson = JSON.stringify(pageurlobj);
                             var url = M.cfg.wwwroot + "/local/learningtools/ltool/note/pop_out.php?contextid=" +
-                            params.contextid + "&pagetype=" + params.pagetype + "&contextlevel=" + params.contextlevel+
-                            "&course=" + params.course + "&user=" + params.user + "&pageurl=" + pageurljson + "&pagetitle="+params.pagetitle
+                            params.contextid + "&pagetype=" + params.pagetype + "&contextlevel=" + params.contextlevel + "&course="
+                            + params.course + "&user=" + params.user + "&pageurl=" + pageurljson + "&pagetitle=" + params.pagetitle
                             + "&heading=" + params.heading;
                             modal.hide();
                             window.open(url, '_blank');
                         });
-                    });
+                        return modal;
+                    }).catch(notification.exception);
                 });
 
             });
@@ -131,21 +134,21 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * @param {string} sorttype sort type
      * @return {void}
      */
-    function note_sort_action_page(sorttype) {
+    function noteSortActionPage(sorttype) {
 
         var pageurl = window.location.href;
         pageurl = removeURLParameter(pageurl, 'sorttype');
 
-        if(sorttype == 'asc') {
+        if (sorttype == 'asc') {
             sorttype = 'desc';
         } else if (sorttype == 'desc') {
             sorttype = 'asc';
         }
-
+        var para = '';
         if (pageurl.indexOf('?') > -1) {
-            var para = '&';
+            para = '&';
         } else {
-            var para = '?';
+            para = '?';
         }
 
         pageurl = pageurl + para + 'sorttype=' + sorttype;
@@ -154,12 +157,11 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
 
     /**
      * Popout url action html.
-     * @param {object} params notes params
      * @return {string} popout html
      */
-    function get_popout_action(params) {
-        var popouthtml = "<div class='popout-block'><button type='submit' id='popout-action'";
-        "name='popoutsubmit'>Pop out</button> <i class='fa fa-window-restore'></i></div>";
+    function getPopoutAction() {
+        var popouthtml = "<div class='popout-block'><button type='submit' id='popout-action'"
+        + "name='popoutsubmit'>Pop out</button> <i class='fa fa-window-restore'></i></div>";
         return popouthtml;
     }
 
@@ -167,13 +169,12 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * Submit the modal data form.
      * @param {object} modal object
      * @param {int} contextid context id
-     * @global {object} ltools
      * @return {void} ajax respoltoolsnse.
      */
     function submitFormData(modal, contextid) {
 
-        var modalform = document.querySelector('.ltoolusernotes form');
-        var formData = serialize(modalform);
+        var modalform = document.querySelectorAll('.ltoolusernotes form')[0];
+        var formData = new URLSearchParams(new FormData(modalform)).toString();
         var notesuccess = String.get_string('successnotemessage', 'local_learningtools');
         Ajax.call([{
             methodname: 'ltool_note_save_usernote',
@@ -209,6 +210,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
      * Submit the modal data form.
      * @param {int} contextid
      * @param {object} params list of the notes params.
+     * @return {string} displayed the note editor form
      */
     function getnoteaction(contextid, params) {
         params.contextid = contextid;
@@ -217,79 +219,6 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
         }
         return Fragment.loadFragment('ltool_note', 'get_note_form', contextid, params);
     }
-
-    /**
-     * Get the form seialize data
-     * @param {object} form object
-     * @return {string} list of the form params.
-     */
-    function serialize(form) {
-        if (!form || form.nodeName !== "FORM") {
-                return;
-        }
-        var i;
-        var j;
-        var q = [];
-
-        for (i = form.elements.length - 1; i >= 0; i = i - 1) {
-            if (form.elements[i].name === "") {
-                continue;
-            }
-            switch (form.elements[i].nodeName) {
-                case 'INPUT':
-                    switch (form.elements[i].type) {
-                        case 'text':
-                        case 'tel':
-                        case 'email':
-                        case 'hidden':
-                        case 'password':
-                        case 'button':
-                        case 'reset':
-                        case 'submit':
-                            q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                            break;
-                        case 'checkbox':
-                        case 'radio':
-                            if (form.elements[i].checked) {
-                                    q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                            }
-                            break;
-                    }
-                    break;
-                    case 'file':
-                    break;
-                case 'TEXTAREA':
-                        q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                        break;
-                case 'SELECT':
-                    switch (form.elements[i].type) {
-                        case 'select-one':
-                            q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                            break;
-                        case 'select-multiple':
-                            for (j = form.elements[i].options.length - 1; j >= 0; j = j - 1) {
-                                if (form.elements[i].options[j].selected) {
-                                        q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].options[j].value));
-                                }
-                            }
-                            break;
-                    }
-                    break;
-                case 'BUTTON':
-                    switch (form.elements[i].type) {
-                        case 'reset':
-                        case 'submit':
-                        case 'button':
-                            q.push(form.elements[i].name + "=" + encodeURIComponent(form.elements[i].value));
-                            break;
-                    }
-                    break;
-                }
-            }
-        return q.join("&");
-    }
-
-
     return {
         init: function(contextid, params) {
             learningToolNoteAction(contextid, params);

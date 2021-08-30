@@ -24,12 +24,12 @@
 define(['core/str', 'core/ajax', 'core/notification'],
     function(String, Ajax, notification) {
 
+    /* global ltools, pagebookmarks */
 
     /**
      * Controls bookmarks tool action.
      * @param {int} contextid
      * @param {object} params
-     * @global {bool} pagebookmarks
      */
     function learningToolBookmarksAction(contextid, params) {
 
@@ -102,9 +102,9 @@ define(['core/str', 'core/ajax', 'core/notification'],
             var prefix = encodeURIComponent(parameter) + '=';
             var pars = urlparts[1].split(/[&;]/g);
 
-            //reverse iteration as may be destructive
+            // Reverse iteration as may be destructive.
             for (var i = pars.length; i-- > 0;) {
-                //idiom for string.startsWith
+                // Idiom for string.startsWith.
                 if (pars[i].lastIndexOf(prefix, 0) !== -1) {
                     pars.splice(i, 1);
                 }
@@ -120,7 +120,6 @@ define(['core/str', 'core/ajax', 'core/notification'],
      * Bookmarks submit the form data.
      * @param {int} contextid context id.
      * @param {object} formData form instance data.
-     * @global {object} ltools
      * @return {void} ajax response
      */
     function submitFormdata(contextid, formData) {
