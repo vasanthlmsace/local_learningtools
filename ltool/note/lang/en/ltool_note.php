@@ -33,7 +33,7 @@ $string['note:managenote'] = "Manage the others notes.";
 $string['notes'] = "Notes";
 
 // Privacy Metadata.
-$string['privacy:note'] = 'Learning Tools - Notes';
+$string['privacynote'] = 'Learning Tools - Notes';
 $string['privacy:metadata:note:userid'] = 'The ID of the user';
 $string['privacy:metadata:note:course'] = 'The ID of the course';
 $string['privacy:metadata:note:coursemodule'] = 'The ID of the course module if note created on course modules page';

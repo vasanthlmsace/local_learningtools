@@ -44,4 +44,4 @@ $string['privacy:metadata:bookmarks:pageurl'] = 'Bookmarked page url';
 $string['privacy:metadata:bookmarks:timecreated'] = 'Time of the bookmarks created';
 $string['privacy:metadata:bookmarks:timemodified'] = 'Time of the bookmarks modified';
 $string['privacy:metadata:bookmarksmetadata'] = 'List of users data stored in bookmarks subplugin';
-$string['privacy:bookmarks'] = 'Learning tools - Bookmarks';
+$string['privacybookmarks'] = 'Learning tools - Bookmarks';

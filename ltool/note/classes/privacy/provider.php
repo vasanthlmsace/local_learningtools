@@ -124,9 +124,14 @@ class provider implements
      * @param approved_userlist $userlist The approved context and user information to delete information for.
      */
     public static function delete_data_for_users(approved_userlist $userlist) {
+        global $DB;
         $context = $userlist->get_context();
         if ($context instanceof \context_user) {
-            self::delete_user_notedata($context->instanceid);
+            list($userinsql, $userinparams) = $DB->get_in_or_equal($userlist->get_userids(), SQL_PARAMS_NAMED);
+            if (!empty($userinparams)) {
+                $sql = "userid {$userinsql}";
+                $DB->delete_records_select('learningtools_note', $sql, $userinparams);
+            }
         }
     }
 
@@ -214,7 +219,7 @@ class provider implements
             // Fetch the generic module data for the note.
             $contextdata = helper::get_context_data($context, $user);
             $contextdata = (object)array_merge((array)$contextdata, $exportdata);
-            writer::with_context($context)->export_data([get_string('privacy:note', 'ltool_note').' '.$user->id], $contextdata);
+            writer::with_context($context)->export_data([get_string('privacynote', 'ltool_note').' '.$user->id], $contextdata);
         }
 
     }
