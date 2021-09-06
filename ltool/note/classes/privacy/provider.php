@@ -93,7 +93,7 @@ class provider implements
      */
     public static function get_contexts_for_userid(int $userid) : contextlist {
         $contextlist = new \core_privacy\local\request\contextlist();
-
+        // Check user has stored any notes.
         if (self::user_has_note_data($userid)) {
             $contextlist->add_user_context($userid);
         }
@@ -112,7 +112,7 @@ class provider implements
         if (!$context instanceof \context_user) {
             return;
         }
-
+        // Check user has stored any notes.
         if (self::user_has_note_data($context->instanceid)) {
             $userlist->add_user($context->instanceid);
         }
@@ -126,47 +126,46 @@ class provider implements
     public static function delete_data_for_users(approved_userlist $userlist) {
         $context = $userlist->get_context();
         if ($context instanceof \context_user) {
-            self::delete_user_data($context->instanceid);
+            self::delete_user_notedata($context->instanceid);
         }
     }
 
     /**
-     * Delete user completion data for multiple context.
+     * Delete user notes data for multiple context.
      *
-     * @param approved_userlist $userlist The approved context and user information to delete information for.
+     * @param approved_userlist $contextlist The approved context and user information to delete information for.
      */
     public static function delete_data_for_user(approved_contextlist $contextlist) {
-        global $DB;
-
         if (empty($contextlist->count())) {
             return;
         }
-
         foreach ($contextlist->get_contexts() as $context) {
             if ($context->contextlevel == CONTEXT_USER) {
-                self::delete_user_data($context->instanceid);
+                // Delete stored user notes.
+                self::delete_user_notedata($context->instanceid);
             }
         }
     }
 
     /**
-     * Delete all completion data for all users in the specified context.
+     * Delete all notes data for all users in the specified context.
      *
      * @param context $context Context to delete data from.
      */
     public static function delete_data_for_all_users_in_context(\context $context) {
         global $DB;
         if ($context->contextlevel == CONTEXT_USER) {
-            self::delete_user_data($context->instanceid);
+            // Delete all users notes.
+            self::delete_user_notedata($context->instanceid);
         }
     }
 
     /**
-     * This does the deletion of user data given a userid.
+     * This does the deletion of user notes data given a userid.
      *
      * @param int $userid The user ID
      */
-    private static function delete_user_data(int $userid) {
+    private static function delete_user_notedata(int $userid) {
         global $DB;
         if ($DB->delete_records('learningtools_note', ['userid' => $userid])) {
             return true;
@@ -187,27 +186,28 @@ class provider implements
         // Context user.
         $user = $contextlist->get_user();
 
-        $records = $DB->get_records('learningtools_note', ['userid' => $user->id]);
+        // List of user notes stored in table.
+        $notes = $DB->get_records('learningtools_note', ['userid' => $user->id]);
 
-        if (empty($records)) {
+        if (empty($notes)) {
             return;
         }
-
-        $exportdata = array_map(function($record) {
-            $modulename = ($record->coursemodule) ? get_coursemodule_from_id('', $record->coursemodule)->name : '-';
+        // Generate the notes list to export.
+        $exportdata = array_map(function($note) {
+            $modulename = ($note->coursemodule) ? get_coursemodule_from_id('', $note->coursemodule)->name : '-';
             return [
-                'contextlevel' => $record->contextlevel,
-                'contextid' => $record->contextid,
-                'course' => ($record->course == 1) ? 'system' : format_string(get_course($record->course)->fullname),
+                'contextlevel' => $note->contextlevel,
+                'contextid' => $note->contextid,
+                'course' => ($note->course == 1) ? 'system' : format_string(get_course($note->course)->fullname),
                 'coursemodule' => format_string($modulename),
-                'pagetitle' => $record->pagetitle,
-                'pagetype' => $record->pagetype,
-                'pageurl' => $record->pageurl,
-                'note' => $record->note,
-                'timecreated' => ($record->timecreated) ? transform::datetime($record->timecreated) : '-',
-                'timemodified' => ($record->timemodified) ? transform::datetime($record->timemodified) : '-',
+                'pagetitle' => $note->pagetitle,
+                'pagetype' => $note->pagetype,
+                'pageurl' => $note->pageurl,
+                'note' => $note->note,
+                'timecreated' => ($note->timecreated) ? transform::datetime($note->timecreated) : '-',
+                'timemodified' => ($note->timemodified) ? transform::datetime($note->timemodified) : '-',
             ];
-        }, $records);
+        }, $notes);
 
         if (!empty($exportdata)) {
             $context = \context_user::instance($user->id);
