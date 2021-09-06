@@ -131,7 +131,7 @@ class provider implements
     /**
      * Delete user completion data for multiple context.
      *
-     * @param approved_userlist $contextlist The approved context and user information to delete information for.
+     * @param approved_contextlist $contextlist The approved context and user information to delete information for.
      */
     public static function delete_data_for_user(approved_contextlist $contextlist) {
         global $DB;
