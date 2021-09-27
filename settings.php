@@ -22,7 +22,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
+require_once(__DIR__.'/lib.php');
 global $CFG;
 
 if ($hassiteconfig) {
@@ -40,6 +40,79 @@ if ($hassiteconfig) {
             new lang_string('notificationdisapperdesc', 'local_learningtools'),
             0
         ));
+
+        // Visiability of fab button
+        $name = "local_learningtools/fabbuttonvisible";
+        $title = get_string('visiblelearningtools', 'local_learningtools');
+        $desc = "";
+        $choices = array(
+            'all' => get_string('everywhere', 'local_learningtools'),
+            'allcourses' => get_string('allcourses', 'local_learningtools'),
+            'specificcate' => get_string('specificcate', 'local_learningtools')
+        );
+        $default = 1;
+        $setting = new admin_setting_configselect($name, $title, '', 'all', $choices);
+        $page->add($setting);
+
+        // Select categories.
+        $categories = \core_course_category::make_categories_list();
+        $name = "local_learningtools/visiblecategories";
+        $title = get_string('visiblecategories', 'local_learningtools');
+        $setting = new admin_setting_configmultiselect($name, $title, '', null, $categories);
+        $page->add($setting);
+
+
+
+        // Disable specific activity types
+        $modules = $DB->get_records_menu('modules',array('visible' => 1), '', 'id,name');
+        if (!empty($modules)) {
+            $name = "local_learningtools/disablemodstatus";
+            $title = get_string('enabledisablemodules', 'local_learningtools');
+            $setting = new admin_setting_configcheckbox($name, $title, '', 0);
+            $page->add($setting);
+
+            $name = "local_learningtools/disablemod";
+            $title = get_string('disablemodules', 'local_learningtools');
+            $setting = new admin_setting_configmultiselect($name, $title, '', null, $modules);
+            $page->add($setting);
+        }
+        
+
+        // Fab button icon background color.
+        $name = "local_learningtools/fabiconbackcolor";
+        $title = get_string('fabiconbackcolor', 'local_learningtools');
+        $default = "#0f6fc5";
+        $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+        $page->add($setting);
+
+        // Fab button icon color.
+        $name = "local_learningtools/fabiconcolor";
+        $title = get_string('fabiconcolor', 'local_learningtools');
+        $default = "#fff";
+        $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+        $page->add($setting);
+
+
+        $ltoolplugins = local_learningtools_get_subplugins();
+        if (!empty($ltoolplugins)) {
+            foreach($ltoolplugins as $ltool) {
+
+                // Define icon background color
+                $name = "local_learningtools/$ltool->shortname"."iconbackcolor";
+                $title = get_string('iconbackcolor', 'local_learningtools', $ltool->shortname);
+                $default = $ltool->get_tool_iconbackcolor();
+                $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+                $page->add($setting);
+
+                // Define icon color 
+                $name = "local_learningtools/$ltool->shortname"."iconcolor";
+                $title = get_string('iconcolor', 'local_learningtools', $ltool->shortname);
+                $default = '#fff';
+                $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+                $page->add($setting);
+
+            }
+        } 
 
         $page->add(new admin_setting_heading('learningtoolsusermenu',
             new lang_string('ltoolsusermenu', 'local_learningtools'),

@@ -23,7 +23,7 @@
  */
 namespace local_learningtools\plugininfo;
 
-use core\plugininfo\base;
+use core\plugininfo\base, part_of_admin_tree, admin_settingpage, moodle_url;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -56,4 +56,5 @@ class ltool extends base {
     public function is_uninstall_allowed() {
         return true;
     }
+
 }

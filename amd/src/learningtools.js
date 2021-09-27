@@ -28,6 +28,7 @@ define([], function() {
      * @param {object} fabbuttonhtml display fab button html.
      */
     function learningToolsAction(loggedin, fabbuttonhtml) {
+        
         // Add fab button.
         if (loggedin) {
             var pagewrapper = document.querySelector("footer");
@@ -45,10 +46,32 @@ define([], function() {
                 }
             });
         }
+
+        var settingspage = document.querySelector("body#page-admin-setting-local_learningtools_settings");
+        if (settingspage) {
+            document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
+            document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function(e) {
+                var val = this.value;
+                if (val == 'specificcate') {
+                    document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
+                } else {
+                    document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
+                }
+            });
+
+            var select = document.querySelectorAll("#admin-fabbuttonvisible select")[0];
+            var option = select.options[select.selectedIndex];
+            var optionval = option.value;
+            if (optionval == 'specificcate') {
+                document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
+            }
+        }   
+
     }
     return {
         init: function(loggedin, fabbuttonhtml) {
             learningToolsAction(loggedin, fabbuttonhtml);
         }
     };
+
 });

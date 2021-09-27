@@ -15,20 +15,18 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template ltool_bookmarks/Bookmarks tool info.
+    @template ltool_note/Notes tools info template.
 
     Example context (json):
     {
-        "reactionurl_dislike" : "http://moodleurl/local/learningtools/ltool/bookmarks/lib.php"
+        "reactionurl_dislike" : "http://moodleurl/local/learningtools/ltool/note/lib.php"
     }
 }}
-
-{{#ltbookmark}}
-<div class="ltbookmarksinfo" id="ltbookmarkinfo">
-    <button type="submit" id="ltbookmarks-action" style="background:{{iconbackcolor}};">
-        <i class="{{icon}}" id="bookmarks-marked" style="color:{{iconcolor}}"></i>
-         <span class="fa fa-check"></span>
-        <p> {{bookmarkhovername}} </p>
-    </button>
-</div>
-{{/ltbookmark}}
+{{#ltoolinvite}} 
+    <div class="ltoolinvite-info" id="ltoolinvite-info">
+        <button type="submit" id="ltoolinvite-action" style="background:{{iconbackcolor}};">
+             <i class="{{icon}}" style="color:{{iconcolor}}"></i>
+            <p>{{invitehovername}} </p>
+        </button>
+    </div>
+{{/ltoolinvite}}

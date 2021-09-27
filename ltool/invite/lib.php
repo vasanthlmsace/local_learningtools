@@ -15,22 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define install function
- * @package    ltool_bookmarks
- * @copyright  bdecent GmbH 2021
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * ltool plugin "Learning Tools Invite" - library file.
+ *
+ * @package   ltool_invite
+ * @copyright bdecent GmbH 2021
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+use core_user\output\myprofile\tree;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * lttool_bookmarks install function.
- *
- * @return void
+ * Learning tools invite template function.
+ * @param array $templatecontent template content
+ * @return string display html content.
  */
-function xmldb_ltool_bookmarks_install() {
-    global $CFG;
-    require_once($CFG->dirroot. '/local/learningtools/lib.php');
-    $plugin = 'bookmarks';
-    add_learningtools_plugin($plugin);
+function ltool_invite_render_template($templatecontent) {
+    global $OUTPUT;
+    return $OUTPUT->render_from_template('ltool_invite/invite', $templatecontent);
 }
+
+

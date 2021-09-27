@@ -56,6 +56,14 @@ class note extends \local_learningtools\learningtools {
     }
 
     /**
+     * Note icon background color
+     */
+    public function get_tool_iconbackcolor() {
+
+        return '#17a2b8';
+    }
+
+    /**
      * Get the notes content.
      *
      * @return string display tool note plugin html
@@ -76,6 +84,8 @@ class note extends \local_learningtools\learningtools {
         $data['ltnote'] = true;
         $data['pagenotes'] = get_userpage_countnotes($args);
         $data['notehovername'] = get_string('createnote', 'local_learningtools');
+        $data['iconbackcolor'] = get_config('local_learningtools', "{$this->shortname}iconbackcolor");
+        $data['iconcolor'] = get_config('local_learningtools', "{$this->shortname}iconcolor");
         return $data;
     }
 

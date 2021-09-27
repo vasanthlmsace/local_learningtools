@@ -130,7 +130,7 @@ function get_moduleid($contextid, $contextlevel) {
 
 /**
  * Get the course module Id.
- * @param array $record list of the page info.
+ * @param stdclass $record list of the page info.
  * @return int course module id.
  */
 function get_coursemodule_id($record) {
@@ -303,22 +303,52 @@ function local_learningtools_get_subplugins() {
  * @return string fab button html content.
  */
 function get_learningtools_info() {
+    global $PAGE;
+
     $content = '';
+    // Visiblity of learningtools.
+    $fabvisiablestatus = get_config('local_learningtools', 'fabbuttonvisible');
+    if ($fabvisiablestatus == 'allcourses') {
+        if ($PAGE->context->contextlevel != 50 && $PAGE->context->contextlevel != 70) {
+            return '';
+        }
+    } else if ($fabvisiablestatus == 'specificcate') {
+        if (isset($PAGE->category->id) && !empty($PAGE->category->id)) {
+            $visiblecategories = explode(",", get_config('local_learningtools', 'visiblecategories'));
+            if (!in_array($PAGE->category->id, $visiblecategories)) {
+                return '';
+            }
+        }
+    }
+
+    // Disable of activities 
+    $disablemodstatus = get_config('local_learningtools', 'disablemodstatus');
+    if ($disablemodstatus) {
+        if (isset($PAGE->cm->module) && !empty($PAGE->cm->module)) {
+            $visiblemods = explode(",",get_config('local_learningtools', 'disablemod'));
+            if (in_array($PAGE->cm->module, $visiblemods)) {
+                return '';
+            }
+        }
+    } 
 
     $content .= html_writer::start_tag('div', array('class' => 'floating-button'));
     $content .= html_writer::start_tag('div', array('class' => 'list-learningtools'));
 
     // Get list of ltool sub plugins.
     $subplugins = local_learningtools_get_subplugins();
+
     if (!empty($subplugins)) {
         foreach ($subplugins as $shortname => $toolobj) {
             $content .= $toolobj->render_template();
         }
     }
-
+    $fabbackiconcolor = get_config('local_learningtools', 'fabiconbackcolor');
+    $fabiconcolor = get_config('local_learningtools', 'fabiconcolor');
     $content .= html_writer::end_tag('div');
-            $content .= html_writer::start_tag('button', array("class" => "btn btn-primary", 'id' => 'tool-action-button') );
-    $content .= html_writer::start_tag('i', array('class' => 'fa fa-magic'));
+            $content .= html_writer::start_tag('button', array("class" => "btn btn-primary",
+            'id' => 'tool-action-button','style' => "background:$fabbackiconcolor;") );
+    $content .= html_writer::start_tag('i', array('class' => 'fa fa-magic', 'style' => "color:$fabiconcolor;"));
     $content .= html_writer::end_tag('i');
     $content .= html_writer::end_tag("button");
     $content .= html_writer::end_tag('div');
@@ -415,5 +445,26 @@ function get_eventlevel_courseid($context, $courseid) {
         return $courseid;
     } else {
         return $course;
+    }
+}
+
+/**
+ * Add the learningtools in db.
+ * @param string $plugin plugin name
+ * @return void
+ */
+function add_learningtools_plugin($plugin) {
+    global $DB;
+    $strpluginname = get_string('pluginname', 'ltool_' . $plugin);
+    if (!$DB->record_exists('local_learningtools_products', array('shortname' => $plugin)) ) {
+        $lasttool = $DB->get_record_sql(' SELECT id FROM {local_learningtools_products} ORDER BY id DESC LIMIT 1', null);
+        $record = new stdClass;
+        $record->shortname = $plugin;
+        $record->name = $strpluginname;
+        $record->status = 1;
+        $lasttoolcount = count((array)$lasttool);
+        $record->sort = (!empty($lasttool)) ? $lasttoolcount + 1 : 1;
+        $record->timecreated = time();
+        $DB->insert_record('local_learningtools_products', $record);
     }
 }

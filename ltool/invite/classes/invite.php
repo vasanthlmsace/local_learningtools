@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace ltool_bookmarks;
+namespace ltool_invite;
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/local/learningtools/lib.php');
@@ -32,14 +32,14 @@ require_once(dirname(__DIR__).'/lib.php');
 /**
  *  The class defines the Bookmarks ltool
  */
-class bookmarks extends \local_learningtools\learningtools {
+class invite extends \local_learningtools\learningtools {
 
     /**
      * Tool shortname.
      *
      * @var string
      */
-    public $shortname = 'bookmarks';
+    public $shortname = 'invite';
 
     /**
      * Bookmarks name
@@ -47,15 +47,16 @@ class bookmarks extends \local_learningtools\learningtools {
      *
      */
     public function get_tool_name() {
-        return get_string('bookmarks', 'local_learningtools');
+        return get_string('invite', 'local_learningtools');
     }
 
+    
     /**
      * Bookmarks icon
      */
     public function get_tool_icon() {
 
-        return 'fa fa-bookmark';
+        return 'fa fa-user-plus';
     }
 
     /**
@@ -66,56 +67,29 @@ class bookmarks extends \local_learningtools\learningtools {
         return '#343a40';
     }
 
-
-
-    /**
-     * Get the bookmarks content.
-     *
-     * @return string display tool bookmarks plugin html.
-     */
     public function get_tool_records() {
-        global $CFG, $USER, $COURSE, $PAGE;
         $data = [];
         $data['name'] = $this->get_tool_name();
         $data['icon'] = $this->get_tool_icon();
-        $data['toolurl'] = "$CFG->wwwroot/local/learningtools/ltool/".$this->shortname."/".$this->shortname."_info.php";
-        $data['id'] = $this->shortname;
-        $data['user'] = $USER->id;
-        $data['course'] = $COURSE->id;
-        $data['pageurl'] = $PAGE->url->out(false);
-        $data['pagetype'] = $PAGE->pagetype;
-        $data['pagetitle'] = $PAGE->title;
-        $data['coursemodule'] = get_moduleid($PAGE->context->id, $PAGE->context->contextlevel);
-        $data['contextlevel'] = $PAGE->context->contextlevel;
-        $data['contextid'] = $PAGE->context->id;
-        $data['sesskey'] = sesskey();
-        $data['ltbookmark'] = true;
-        $data['bookmarkhovername'] = get_string('addbookmark', 'local_learningtools');
-        $data['pagebookmarks'] = check_page_bookmarks_exist($PAGE->context->id, $data['pageurl'], $USER->id);
+        $data['ltoolinvite'] = true;
+        $data['invitehovername'] = get_string('invite', 'local_learningtools');
         $data['iconbackcolor'] = get_config('local_learningtools', "{$this->shortname}iconbackcolor");
         $data['iconcolor'] = get_config('local_learningtools', "{$this->shortname}iconcolor");
         return $data;
     }
 
     /**
-     * Load the required javascript files for bookmarks.
-     *
-     * @return void
-     */
-    public function load_js() {
-        $data = $this->get_tool_records();
-        // Load bookmarks tool js configuration.
-        load_bookmarks_js_config($data);
-    }
-
-    /**
-     * Return the template of Bookmark fab button.
+     * Return the template of invite fab button.
      *
      * @return string Bookmark tool fab button html.
      */
     public function render_template() {
-        $data = $this->get_tool_records();
-        return ltool_bookmarks_render_template($data);
+        global $PAGE;
+        if (!empty($PAGE->course->id)) {
+            $data = $this->get_tool_records();
+            return ltool_invite_render_template($data);
+        }
+        return '';
     }
 
 }

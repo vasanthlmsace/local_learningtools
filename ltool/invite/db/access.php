@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define install function
- * @package    ltool_bookmarks
- * @copyright  bdecent GmbH 2021
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Define plugin capabilities.
+ *
+ * @package   ltool_invite
+ * @copyright bdecent GmbH 2021
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * lttool_bookmarks install function.
- *
- * @return void
- */
-function xmldb_ltool_bookmarks_install() {
-    global $CFG;
-    require_once($CFG->dirroot. '/local/learningtools/lib.php');
-    $plugin = 'bookmarks';
-    add_learningtools_plugin($plugin);
-}
+$capabilities = array(
+
+    'ltool/invite:createinvite' => array(
+        'riskbitmask' => RISK_SPAM,
+        'captype'      => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+        'archetypes'   => array(
+            'user' => CAP_ALLOW
+        )
+    ),
+);

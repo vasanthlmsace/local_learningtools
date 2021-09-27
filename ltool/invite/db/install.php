@@ -16,7 +16,7 @@
 
 /**
  * Define install function
- * @package    ltool_bookmarks
+ * @package    ltool_invite
  * @copyright  bdecent GmbH 2021
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -24,13 +24,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * lttool_bookmarks install function.
+ * ltool_invite install function.
  *
  * @return void
  */
-function xmldb_ltool_bookmarks_install() {
+function xmldb_ltool_invite_install() {
     global $CFG;
     require_once($CFG->dirroot. '/local/learningtools/lib.php');
-    $plugin = 'bookmarks';
+    $plugin = 'invite';
     add_learningtools_plugin($plugin);
 }

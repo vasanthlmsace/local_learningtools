@@ -41,12 +41,21 @@ $string['privacy:metadata'] = 'Learning tools parent plugin don\'t store any use
 $string['coursenotes'] = "Course Notes";
 $string['addbookmark'] = "Add bookmark";
 $string['createnote'] = "Create note";
-
+$string['fabiconbackcolor'] = "Learning Tools icon background color";
+$string['fabiconcolor'] = "Learning Tools icon color";
+$string['iconbackcolor'] = '{$a} icon background color';
+$string['iconcolor'] = '{$a} icon color';
+$string['ltoolsettings'] = '{$a} settings';
+$string['everywhere'] = "Everywhere";
+$string['allcourses'] = "All Courses";
+$string['specificcate'] = "Specific Categories";
+$string['visiblelearningtools'] = "Visibility of Learing Tools button";
+$string['visiblecategories'] = "Select Visible Categories";
+$string['disablemodules'] = "Select Disable activities to hide Learnig Tools";
+$string['enabledisablemodules'] = "Enable Learning Tools to hide activities";
 
 $string['bookmarksusermenu'] = "Display Bookmarks tool in user menu";
 $string['bookmarksusermenu_help'] = "bookmarks,local_learningtools|/local/learningtools/ltool/bookmarks/list.php|b/bookmark-new";
-
-
 $string['notesusermenu'] = "Display Notes tool in user menu";
 $string['notesusermenu_help'] = "notes,local_learningtools|/local/learningtools/ltool/note/list.php|i/edit";
 
@@ -116,3 +125,7 @@ $string['pagenotes'] = "Page notes";
 $string['courseparticipants'] = "Course Participants";
 $string['viewbookmarks'] = "View Bookmarks";
 $string['viewpage'] = "View Page";
+
+// invite ltool strings
+
+$string['invite'] = "Invite";
