@@ -67,6 +67,16 @@ class invite extends \local_learningtools\learningtools {
         return '#343a40';
     }
 
+    /**
+     * Load the required javascript files for note.
+     *
+     * @return void
+     */
+    public function load_js() {
+        // Load note tool js configuration.
+        load_invite_js_config();
+    }
+
     public function get_tool_records() {
         $data = [];
         $data['name'] = $this->get_tool_name();
@@ -84,8 +94,8 @@ class invite extends \local_learningtools\learningtools {
      * @return string Bookmark tool fab button html.
      */
     public function render_template() {
-        global $PAGE;
-        if (!empty($PAGE->course->id)) {
+        global $PAGE, $SITE;
+        if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
             $data = $this->get_tool_records();
             return ltool_invite_render_template($data);
         }

@@ -129,3 +129,6 @@ $string['viewpage'] = "View Page";
 // invite ltool strings
 
 $string['invite'] = "Invite";
+$string['inviteusers'] = "Invite Users";
+$string['usersemail'] = "Users Email";
+$string['invitenow'] = "Invite Now";

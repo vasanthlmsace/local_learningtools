@@ -59,7 +59,7 @@ function local_learningtools_myprofile_navigation(tree $tree, $user, $iscurrentu
  */
 function local_learningtools_extend_settings_navigation($settingnav, $context) {
 
-    global $PAGE, $USER, $COURSE;
+    global $PAGE, $CFG;
 
     $context = context_system::instance();
     $ltoolsjs = array();
@@ -81,6 +81,11 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
             $plugin->load_js();
         }
     }
+    $params = '{"course":"68","user":"4","contextid":1189,"contextlevel":50,
+    "pageurl":"http://localhost/moodle/moodle-311/course/view.php?id=68","strinviteusers":"Invite Users"}';
+    $formdata = 'sesskey=6xkDhRMBXI&_qf__ltool_inviteusers_mform=1&inviteusers=maddyvasanth5%40gmail.com%0D%0Avasanthr.lmsace%40gmail.com';
+    //$val = \ltool_invite\external::teachersinvite_users($params, $formdata);
+    
 }
 
 /**

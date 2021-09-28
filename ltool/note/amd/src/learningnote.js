@@ -107,7 +107,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                         modal.getRoot().on(ModalEvents.save, function(e) {
 
                             e.preventDefault();
-                            submitFormData(modal, contextid, params);
+                            submitFormData(modal, contextid);
                             modal.getRoot().submit();
                         });
 
