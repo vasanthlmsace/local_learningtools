@@ -92,8 +92,8 @@ class bookmarks extends \local_learningtools\learningtools {
         $data['ltbookmark'] = true;
         $data['bookmarkhovername'] = get_string('addbookmark', 'local_learningtools');
         $data['pagebookmarks'] = check_page_bookmarks_exist($PAGE->context->id, $data['pageurl'], $USER->id);
-        $data['iconbackcolor'] = get_config('local_learningtools', "{$this->shortname}iconbackcolor");
-        $data['iconcolor'] = get_config('local_learningtools', "{$this->shortname}iconcolor");
+        $data['iconbackcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconbackcolor");
+        $data['iconcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconcolor");
         return $data;
     }
 

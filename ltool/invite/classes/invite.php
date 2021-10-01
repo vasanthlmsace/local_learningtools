@@ -83,8 +83,8 @@ class invite extends \local_learningtools\learningtools {
         $data['icon'] = $this->get_tool_icon();
         $data['ltoolinvite'] = true;
         $data['invitehovername'] = get_string('invite', 'local_learningtools');
-        $data['iconbackcolor'] = get_config('local_learningtools', "{$this->shortname}iconbackcolor");
-        $data['iconcolor'] = get_config('local_learningtools', "{$this->shortname}iconcolor");
+        $data['iconbackcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconbackcolor");
+        $data['iconcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconcolor");
         return $data;
     }
 

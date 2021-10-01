@@ -64,10 +64,19 @@
         var formData = new URLSearchParams(new FormData(modalform)).toString();
         console.log(formData);
         params = JSON.stringify(params);
+        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id="+params.userid
         Ajax.call([{
             methodname: 'ltool_invite_inviteusers',
             args: {params: params, formdata: formData},
             done: function(response) {
+                modal.hide();
+                var successinfo = Str.get_string('successinviteusers', 'local_learningtools', 'test');
+                $.when(successinfo).done(function(localizedEditString) {
+                    notification.addNotification({
+                        message: localizedEditString,
+                        type: "success"
+                    });
+                });
             }
         }]);
     }

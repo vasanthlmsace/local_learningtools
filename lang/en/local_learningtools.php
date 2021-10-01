@@ -132,3 +132,15 @@ $string['invite'] = "Invite";
 $string['inviteusers'] = "Invite Users";
 $string['usersemail'] = "Users Email";
 $string['invitenow'] = "Invite Now";
+$string['inviteuserslist'] = "List of invite users";
+$string['successinviteusers'] = 'Invite users successfully.{$a}';
+$string['donotcreateusers'] = "Do not create users";
+$string['enrolled'] = "Enrolled successfully";
+$string['alredyenrolled'] = "User was already enrolled";
+$string['suspended'] = "User was suspended";
+$string['timeaccess'] = "Time access";
+$string['registerandenrolled'] = "User was registered and enrolled successfully";
+$string['invaildemail'] = "Invaild email";
+$string['invaildemailadderss'] = "Email adderss should be wrong";
+
+//<a href='{$a}'>//Show list of invite users </a>

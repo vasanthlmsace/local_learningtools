@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * tool plugin "Learning Tools Note" - settings file.
- * @package   ltool_note
+ * tool plugin "Learning Tools Invite" - settings file.
+ * @package   ltool_invite
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,17 +25,20 @@ defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
     // Define icon background color
-    $name = "ltool_note/noteiconbackcolor";
-    $title = get_string('iconbackcolor', 'local_learningtools', "note");
-    $noteinfo = new \ltool_note\note();
-    $default = $noteinfo->get_tool_iconbackcolor();
+    $name = "ltool_invite/inviteiconbackcolor";
+    $title = get_string('iconbackcolor', 'local_learningtools', "invite");
+    $inviteinfo = new \ltool_invite\invite();
+    $default = $inviteinfo->get_tool_iconbackcolor();
     $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
     $page->add($setting);
 
     // Define icon color 
-    $name = "ltool_note/noteiconcolor";
-    $title = get_string('iconcolor', 'local_learningtools', "note");
+    $name = "ltool_invite/inviteiconcolor";
+    $title = get_string('iconcolor', 'local_learningtools', "invite");
     $default = '#fff';
     $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
     $page->add($setting);
+
+    $page->add(new admin_setting_configcheckbox('ltool_invite/donotcreateusers',
+    get_string('donotcreateusers', 'local_learningtools'), '', 1));
 }

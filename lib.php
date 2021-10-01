@@ -81,11 +81,10 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
             $plugin->load_js();
         }
     }
-    $params = '{"course":"68","user":"4","contextid":1189,"contextlevel":50,
-    "pageurl":"http://localhost/moodle/moodle-311/course/view.php?id=68","strinviteusers":"Invite Users"}';
-    $formdata = 'sesskey=6xkDhRMBXI&_qf__ltool_inviteusers_mform=1&inviteusers=maddyvasanth5%40gmail.com%0D%0Avasanthr.lmsace%40gmail.com';
-    //$val = \ltool_invite\external::teachersinvite_users($params, $formdata);
-    
+    $params = '{"course":"68","user":"4","contextid":1189,"contextlevel":50,"pageurl":"http://localhost/moodle/moodle-311/course/view.php?id=68","strinviteusers":"Invite Users"}';
+    $formdata = 'sesskey=6UQzhUbDVL&_qf__ltool_inviteusers_mform=1&inviteusers=maddyvasanth5%40gmail.com%0D%0Avasanthr.lmsace%40gmail.com';
+/*     $val = \ltool_invite\external::teachersinvite_users($params, $formdata);
+    exit; */
 }
 
 /**

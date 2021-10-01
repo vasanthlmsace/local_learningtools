@@ -23,5 +23,19 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('local_learningtools', new admin_category('ltoolbookmarks',
-            get_string('pluginname', 'ltool_bookmarks', null, true)));
+if ($hassiteconfig) {
+    // Define icon background color
+    $name = "ltool_bookmarks/bookmarksiconbackcolor";
+    $title = get_string('iconbackcolor', 'local_learningtools', "bookmarks");
+    $bookmarksinfo = new \ltool_bookmarks\bookmarks();
+    $default = $bookmarksinfo->get_tool_iconbackcolor();
+    $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+    $page->add($setting);
+
+    // Define icon color 
+    $name = "ltool_bookmarks/bookmarksiconcolor";
+    $title = get_string('iconcolor', 'local_learningtools', "bookmarks");
+    $default = '#fff';
+    $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+    $page->add($setting);
+}

@@ -72,9 +72,9 @@ echo $OUTPUT->heading(get_string('learningtools', 'local_learningtools'));
 
 // Print the table of all installed ltools plugins.
 $table = new flexible_table('learningtool_products_info');
-$table->define_columns(array('name', 'version', 'status', 'updown', 'uninstall', 'settings'));
+$table->define_columns(array('name', 'version', 'status', 'updown', 'uninstall'));
 $table->define_headers(array($strname, $strversion, $strenable.'/'.$strdisable,
-$strup.'/'.$strdown, $uninstallplug, ''));
+$strup.'/'.$strdown, $uninstallplug));
 $table->define_baseurl($PAGE->url);
 $table->set_attribute('id', 'learningtool-products');
 $table->set_attribute('class', 'learningtool generaltable');
@@ -132,9 +132,9 @@ foreach ($learningtools as $tool) {
     }
     $cnt++;
 
-    $settings = html_writer::link($PAGE->url, 'settings');
+    //$settings = html_writer::link($PAGE->url, 'settings');
 
-    $table->add_data(array($tool->name, $version, $status, $updown, $uninstall, $settings));
+    $table->add_data(array($tool->name, $version, $status, $updown, $uninstall));
 }
 // Print the ltool plugins table.
 $table->print_html();

@@ -84,8 +84,8 @@ class note extends \local_learningtools\learningtools {
         $data['ltnote'] = true;
         $data['pagenotes'] = get_userpage_countnotes($args);
         $data['notehovername'] = get_string('createnote', 'local_learningtools');
-        $data['iconbackcolor'] = get_config('local_learningtools', "{$this->shortname}iconbackcolor");
-        $data['iconcolor'] = get_config('local_learningtools', "{$this->shortname}iconcolor");
+        $data['iconbackcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconbackcolor");
+        $data['iconcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconcolor");
         return $data;
     }
 

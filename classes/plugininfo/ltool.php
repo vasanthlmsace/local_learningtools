@@ -23,7 +23,7 @@
  */
 namespace local_learningtools\plugininfo;
 
-use core\plugininfo\base, part_of_admin_tree, admin_settingpage, moodle_url;
+use core\plugininfo\base, part_of_admin_tree, admin_settingpage;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -55,6 +55,31 @@ class ltool extends base {
      */
     public function is_uninstall_allowed() {
         return true;
+    }
+
+    public function get_settings_section_name() {
+        return 'ltool'.$this->name.'settings';
+    }
+
+
+    public function load_settings(part_of_admin_tree $adminroot, $parentnodename, $hassiteconfig) {
+
+        $ADMIN = $adminroot; // May be used in settings.php.
+        if (!$this->is_installed_and_upgraded()) {
+            return;
+        }
+
+        if (!$hassiteconfig or !file_exists($this->full_path('settings.php'))) {
+            return;
+        }
+
+        $section = $this->get_settings_section_name();
+        $page = new admin_settingpage($section, $this->displayname, 'moodle/site:config', $this->is_enabled() === false);
+        include($this->full_path('settings.php')); // This may also set $settings to null.
+
+        if ($page) {
+            $ADMIN->add($parentnodename, $page);
+        }
     }
 
 }

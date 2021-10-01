@@ -93,7 +93,7 @@ if ($hassiteconfig) {
         $page->add($setting);
 
 
-        $ltoolplugins = local_learningtools_get_subplugins();
+/*         $ltoolplugins = local_learningtools_get_subplugins();
         if (!empty($ltoolplugins)) {
             foreach($ltoolplugins as $ltool) {
 
@@ -112,7 +112,7 @@ if ($hassiteconfig) {
                 $page->add($setting);
 
             }
-        } 
+        }  */
 
         $page->add(new admin_setting_heading('learningtoolsusermenu',
             new lang_string('ltoolsusermenu', 'local_learningtools'),
@@ -126,9 +126,15 @@ if ($hassiteconfig) {
 
     }
     $ADMIN->add('local_learningtools', $page);
-
+    unset($page);
+    $ltools = core_plugin_manager::instance()->get_plugins_of_type('ltool');
+    if (!empty($ltools)) {
+        foreach ($ltools as $plugin) {
+            $plugin->load_settings($ADMIN, 'local_learningtools', $hassiteconfig);
+        }
+    }
+    $page = null;
     $ADMIN->add('local_learningtools', new admin_externalpage('local_learningtools_lttool',
         get_string('learningtoolsltool', 'local_learningtools'),
         "$CFG->wwwroot/local/learningtools/learningtoolslist.php"));
-
 }

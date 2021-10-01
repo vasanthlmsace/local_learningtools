@@ -69,27 +69,31 @@ function ltool_invite_output_fragment_get_inviteusers_form($args) {
 }
 
 function invite_users_action($params, $data) {
-    global $DB;
-    $record = new stdClass;
+    global $DB, $PAGE;
+    
     if (isset($data['inviteusers']) && !empty($data['inviteusers'])) {
         $useremails = $data['inviteusers'];
         $useremails = explode("\n",$useremails);
         $teacher = $DB->get_record('user', array('id' => $params->user));
         $course = $DB->get_record('course', array('id' => $params->course));
         $coursecontext = context_course::instance($course->id);
-        $record->teacher = $teacher->id;
-        $record->course = $course->id;
+        $PAGE->set_context($coursecontext);
+        $plugin = enrol_get_plugin('manual');
+        $instance = $DB->get_record('enrol', array('courseid' => $course->id, 'enrol' => 'manual'));
+        $student = $DB->get_record('role', array('shortname' => 'student'));
         if (has_capability('ltool/invite:accessinvite', $coursecontext)) {
             if (!empty($useremails)) {
                 foreach ($useremails as $useremail) {
+                    $record = new stdClass;
+                    $record->teacher = $teacher->id;
+                    $record->course = $course->id;
+                    $record->timecreated = time();
+                    $useremail = trim($useremail);
                     if ($DB->record_exists('user', array('email' => $useremail))) {
                         $user = $DB->get_record('user', array('email' => $useremail));
                         $record->userid = $user->id;
                         if (!empty($user) && !$user->suspended) {
                             if (!is_enrolled($coursecontext, $user)) {
-                                $plugin = enrol_get_plugin('manual');
-                                $instance = $DB->get_record('enrol', array('courseid' => $course->id, 'enrol' => 'manual'));
-                                $student = $DB->get_record('role', array('shortname' => 'student'));
                                 $plugin->enrol_user($instance, $user->id, $student->id);
                                 $record->status = 'enrolled';
                                 $record->enrolled = 1;
@@ -100,14 +104,61 @@ function invite_users_action($params, $data) {
                         } else if ($user->suspended)  {
                             $record->status = "suspended";
                             $record->enrolled = 0;
-                        }       
+                        }
+                    } else {
+                        if (validate_email($useremail)) {
+                            // Create user and enroll to the instance course.
+                            $donotcreateusers = get_config('ltool_invite', 'donotcreateusers');
+                            if (!$donotcreateusers) {
+                                $newuserid = ltool_invite_create_user($useremail);
+                                $newuser = $DB->get_record('user', array('id' => $newuserid));
+                                if (!empty($newuser)) {
+                                    $plugin->enrol_user($instance, $newuser->id, $student->id);
+                                    $record->userid = $newuser->id;
+                                    $record->status = 'registerandenrolled';
+                                    $record->enrolled = 1;
+                                }
+                            } else {
+                                $record->status = "invaildemail";
+                                $record->enrolled = 0;
+                            }
+                        } else {
+                            return false;
+                        }
                     }
+
+                    $DB->insert_record('learningtools_invite', $record);
                 }
                 
             }
         }
-        $record->timecreated = time();
     }
+    return true;
+}
+/**
+ * Create a user through the specific email.
+ * @param string $email user email.
+ */
+function ltool_invite_create_user($email) {
+    global $CFG, $PAGE;
+    require_once($CFG->dirroot.'/user/lib.php');
+    $user = new StdClass;
+    $user->username = $email;
+    $user->course = 1;
+    $user->email = $email;
+    $user->confirmed = 1;
+    $user->deleted = 0;
+    $user->auth = 'manual';
+    $user->mnethostid = $CFG->mnet_localhost_id;
+    $user->preference_auth_forcepasswordchange = 1;
+    $user->sesskey = sesskey();
+    // Create a user.
+    $userid = user_create_user($user, false, false);
+    $user->id = $userid;
+    setnew_password_and_mail($user);
+    // Set force password.
+    set_user_preference('auth_forcepasswordchange', 1, $user);
+    return $userid;
 }
 
 class ltool_inviteusers_mform extends moodleform {

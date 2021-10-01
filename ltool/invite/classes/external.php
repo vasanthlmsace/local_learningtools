@@ -60,4 +60,11 @@ class external extends \external_api {
         $params = json_decode($params);
         return invite_users_action($params, $data);
     }
+
+    /**
+     * Return parameters define for Invite users status.
+     */
+    public static function teachersinvite_users_returns() {
+        return new \external_value(PARAM_BOOL, 'Invite users status');
+    }
 }
