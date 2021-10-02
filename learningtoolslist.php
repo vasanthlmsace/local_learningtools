@@ -131,9 +131,6 @@ foreach ($learningtools as $tool) {
         $updown .= $spacer;
     }
     $cnt++;
-
-    //$settings = html_writer::link($PAGE->url, 'settings');
-
     $table->add_data(array($tool->name, $version, $status, $updown, $uninstall));
 }
 // Print the ltool plugins table.

@@ -126,8 +126,7 @@ $string['courseparticipants'] = "Course Participants";
 $string['viewbookmarks'] = "View Bookmarks";
 $string['viewpage'] = "View Page";
 
-// invite ltool strings
-
+// Invite ltool strings.
 $string['invite'] = "Invite";
 $string['inviteusers'] = "Invite Users";
 $string['usersemail'] = "Users Email";
@@ -142,5 +141,3 @@ $string['timeaccess'] = "Time access";
 $string['registerandenrolled'] = "User was registered and enrolled successfully";
 $string['invaildemail'] = "Invaild email";
 $string['invaildemailadderss'] = "Email adderss should be wrong";
-
-//<a href='{$a}'>//Show list of invite users </a>

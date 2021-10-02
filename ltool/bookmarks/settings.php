@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($hassiteconfig) {
-    // Define icon background color
+    // Define icon background color.
     $name = "ltool_bookmarks/bookmarksiconbackcolor";
     $title = get_string('iconbackcolor', 'local_learningtools', "bookmarks");
     $bookmarksinfo = new \ltool_bookmarks\bookmarks();
@@ -32,7 +32,7 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
     $page->add($setting);
 
-    // Define icon color 
+    // Define icon color.
     $name = "ltool_bookmarks/bookmarksiconcolor";
     $title = get_string('iconcolor', 'local_learningtools', "bookmarks");
     $default = '#fff';

@@ -47,9 +47,6 @@ abstract class learningtools {
      * Get the available data records for the ltool.
      */
     abstract public function get_tool_records();
-    
-
-
     /**
      * Fetch available tool data from subplugin. By default it returns the tool icon and name.
      *

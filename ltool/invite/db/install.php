@@ -34,3 +34,4 @@ function xmldb_ltool_invite_install() {
     $plugin = 'invite';
     add_learningtools_plugin($plugin);
 }
+

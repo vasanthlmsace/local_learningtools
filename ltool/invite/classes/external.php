@@ -48,9 +48,9 @@ class external extends \external_api {
 
     /**
      * Invite users actions
-     * @param int $contextid context id
+     * @param mixed $params context id
      * @param mixed $formdata user data
-     * @return int page user notes details.
+     * @return bool status
      */
     public static function teachersinvite_users($params, $formdata) {
         global $CFG;

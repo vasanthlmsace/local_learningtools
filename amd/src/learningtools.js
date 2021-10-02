@@ -28,7 +28,6 @@ define([], function() {
      * @param {object} fabbuttonhtml display fab button html.
      */
     function learningToolsAction(loggedin, fabbuttonhtml) {
-        
         // Add fab button.
         if (loggedin) {
             var pagewrapper = document.querySelector("footer");
@@ -50,7 +49,7 @@ define([], function() {
         var settingspage = document.querySelector("body#page-admin-setting-local_learningtools_settings");
         if (settingspage) {
             document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
-            document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function(e) {
+            document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function() {
                 var val = this.value;
                 if (val == 'specificcate') {
                     document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
@@ -65,8 +64,7 @@ define([], function() {
             if (optionval == 'specificcate') {
                 document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
             }
-        }   
-
+        }
     }
     return {
         init: function(loggedin, fabbuttonhtml) {

@@ -17,7 +17,7 @@
 /**
  * List of the invite users.
  *
- * @package   ltool_note
+ * @package   ltool_invite
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -48,8 +48,9 @@ if ($courseid) {
 }
 
 $table = new \ltool_invite\invitetool_table('datatable-invitetool', $courseid, $teacher);
-$table->set_sql('*','{learningtools_invite}', $sqlconditions, $sqlparams);
+$table->set_sql('*', '{learningtools_invite}', $sqlconditions, $sqlparams);
 $table->define_baseurl($PAGE->url);
 $table->out(10, true);
 echo $OUTPUT->footer();
+
 

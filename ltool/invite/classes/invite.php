@@ -17,7 +17,7 @@
 /**
  * The class defines the Bookmarks ltool.
  *
- * @package   ltool_bookmarks
+ * @package   ltool_invite
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -50,7 +50,6 @@ class invite extends \local_learningtools\learningtools {
         return get_string('invite', 'local_learningtools');
     }
 
-    
     /**
      * Bookmarks icon
      */
@@ -76,7 +75,11 @@ class invite extends \local_learningtools\learningtools {
         // Load note tool js configuration.
         load_invite_js_config();
     }
-
+    /**
+     * Get the invite tool  content.
+     *
+     * @return string display tool invite plugin html.
+     */
     public function get_tool_records() {
         $data = [];
         $data['name'] = $this->get_tool_name();

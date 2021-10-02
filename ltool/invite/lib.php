@@ -42,8 +42,7 @@ function ltool_invite_render_template($templatecontent) {
  */
 function load_invite_js_config() {
     global $PAGE, $USER;
-
-    $params =[];
+    $params = [];
     if (!empty($PAGE->course->id)) {
         $params['course'] = $PAGE->course->id;
         $params['user'] = $USER->id;
@@ -68,12 +67,17 @@ function ltool_invite_output_fragment_get_inviteusers_form($args) {
     return $formhtml;
 }
 
+/**
+ * Action of invite users email.
+ * @param mixed $params context id
+ * @param mixed $data user data
+ * @return bool status
+ */
 function invite_users_action($params, $data) {
     global $DB, $PAGE;
-    
     if (isset($data['inviteusers']) && !empty($data['inviteusers'])) {
         $useremails = $data['inviteusers'];
-        $useremails = explode("\n",$useremails);
+        $useremails = explode("\n", $useremails);
         $teacher = $DB->get_record('user', array('id' => $params->user));
         $course = $DB->get_record('course', array('id' => $params->course));
         $coursecontext = context_course::instance($course->id);
@@ -101,7 +105,7 @@ function invite_users_action($params, $data) {
                                 $record->status = "alredyenrolled";
                                 $record->enrolled = 0;
                             }
-                        } else if ($user->suspended)  {
+                        } else if ($user->suspended) {
                             $record->status = "suspended";
                             $record->enrolled = 0;
                         }
@@ -129,12 +133,12 @@ function invite_users_action($params, $data) {
 
                     $DB->insert_record('learningtools_invite', $record);
                 }
-                
             }
         }
     }
     return true;
 }
+
 /**
  * Create a user through the specific email.
  * @param string $email user email.
@@ -161,8 +165,13 @@ function ltool_invite_create_user($email) {
     return $userid;
 }
 
+/**
+ * Display invite user email textarea
+ */
 class ltool_inviteusers_mform extends moodleform {
-    // Add elements to form.
+    /**
+     * Add elements to form.
+     */
     public function definition() {
         $mform = $this->_form;
         $mform->addElement('textarea', 'inviteusers', get_string('usersemail', 'local_learningtools'),

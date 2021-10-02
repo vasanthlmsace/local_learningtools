@@ -81,10 +81,6 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
             $plugin->load_js();
         }
     }
-    $params = '{"course":"68","user":"4","contextid":1189,"contextlevel":50,"pageurl":"http://localhost/moodle/moodle-311/course/view.php?id=68","strinviteusers":"Invite Users"}';
-    $formdata = 'sesskey=6UQzhUbDVL&_qf__ltool_inviteusers_mform=1&inviteusers=maddyvasanth5%40gmail.com%0D%0Avasanthr.lmsace%40gmail.com';
-/*     $val = \ltool_invite\external::teachersinvite_users($params, $formdata);
-    exit; */
 }
 
 /**
@@ -325,16 +321,16 @@ function get_learningtools_info() {
         }
     }
 
-    // Disable of activities 
+    // Disable of activities.
     $disablemodstatus = get_config('local_learningtools', 'disablemodstatus');
     if ($disablemodstatus) {
         if (isset($PAGE->cm->module) && !empty($PAGE->cm->module)) {
-            $visiblemods = explode(",",get_config('local_learningtools', 'disablemod'));
+            $visiblemods = explode(",", get_config('local_learningtools', 'disablemod'));
             if (in_array($PAGE->cm->module, $visiblemods)) {
                 return '';
             }
         }
-    } 
+    }
 
     $content .= html_writer::start_tag('div', array('class' => 'floating-button'));
     $content .= html_writer::start_tag('div', array('class' => 'list-learningtools'));
@@ -351,7 +347,7 @@ function get_learningtools_info() {
     $fabiconcolor = get_config('local_learningtools', 'fabiconcolor');
     $content .= html_writer::end_tag('div');
             $content .= html_writer::start_tag('button', array("class" => "btn btn-primary",
-            'id' => 'tool-action-button','style' => "background:$fabbackiconcolor;") );
+            'id' => 'tool-action-button', 'style' => "background:$fabbackiconcolor;") );
     $content .= html_writer::start_tag('i', array('class' => 'fa fa-magic', 'style' => "color:$fabiconcolor;"));
     $content .= html_writer::end_tag('i');
     $content .= html_writer::end_tag("button");

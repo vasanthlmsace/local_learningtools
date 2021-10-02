@@ -66,8 +66,6 @@ class bookmarks extends \local_learningtools\learningtools {
         return '#343a40';
     }
 
-
-
     /**
      * Get the bookmarks content.
      *

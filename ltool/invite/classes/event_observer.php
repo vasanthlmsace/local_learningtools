@@ -15,18 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * All events consumed by local reminder plugin.
+ * All events consumed by ltool invite plugin.
  *
  * @package    ltool_invite
- * @copyright  2012 Isuru Madushanka Weerarathna
+ * @copyright  bdecent GmbH 2021
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace ltool_invite;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Define event observer class.
+ */
 class event_observer {
 
+    /**
+     * Delete the invite reports.
+     * @param object $event event object 
+     */
     public static function delete_invite_reports($event) {
         global $DB;
         $eventdata = $event->get_data();

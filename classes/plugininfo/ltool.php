@@ -23,9 +23,9 @@
  */
 namespace local_learningtools\plugininfo;
 
-use core\plugininfo\base, part_of_admin_tree, admin_settingpage;
-
 defined('MOODLE_INTERNAL') || die();
+
+use core\plugininfo\base, part_of_admin_tree, admin_settingpage;
 
 /**
  * Ltools subplugin define classes.
@@ -57,11 +57,24 @@ class ltool extends base {
         return true;
     }
 
+    /**
+     * Returns the node name used in admin settings menu for this plugin settings (if applicable)
+     *
+     * @return null|string node name or null if plugin does not create settings node (default)
+     */
     public function get_settings_section_name() {
         return 'ltool'.$this->name.'settings';
     }
-
-
+    /**
+     * Loads plugin settings to the settings tree
+     *
+     * This function usually includes settings.php file in plugins folder.
+     * Alternatively it can create a link to some settings page (instance of admin_externalpage)
+     *
+     * @param \part_of_admin_tree $adminroot
+     * @param string $parentnodename
+     * @param bool $hassiteconfig whether the current user has moodle/site:config capability
+     */
     public function load_settings(part_of_admin_tree $adminroot, $parentnodename, $hassiteconfig) {
 
         $ADMIN = $adminroot; // May be used in settings.php.

@@ -14,8 +14,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Notes ltool define js.
- * @package   ltool_note
+ * Invite ltool define js.
+ * @package   ltool_invite
  * @category  Classes - autoloading
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -24,10 +24,18 @@
  define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal_events', 'core/ajax', 'core/notification'],
  function($, ModalFactory, Str, Fragment, ModalEvents, Ajax, notification) {
 
+    /**
+     * Controls bookmarks tool action.
+     * @param {object} params
+     */
     function learningToolInviteAction(params) {
         showModalInvitetool(params);
     }
 
+    /**
+     * Display the modal to invite user emails.
+     * @param {object} params
+     */
     function showModalInvitetool(params) {
         var inviteinfo = document.querySelector(".ltoolinvite-info #ltoolinvite-action");
         if (inviteinfo) {
@@ -48,7 +56,8 @@
                         submitFormData(modal, params);
                         modal.getRoot().submit();
                     });
-                });
+                    return modal;
+                }).catch(notification.exception);
             });
         }
     }
@@ -62,13 +71,12 @@
     function submitFormData(modal, params) {
         var modalform = document.querySelectorAll('#invite-users-area form')[0];
         var formData = new URLSearchParams(new FormData(modalform)).toString();
-        console.log(formData);
         params = JSON.stringify(params);
-        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id="+params.userid
+        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.userid;
         Ajax.call([{
             methodname: 'ltool_invite_inviteusers',
             args: {params: params, formdata: formData},
-            done: function(response) {
+            done: function() {
                 modal.hide();
                 var successinfo = Str.get_string('successinviteusers', 'local_learningtools', 'test');
                 $.when(successinfo).done(function(localizedEditString) {
@@ -80,15 +88,22 @@
             }
         }]);
     }
-
+    /**
+     * Get invite user emails form.
+     * @param {object} params
+     * @return {string} textarea html
+     */
     function getInviteAction(params) {
         return Fragment.loadFragment('ltool_invite', 'get_inviteusers_form', params.contextid, params);
     }
-
+    /**
+     * Display the list of invite users link.
+     * @param {object} params
+     * @returns {string} list of invite users link.
+     */
     function getListInviteUsers(params) {
         return '';
     }
-
 
     return {
         init: function(params) {

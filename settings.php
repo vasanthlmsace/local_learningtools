@@ -41,7 +41,7 @@ if ($hassiteconfig) {
             0
         ));
 
-        // Visiability of fab button
+        // Visiability of fab button.
         $name = "local_learningtools/fabbuttonvisible";
         $title = get_string('visiblelearningtools', 'local_learningtools');
         $desc = "";
@@ -61,10 +61,8 @@ if ($hassiteconfig) {
         $setting = new admin_setting_configmultiselect($name, $title, '', null, $categories);
         $page->add($setting);
 
-
-
-        // Disable specific activity types
-        $modules = $DB->get_records_menu('modules',array('visible' => 1), '', 'id,name');
+        // Disable specific activity types.
+        $modules = $DB->get_records_menu('modules', array('visible' => 1), '', 'id,name');
         if (!empty($modules)) {
             $name = "local_learningtools/disablemodstatus";
             $title = get_string('enabledisablemodules', 'local_learningtools');
@@ -76,7 +74,6 @@ if ($hassiteconfig) {
             $setting = new admin_setting_configmultiselect($name, $title, '', null, $modules);
             $page->add($setting);
         }
-        
 
         // Fab button icon background color.
         $name = "local_learningtools/fabiconbackcolor";
@@ -91,29 +88,6 @@ if ($hassiteconfig) {
         $default = "#fff";
         $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
         $page->add($setting);
-
-
-/*         $ltoolplugins = local_learningtools_get_subplugins();
-        if (!empty($ltoolplugins)) {
-            foreach($ltoolplugins as $ltool) {
-
-                // Define icon background color
-                $name = "local_learningtools/$ltool->shortname"."iconbackcolor";
-                $title = get_string('iconbackcolor', 'local_learningtools', $ltool->shortname);
-                $default = $ltool->get_tool_iconbackcolor();
-                $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
-                $page->add($setting);
-
-                // Define icon color 
-                $name = "local_learningtools/$ltool->shortname"."iconcolor";
-                $title = get_string('iconcolor', 'local_learningtools', $ltool->shortname);
-                $default = '#fff';
-                $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
-                $page->add($setting);
-
-            }
-        }  */
-
         $page->add(new admin_setting_heading('learningtoolsusermenu',
             new lang_string('ltoolsusermenu', 'local_learningtools'),
             new lang_string('ltoolusermenu_help', 'local_learningtools')));
