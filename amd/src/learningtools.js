@@ -28,6 +28,7 @@ define([], function() {
      * @param {object} fabbuttonhtml display fab button html.
      */
     function learningToolsAction(loggedin, fabbuttonhtml) {
+        fabbuttonhtml = JSON.parse(fabbuttonhtml);
         // Add fab button.
         if (loggedin) {
             var pagewrapper = document.querySelector("footer");

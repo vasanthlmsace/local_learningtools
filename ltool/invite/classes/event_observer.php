@@ -32,7 +32,7 @@ class event_observer {
 
     /**
      * Delete the invite reports.
-     * @param object $event event object 
+     * @param object $event event object
      */
     public static function delete_invite_reports($event) {
         global $DB;

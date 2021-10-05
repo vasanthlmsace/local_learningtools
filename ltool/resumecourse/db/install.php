@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define uninstall function
- * @package    ltool_invite
+ * Define install function
+ * @package    ltool_resumecourse
  * @copyright  bdecent GmbH 2021
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -24,13 +24,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * ltool_invite uninstall function.
+ * ltool_resumecourse install function.
  *
  * @return void
  */
-function xmldb_ltool_invite_uninstall() {
+function xmldb_ltool_resumecourse_install() {
     global $CFG;
     require_once($CFG->dirroot. '/local/learningtools/lib.php');
-    $plugin = 'invite';
-    delete_ltool_table($plugin);
+    $plugin = 'resumecourse';
+    add_learningtools_plugin($plugin);
 }

@@ -21,11 +21,12 @@
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use core_user\output\myprofile\tree;
 
 defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->libdir/formslib.php");
+require_once($CFG->dirroot. '/local/learningtools/lib.php');
+
 /**
  * Learning tools invite template function.
  * @param array $templatecontent template content
@@ -50,6 +51,7 @@ function load_invite_js_config() {
         $params['contextlevel'] = $PAGE->context->contextlevel;
         $params['pageurl'] = $PAGE->url->out(false);
         $params['strinviteusers'] = get_string('inviteusers', 'local_learningtools');
+        $params['strinvitelist'] = get_string('inviteuserslist', 'local_learningtools');
         $PAGE->requires->js_call_amd('ltool_invite/ltoolsinvite', 'init', array($params));
     }
 }
@@ -69,7 +71,7 @@ function ltool_invite_output_fragment_get_inviteusers_form($args) {
 
 /**
  * Action of invite users email.
- * @param mixed $params context id
+ * @param mixed $params info
  * @param mixed $data user data
  * @return bool status
  */
@@ -77,7 +79,9 @@ function invite_users_action($params, $data) {
     global $DB, $PAGE;
     if (isset($data['inviteusers']) && !empty($data['inviteusers'])) {
         $useremails = $data['inviteusers'];
-        $useremails = explode("\n", $useremails);
+        if (!is_array($useremails)) {
+            $useremails = explode("\n", $useremails);
+        }
         $teacher = $DB->get_record('user', array('id' => $params->user));
         $course = $DB->get_record('course', array('id' => $params->course));
         $coursecontext = context_course::instance($course->id);
@@ -130,13 +134,13 @@ function invite_users_action($params, $data) {
                             return false;
                         }
                     }
-
                     $DB->insert_record('learningtools_invite', $record);
+                    return true;
                 }
             }
         }
     }
-    return true;
+    return false;
 }
 
 /**

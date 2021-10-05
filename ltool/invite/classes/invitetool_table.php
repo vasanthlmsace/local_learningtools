@@ -31,7 +31,7 @@ require_once($CFG->libdir. '/tablelib.php');
 /**
  * Class for the displaying the invite users info table.
  *
- * @package    ltool_invite 
+ * @package    ltool_invite
  * @copyright  2bdecent GmbH 2021
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

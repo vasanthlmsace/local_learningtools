@@ -40,8 +40,9 @@
         var inviteinfo = document.querySelector(".ltoolinvite-info #ltoolinvite-action");
         if (inviteinfo) {
             inviteinfo.addEventListener("click", function() {
+                //strinviteusers
                 ModalFactory.create({
-                    title:  params.strinviteusers + getListInviteUsers(params),
+                    title: getListInviteUsers(params),
                     type: ModalFactory.types.SAVE_CANCEL,
                     body: getInviteAction(params),
                     large: true
@@ -72,19 +73,20 @@
         var modalform = document.querySelectorAll('#invite-users-area form')[0];
         var formData = new URLSearchParams(new FormData(modalform)).toString();
         params = JSON.stringify(params);
-        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.userid;
         Ajax.call([{
             methodname: 'ltool_invite_inviteusers',
             args: {params: params, formdata: formData},
-            done: function() {
+            done: function(response) {
                 modal.hide();
-                var successinfo = Str.get_string('successinviteusers', 'local_learningtools', 'test');
-                $.when(successinfo).done(function(localizedEditString) {
-                    notification.addNotification({
-                        message: localizedEditString,
-                        type: "success"
+                if (response) {
+                    var successinfo = Str.get_string('successinviteusers', 'local_learningtools');
+                    $.when(successinfo).done(function(localizedEditString) {
+                        notification.addNotification({
+                            message: localizedEditString,
+                            type: "success"
+                        });
                     });
-                });
+                }
             }
         }]);
     }
@@ -102,7 +104,11 @@
      * @returns {string} list of invite users link.
      */
     function getListInviteUsers(params) {
-        return '';
+        var listaction = "<p>" + params.strinviteusers + "</p>";
+        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.user +
+        "&courseid=" + params.course;
+        listaction += "<div id='list-action-url'><a href='" + listurl +"' target='_blank'>" + params.strinvitelist + "</a></div>";
+        return listaction;
     }
 
     return {

@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * lttool_bookmarks install function.
+ * ltool_bookmarks install function.
  *
  * @return void
  */

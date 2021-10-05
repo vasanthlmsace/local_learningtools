@@ -15,14 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The class defines the Bookmarks ltool.
+ * The class defines the Resume course ltool.
  *
- * @package   ltool_invite
+ * @package   ltool_resumecourse
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace ltool_invite;
+namespace ltool_resumecourse;
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/local/learningtools/lib.php');
@@ -30,36 +30,36 @@ require_once($CFG->dirroot.'/local/learningtools/lib.php');
 require_once(dirname(__DIR__).'/lib.php');
 
 /**
- *  The class defines the Bookmarks ltool
+ *  The class defines the resumecourse ltool
  */
-class invite extends \local_learningtools\learningtools {
+class resumecourse extends \local_learningtools\learningtools {
 
     /**
      * Tool shortname.
      *
      * @var string
      */
-    public $shortname = 'invite';
+    public $shortname = 'resumecourse';
 
     /**
-     * invite name
+     * resumecourse name
      * @return string name
      *
      */
     public function get_tool_name() {
-        return get_string('invite', 'local_learningtools');
+        return get_string('resumecourse', 'local_learningtools');
     }
 
     /**
-     * invite icon
+     * resumecourse icon
      */
     public function get_tool_icon() {
 
-        return 'fa fa-user-plus';
+        return 'fa fa-backward';
     }
 
     /**
-     * invite icon background color
+     * resumecourse icon background color
      */
     public function get_tool_iconbackcolor() {
 
@@ -67,42 +67,40 @@ class invite extends \local_learningtools\learningtools {
     }
 
     /**
-     * Load the required javascript files for invite.
+     * Load the required javascript files for resumecourse.
      *
      * @return void
      */
     public function load_js() {
-        // Load invite tool js configuration.
-        load_invite_js_config();
+        // Load note tool js configuration.
+        load_resumecourse_js_config();
     }
+
     /**
-     * Get the invite tool  content.
+     * Get the resumecourse tool  content.
      *
-     * @return string display tool invite plugin html.
+     * @return string display tool resumecourse plugin html.
      */
     public function get_tool_records() {
         $data = [];
         $data['name'] = $this->get_tool_name();
         $data['icon'] = $this->get_tool_icon();
-        $data['ltoolinvite'] = true;
-        $data['invitehovername'] = get_string('invite', 'local_learningtools');
+        $data['ltoolresumecourse'] = true;
+        $data['resumecoursehovername'] = get_string('resumecourse', 'local_learningtools');
         $data['iconbackcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconbackcolor");
         $data['iconcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconcolor");
+        ltool_resumecourse_store_user_access_data();
         return $data;
     }
 
     /**
-     * Return the template of invite fab button.
+     * Return the template of resumecourse fab button.
      *
-     * @return string invite tool fab button html.
+     * @return string resumecourse tool fab button html.
      */
     public function render_template() {
-        global $PAGE, $SITE;
-        if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
-            $data = $this->get_tool_records();
-            return ltool_invite_render_template($data);
-        }
-        return '';
+        $data = $this->get_tool_records();
+        return ltool_resumecourse_render_template($data);
     }
-
 }
+

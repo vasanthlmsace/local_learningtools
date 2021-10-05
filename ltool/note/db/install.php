@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * lttool_note install function.
+ * ltool_note install function.
  *
  * @return void
  */

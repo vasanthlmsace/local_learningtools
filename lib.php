@@ -64,7 +64,7 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     $context = context_system::instance();
     $ltoolsjs = array();
     // Content of fab button html.
-    $fabbuttonhtml = get_learningtools_info();
+    $fabbuttonhtml = json_encode(get_learningtools_info());
     $ltoolsjs['disappertimenotify'] = get_config('local_learningtools', 'notificationdisapper');
     $PAGE->requires->data_for_js('ltools', $ltoolsjs);
     $loggedin = false;
@@ -466,5 +466,25 @@ function add_learningtools_plugin($plugin) {
         $record->sort = (!empty($lasttool)) ? $lasttoolcount + 1 : 1;
         $record->timecreated = time();
         $DB->insert_record('local_learningtools_products', $record);
+    }
+}
+
+/**
+ * Remove the learningtools in db.
+ * @param string $plugin ltool plugin shortname
+ * @return void
+ */
+function delete_ltool_table($plugin) {
+    global $DB;
+
+    if ($DB->record_exists('local_learningtools_products', array('shortname' => $plugin)) ) {
+        $DB->delete_records('local_learningtools_products', array('shortname' => $plugin));
+    }
+
+    $table = "learningtools_". $plugin;
+    $dbman = $DB->get_manager();
+    if ($dbman->table_exists($table)) {
+        $droptable = new xmldb_table($table);
+        $dbman->drop_table($droptable);
     }
 }

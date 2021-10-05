@@ -132,7 +132,7 @@ $string['inviteusers'] = "Invite Users";
 $string['usersemail'] = "Users Email";
 $string['invitenow'] = "Invite Now";
 $string['inviteuserslist'] = "List of invite users";
-$string['successinviteusers'] = 'Invite users successfully.{$a}';
+$string['successinviteusers'] = 'Invite users successfully.';
 $string['donotcreateusers'] = "Do not create users";
 $string['enrolled'] = "Enrolled successfully";
 $string['alredyenrolled'] = "User was already enrolled";
@@ -141,3 +141,10 @@ $string['timeaccess'] = "Time access";
 $string['registerandenrolled'] = "User was registered and enrolled successfully";
 $string['invaildemail'] = "Invaild email";
 $string['invaildemailadderss'] = "Email adderss should be wrong";
+
+// Resume course strings.
+$string['resumecourse'] = "Resume course";
+
+// Email tool strings 
+$string['email'] = "Email";
+
