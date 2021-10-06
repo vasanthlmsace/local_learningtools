@@ -15,16 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Ltool plugin "Invite Tools" - string file.
- *
- * @package   ltool_invite
+ * tool plugin "Learning Tools Email" - settings file.
+ * @package   ltool_email
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- defined("MOODLE_INTERNAL") || die();
+defined('MOODLE_INTERNAL') || die;
 
-$string['pluginname'] = "Learning Tools Invite";
-$string['invite:createinvite'] = "Create the invite tool";
-$string['invite:accessinvite'] = "Access the invite tool";
-$string['invite:viewinvite'] = "View the invite tool";
+if ($hassiteconfig) {
+    // Define icon background color.
+    $name = "ltool_email/emailiconbackcolor";
+    $title = get_string('iconbackcolor', 'local_learningtools', "email");
+    $emailinfo = new \ltool_email\email();
+    $default = $emailinfo->get_tool_iconbackcolor();
+    $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+    $page->add($setting);
+
+    // Define icon color.
+    $name = "ltool_email/emailiconcolor";
+    $title = get_string('iconcolor', 'local_learningtools', "email");
+    $default = '#fff';
+    $setting = new admin_setting_configcolourpicker($name, $title, '', $default);
+    $page->add($setting);
+}

@@ -147,4 +147,13 @@ $string['resumecourse'] = "Resume course";
 
 // Email tool strings 
 $string['email'] = "Email";
-
+$string['sentemailparticipants'] = "Send the email to course participants";
+$string['subject'] = "Subject";
+$string['message'] = "Message";
+$string['subjecterr'] = "Missing Subject";
+$string['messageerr'] = "Missing Message";
+$string['recipients'] = "Recipients";
+$string['recipientserr'] = "Missing Recipient";
+$string['attachments'] = "Attachments";
+$string['msgemailsent'] = "Successfully sent the mail to users";
+$string['sentemailuserslist'] = "Sent the email to users list";

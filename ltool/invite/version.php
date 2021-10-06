@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'ltool_invite';
-$plugin->version = 2021092801;
+$plugin->version = 2021092802;
 $plugin->requires = 2020061501;

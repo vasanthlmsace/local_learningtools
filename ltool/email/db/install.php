@@ -15,16 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Ltool plugin "Invite Tools" - string file.
- *
- * @package   ltool_invite
- * @copyright bdecent GmbH 2021
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Define install function
+ * @package    ltool_email
+ * @copyright  bdecent GmbH 2021
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- defined("MOODLE_INTERNAL") || die();
+defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = "Learning Tools Invite";
-$string['invite:createinvite'] = "Create the invite tool";
-$string['invite:accessinvite'] = "Access the invite tool";
-$string['invite:viewinvite'] = "View the invite tool";
+/**
+ * ltool_email install function.
+ *
+ * @return void
+ */
+function xmldb_ltool_email_install() {
+    global $CFG;
+    require_once($CFG->dirroot. '/local/learningtools/lib.php');
+    $plugin = 'email';
+    add_learningtools_plugin($plugin);
+}
