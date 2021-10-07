@@ -34,7 +34,7 @@ $courseid = optional_param('courseid', 0, PARAM_INT);
 $context = context_system::instance();
 $title = get_string('inviteuserslist', 'local_learningtools');
 $PAGE->set_context($context);
-$PAGE->set_url('/local/learningtools/ltool/email/list.php', array('id' => $teacher,
+$PAGE->set_url('/local/learningtools/ltool/invite/list.php', array('id' => $teacher,
     'courseid' => $courseid));
 $PAGE->set_title($title);
 $PAGE->set_heading($SITE->fullname);
@@ -47,7 +47,7 @@ if ($courseid) {
     $sqlparams['courseid'] = $courseid;
 }
 
-$table = new \ltool_invite\emailtool_table('datatable-invitetool', $courseid, $teacher);
+$table = new \ltool_invite\invitetool_table('datatable-invitetool', $courseid, $teacher);
 $table->set_sql('*', '{learningtools_invite}', $sqlconditions, $sqlparams);
 $table->define_baseurl($PAGE->url);
 $table->out(10, true);

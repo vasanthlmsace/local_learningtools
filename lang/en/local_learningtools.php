@@ -145,7 +145,7 @@ $string['invaildemailadderss'] = "Email adderss should be wrong";
 // Resume course strings.
 $string['resumecourse'] = "Resume course";
 
-// Email tool strings 
+// Email tool strings.
 $string['email'] = "Email";
 $string['sentemailparticipants'] = "Send the email to course participants";
 $string['subject'] = "Subject";
@@ -157,3 +157,4 @@ $string['recipientserr'] = "Missing Recipient";
 $string['attachments'] = "Attachments";
 $string['msgemailsent'] = "Successfully sent the mail to users";
 $string['sentemailuserslist'] = "Sent the email to users list";
+$string['receivedusers'] = "Received Users";

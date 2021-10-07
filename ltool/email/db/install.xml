@@ -9,7 +9,8 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="teacher" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="tousers" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="tousers" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+         <FIELD NAME="roleids" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="subject" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="message" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="attachementdraft" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>

@@ -52,6 +52,8 @@ function load_email_js_config() {
  * Sent to the email for role users.
  * @param object $data message info.
  * @param object $context
+ * @param int $courseid
+ * @return void
  */
 function ltool_email_sent_email_to_users($data, $context, $courseid) {
     global $USER, $DB;
@@ -64,7 +66,7 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
     $record = new stdClass();
     $record->subject = $subject;
     $record->message = $messagehtml;
-    $record->roleids = $roleids;
+    $record->roleids = json_encode($roleids);
     $record->attachementdraft = $data->attachments;
     $record->teacher = $USER->id;
     $record->courseid = $courseid;
@@ -87,11 +89,16 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
         $DB->insert_record('learningtools_email', $record);
     }
 }
-
+/**
+ * Get user info based on roleid for course context.
+ * @param array $roleids roleids
+ * @param object $context course context
+ * @return array users info
+ */
 function get_user_for_roleids($roleids, $context) {
     $usersobject = [];
     if (!empty($roleids)) {
-        foreach($roleids as $roleid) {
+        foreach ($roleids as $roleid) {
             $roleinfo = get_role_users($roleid, $context, true);
             $usersobject += $roleinfo;
         }

@@ -24,9 +24,11 @@
 namespace ltool_email;
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->libdir."/forms
-lib.php");
+require_once($CFG->libdir."/formslib.php");
 
+/**
+ * Display email form to sent email 
+ */
 class emailform extends \moodleform  {
 
     /**
@@ -41,7 +43,7 @@ class emailform extends \moodleform  {
         $mform->addElement('header', 'moodle', $strheading);
         // Subject.
         $mform->addElement('text', 'subject', get_string('subject', 'local_learningtools'),
-            array('size'=>'40'));
+        array('size' => '40'));
         $mform->setType('subject', PARAM_RAW);
         $mform->addRule('subject', get_string('subjecterr', 'local_learningtools'), 'required', 'client');
 
@@ -49,12 +51,12 @@ class emailform extends \moodleform  {
         $mform->addElement('editor', 'message', get_string('message', 'local_learningtools'));
         $mform->addRule('message', get_string('messageerr', 'local_learningtools'), 'required', 'client');
 
-        // Recipients 
+        // Recipients.
         $coursecontext = \context_course::instance($courseid);
         $contextroles = role_fix_names(get_roles_used_in_context($coursecontext));
         $roles = array();
         if (!empty($contextroles)) {
-            foreach($contextroles as $role) {
+            foreach ($contextroles as $role) {
                 $roles[$role->id] = $role->localname;
             }
         }
@@ -71,3 +73,4 @@ class emailform extends \moodleform  {
         $this->add_action_buttons();
     }
 }
+

@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * List of the invite users.
+ * List of the email tool reports.
  *
- * @package   ltool_invite
+ * @package   ltool_email
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,7 +33,7 @@ $courseid = optional_param('courseid', 0, PARAM_INT);
 $context = context_system::instance();
 $title = get_string('sentemailuserslist', 'local_learningtools');
 $PAGE->set_context($context);
-$PAGE->set_url('/local/learningtools/ltool/invite/list.php', array('id' => $teacher,
+$PAGE->set_url('/local/learningtools/ltool/email/list.php', array('id' => $teacher,
     'courseid' => $courseid));
 $PAGE->set_title($title);
 $PAGE->set_heading($SITE->fullname);
@@ -45,11 +45,9 @@ if ($courseid) {
     $sqlconditions .= "AND course = :courseid";
     $sqlparams['courseid'] = $courseid;
 }
-
-$table = new \ltool_invite\invitetool_table('datatable-invitetool', $courseid, $teacher);
-$table->set_sql('*', '{learningtools_invite}', $sqlconditions, $sqlparams);
+$table = new \ltool_email\emailtool_table('datatable-emailtool', $courseid, $teacher);
+$table->set_sql('*', '{learningtools_email}', $sqlconditions, $sqlparams);
 $table->define_baseurl($PAGE->url);
 $table->out(10, true);
 echo $OUTPUT->footer();
-
 

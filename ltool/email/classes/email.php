@@ -67,16 +67,6 @@ class email extends \local_learningtools\learningtools {
     }
 
     /**
-     * Load the required javascript files for email.
-     *
-     * @return void
-     */
-    public function load_js() {
-        // Load note tool js configuration.
-        //load_email_js_config();
-    }
-
-    /**
      * Get the email tool  content.
      *
      * @return string display tool email plugin html.
@@ -105,7 +95,7 @@ class email extends \local_learningtools\learningtools {
         global $PAGE, $SITE;
         if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
             $coursecontext = \context_course::instance($PAGE->course->id);
-            if(has_capability("ltool/invite:viewinvite", $coursecontext)) {
+            if (has_capability("ltool/invite:viewinvite", $coursecontext)) {
                 $data = $this->get_tool_records();
                 return ltool_email_render_template($data);
             }
@@ -114,3 +104,4 @@ class email extends \local_learningtools\learningtools {
     }
 
 }
+

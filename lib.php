@@ -462,7 +462,7 @@ function add_learningtools_plugin($plugin) {
         $record->shortname = $plugin;
         $record->name = $strpluginname;
         $record->status = 1;
-        $lasttoolcount = count((array)$lasttool);
+        $lasttoolcount = $DB->count_records('local_learningtools_products');
         $record->sort = (!empty($lasttool)) ? $lasttoolcount + 1 : 1;
         $record->timecreated = time();
         $DB->insert_record('local_learningtools_products', $record);

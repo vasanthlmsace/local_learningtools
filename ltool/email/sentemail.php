@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * List of the user bookmarks.
+ * List of the sent email reports.
  *
- * @package   ltool_bookmarks
+ * @package   ltool_email
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -35,7 +35,7 @@ array('courseid' => $courseid, 'userid' => $userid));
 $returnurl = new moodle_url('/course/view.php', array('id' => $courseid));
 $PAGE->set_url($pageurl);
 $title = get_string('coursebookmarks', 'local_learningtools');
-$course= get_course($courseid);
+$course = get_course($courseid);
 $courselistelement = new core_course_list_element($course);
 $PAGE->set_course($course);
 $PAGE->set_heading($courselistelement->get_formatted_name());
@@ -47,10 +47,10 @@ if ($mform->is_cancelled()) {
     redirect($returnurl);
 } else if ($formdata = $mform->get_data()) {
     ltool_email_sent_email_to_users($formdata, $setcontext, $courseid);
-    redirect($returnurl, get_string('msgemailsent','local_learningtools'), null, \core\output\notification::NOTIFY_SUCCESS);
+    redirect($returnurl, get_string('msgemailsent', 'local_learningtools'), null,
+        \core\output\notification::NOTIFY_SUCCESS);
 } else {
     echo $OUTPUT->header();
     $mform->display();
 }
-
 echo $OUTPUT->footer();

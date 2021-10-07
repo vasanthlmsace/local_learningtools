@@ -17,7 +17,7 @@
 /**
  * Course resume ltool lib test cases defined.
  *
- * @package   ltool_resume
+ * @package   ltool_resumecourse
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -25,7 +25,7 @@
 defined( 'MOODLE_INTERNAL') || die(' No direct access ');
 
 /**
- * Note subplugin for learningtools phpunit test cases defined.
+ * Resume course subplugin for learningtools phpunit test cases defined.
  */
 class ltool_resume_testcase extends advanced_testcase {
 
@@ -35,30 +35,34 @@ class ltool_resume_testcase extends advanced_testcase {
      * @return void
      */
     public function setup(): void {
-        global $PAGE, $CFG;
+        global $CFG, $PAGE;
         $this->resetAfterTest();
         $this->setAdminUser();
         $this->generator = $this->getDataGenerator();
-        $this->user = $this->generator->create_user();
         $course = $this->generator->create_course();
-        $cm = $this->generator->create_module('quiz', array('course' => $course->id));
-        $cmcontext = \context_module::instance($cm->cmid);
-        $PAGE->set_context($cmcontext);
+        $options = array('course' => $course->id);
+        $quiz = $this->getDataGenerator()->create_module('quiz', $options);
+        $cm = get_coursemodule_from_instance('quiz', $quiz->id);
+        $this->cm = $cm;
+        $quizcontext = \context_module::instance($cm->id);
+        $PAGE = new \moodle_page();
         $PAGE->set_course($course);
+        $PAGE->set_context($quizcontext);
         $PAGE->set_cm($cm);
         $PAGE->set_title('Course 1: Quiz test 1');
-        $PAGE->set_pagelayout('standard');
         $PAGE->set_url(new moodle_url('/mod/quiz/view.php', ['id' => $cm->id]));
+        $this->user = $this->generator->create_user();
     }
 
     /**
      * Test store_user_access_data
      */
     public function test_ltool_resumecourse_store_user_access_data() {
-        global $DB;
+        global $DB, $PAGE;
+        $PAGE->set_url(new moodle_url('/mod/quiz/view.php', ['id' => $this->cm->id]));
         $this->setUser($this->user);
         ltool_resumecourse_store_user_access_data();
-        $userrecord = $DB->count_records('learningtools_resumecourse', array('userid' => $this->userid));
+        $userrecord = $DB->count_records('learningtools_resumecourse', array('userid' => $this->user->id));
         $this->assertEquals(1, $userrecord);
     }
 
