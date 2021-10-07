@@ -45,6 +45,7 @@ class ltool_email_testcase extends advanced_testcase {
         $this->teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $this->coursecontext = context_course::instance($this->course->id);
     }
+    
     /**
      * Test case for get_user_for_roleids method
      */

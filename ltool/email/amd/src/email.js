@@ -36,7 +36,7 @@
                  Ajax.call([{
                     methodname: 'ltool_email_lastaccess_activity',
                     args: {params: params}
-                }]); 
+                }]);
             });
         }
     }

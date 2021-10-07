@@ -40,7 +40,7 @@
         var inviteinfo = document.querySelector(".ltoolinvite-info #ltoolinvite-action");
         if (inviteinfo) {
             inviteinfo.addEventListener("click", function() {
-                //strinviteusers
+                // Strinviteusers.
                 ModalFactory.create({
                     title: getListInviteUsers(params),
                     type: ModalFactory.types.SAVE_CANCEL,
@@ -107,7 +107,7 @@
         var listaction = "<p>" + params.strinviteusers + "</p>";
         var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.user +
         "&courseid=" + params.course;
-        listaction += "<div id='list-action-url'><a href='" + listurl +"' target='_blank'>" + params.strinvitelist + "</a></div>";
+        listaction += "<div id='list-action-url'><a href='" + listurl + "' target='_blank'>" + params.strinvitelist + "</a></div>";
         return listaction;
     }
 

@@ -22,12 +22,13 @@
  */
 define([], function() {
 
+    /* global fabbuttonhtml */
+
     /**
      * Controls Learning Tools action.
      * @param {bool} loggedin login status
-     * @param {object} fabbuttonhtml display fab button html.
      */
-    function learningToolsAction(loggedin, fabbuttonhtml) {
+    function learningToolsAction(loggedin) {
         fabbuttonhtml = JSON.parse(fabbuttonhtml);
         // Add fab button.
         if (loggedin) {
@@ -68,8 +69,8 @@ define([], function() {
         }
     }
     return {
-        init: function(loggedin, fabbuttonhtml) {
-            learningToolsAction(loggedin, fabbuttonhtml);
+        init: function(loggedin) {
+            learningToolsAction(loggedin);
         }
     };
 

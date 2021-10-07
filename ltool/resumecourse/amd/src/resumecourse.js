@@ -37,11 +37,11 @@
                     methodname: 'ltool_resumecourse_lastaccess_activity',
                     args: {params: params},
                     done: function(response) {
-                        if(response) {
+                        if (response) {
                             window.open(response, '_self');
                         }
                     }
-                }]); 
+                }]);
             });
         }
     }

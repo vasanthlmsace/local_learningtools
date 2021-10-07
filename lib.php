@@ -71,7 +71,8 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     if (isloggedin() && !isguestuser()) {
         $loggedin = true;
     }
-    $viewcapability = array('loggedin' => $loggedin, 'fabbuttonhtml' => $fabbuttonhtml);
+    $viewcapability = array('loggedin' => $loggedin);
+    $PAGE->requires->data_for_js('fabbuttonhtml', $fabbuttonhtml);
     $PAGE->requires->js_call_amd('local_learningtools/learningtools', 'init', $viewcapability);
     // List of subplugins.
     // Load available subplugins javascript.
