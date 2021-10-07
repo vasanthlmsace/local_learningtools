@@ -14,7 +14,7 @@ Feature: Check the invite ltool workflow.
     And the following "course enrolments" exist:
       | user | course | role           |
       | teacher1 | C1 | editingteacher |
-  
+
   @javascript
   Scenario: Create invite to users.
     Given I log in as "teacher1"
@@ -32,7 +32,7 @@ Feature: Check the invite ltool workflow.
     And I am on "Course 1" course homepage
     And I navigate to "Users > Enrolled users" in current page administration
     Then I should see "Student User 1"
-  
+
   @javascript
   Scenario: Create user and to invite the course.
     Given I log in as "admin"
@@ -52,8 +52,3 @@ Feature: Check the invite ltool workflow.
     Then I should see "Invite users successfully."
     And I navigate to "Users > Enrolled users" in current page administration
     Then I should see "demouser1@test.com"
-
-    
-
-
-  

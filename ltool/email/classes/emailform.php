@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir."/formslib.php");
 
 /**
- * Display email form to sent email 
+ * Display email form to sent email
  */
 class emailform extends \moodleform  {
 

@@ -71,12 +71,16 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
     $record->teacher = $USER->id;
     $record->courseid = $courseid;
     $record->timecreated = time();
-    $itemid = file_get_unused_draft_itemid();
-    file_save_draft_area_files($data->attachments, $context->id, 'ltool_email', 'attachments',
+    $attachement = '';
+    $attachementname = '';
+    if (isset($data->attachements)) {
+        $itemid = file_get_unused_draft_itemid();
+        file_save_draft_area_files($data->attachments, $context->id, 'ltool_email', 'attachments',
                    $itemid);
-    $fileinfo = file_get_drafarea_files($data->attachments);
-    $attachement = isset($fileinfo->list[0]) ? $fileinfo->list[0]->url : '';
-    $attachementname = isset($fileinfo->list[0]) ? $fileinfo->list[0]->filename : '';
+        $fileinfo = file_get_drafarea_files($data->attachments);
+        $attachement = isset($fileinfo->list[0]) ? $fileinfo->list[0]->url : '';
+        $attachementname = isset($fileinfo->list[0]) ? $fileinfo->list[0]->filename : '';
+    }
     $users = get_user_for_roleids($roleids, $context);
     $userids = [];
     if (!empty($users)) {

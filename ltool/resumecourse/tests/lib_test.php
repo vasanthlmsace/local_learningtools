@@ -27,7 +27,7 @@ defined( 'MOODLE_INTERNAL') || die(' No direct access ');
 /**
  * Resume course subplugin for learningtools phpunit test cases defined.
  */
-class ltool_resume_testcase extends advanced_testcase {
+class ltool_resumecourse_testcase extends advanced_testcase {
 
     /**
      * Create custom page instance and set admin user as loggedin user.
@@ -59,7 +59,6 @@ class ltool_resume_testcase extends advanced_testcase {
      */
     public function test_ltool_resumecourse_store_user_access_data() {
         global $DB, $PAGE;
-        $PAGE->set_url(new moodle_url('/mod/quiz/view.php', ['id' => $this->cm->id]));
         $this->setUser($this->user);
         ltool_resumecourse_store_user_access_data();
         $userrecord = $DB->count_records('learningtools_resumecourse', array('userid' => $this->user->id));

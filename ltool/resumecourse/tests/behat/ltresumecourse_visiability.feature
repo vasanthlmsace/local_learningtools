@@ -23,4 +23,3 @@ Feature: Check the Resume course ltool workflow.
     Then "#ltoolresumecourse-info" "css_element" Should be visible
     And I click on "#ltoolresumecourse-info" "css_element"
     Then I should see "Quiz 1"
-
