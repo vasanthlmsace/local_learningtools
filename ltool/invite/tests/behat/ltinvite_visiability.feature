@@ -56,7 +56,7 @@ Feature: Check the invite ltool workflow.
     Then I log in as "admin"
     And I navigate to "Users > Browse list of users" in site administration
     Then I should see "demouser1@test.com"
-     And  I log out
+    And  I log out
 
   @javascript
   Scenario: Does not create user and to invite the course.

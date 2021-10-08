@@ -29,7 +29,6 @@ define([], function() {
      * @param {bool} loggedin login status
      */
     function learningToolsAction(loggedin) {
-        console.log(fabbuttonhtml);
         fabbuttonhtml = JSON.parse(fabbuttonhtml);
         // Add fab button.
         if (loggedin) {
