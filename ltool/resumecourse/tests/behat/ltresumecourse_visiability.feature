@@ -17,9 +17,9 @@ Feature: Check the Resume course ltool workflow.
 
   @javascript
   Scenario: Check the resume course tool.
-    When I am on the "Quiz 1" "mod_quiz > View" page logged in as "student"
-    And I follow on "dashboard"
+    When I am on the "Quiz 1" "mod_quiz > View" page logged in as "student1"
+    And I am on site homepage
     And I click on FAB button
-    Then "#ltoolresumecourse-info" "css_element" Should be visible
+    Then "#ltoolresumecourse-info" "css_element" should be visible
     And I click on "#ltoolresumecourse-info" "css_element"
     Then I should see "Quiz 1"

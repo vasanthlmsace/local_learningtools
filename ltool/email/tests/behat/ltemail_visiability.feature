@@ -20,20 +20,18 @@ Feature: Check the email ltool workflow.
   @javascript
   Scenario: Check to the visible of email tool.
     Given I log in as "teacher1"
-    And I follow "dashboard"
+    And I am on site homepage
     And I click on FAB button
     Then "#ltoolemail-info" "css_element" should not be visible
     And I follow "Course 1"
     And I click on FAB button
-    Then "#ltoolemail-info" "css_element" Should be visible
+    Then "#ltoolemail-info" "css_element" should be visible
     And I click on "#ltoolemail-info" "css_element"
     And I should see "Send the email to course participants"
     And I set the following fields to these values:
       | Subject | testuser@gmail.com |
       | Message | Example test message |
-      | Recipients | 5 |
+      | Recipients | Student |
     And I press "Save changes"
-    Then I should see "Successfully sent the mail to users";
-    And I logout out
-
-
+    Then I should see "Successfully sent the mail to users"
+    And I log out

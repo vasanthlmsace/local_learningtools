@@ -63,10 +63,6 @@ class ltool_resumecourse_testcase extends advanced_testcase {
         ltool_resumecourse_store_user_access_data();
         $userrecord = $DB->count_records('learningtools_resumecourse', array('userid' => $this->user->id));
         $this->assertEquals(1, $userrecord);
-    }
-
-    public function test_lastaccess_activity_action() {
-        global $PAGE;
         $userrecord = new stdClass();
         $userrecord->userid = $this->user->id;
         $useraccessurl = lastaccess_activity_action($userrecord);

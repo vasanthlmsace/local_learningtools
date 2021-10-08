@@ -67,12 +67,12 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
     $fabbuttonhtml = json_encode(get_learningtools_info());
     $ltoolsjs['disappertimenotify'] = get_config('local_learningtools', 'notificationdisapper');
     $PAGE->requires->data_for_js('ltools', $ltoolsjs);
+    $PAGE->requires->data_for_js('fabbuttonhtml', $fabbuttonhtml, true);
     $loggedin = false;
     if (isloggedin() && !isguestuser()) {
         $loggedin = true;
     }
     $viewcapability = array('loggedin' => $loggedin);
-    $PAGE->requires->data_for_js('fabbuttonhtml', $fabbuttonhtml);
     $PAGE->requires->js_call_amd('local_learningtools/learningtools', 'init', $viewcapability);
     // List of subplugins.
     // Load available subplugins javascript.
