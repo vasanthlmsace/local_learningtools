@@ -41,6 +41,8 @@ $PAGE->set_course($course);
 $PAGE->set_heading($courselistelement->get_formatted_name());
 $setcontext = context_course::instance($course->id);
 $PAGE->set_context($setcontext);
+$PAGE->set_button($OUTPUT->single_button(new moodle_url('/local/learningtools/ltool/email/list.php',
+['id' => $userid, 'courseid' => $courseid]), get_string('listemailreports', 'local_learningtools')));
 
 $mform = new ltool_email\emailform($pageurl, array('course' => $courseid, 'user' => $userid));
 if ($mform->is_cancelled()) {

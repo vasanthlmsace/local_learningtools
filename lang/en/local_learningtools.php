@@ -158,3 +158,4 @@ $string['attachments'] = "Attachments";
 $string['msgemailsent'] = "Successfully sent the mail to users";
 $string['sentemailuserslist'] = "Sent the email to users list";
 $string['receivedusers'] = "Received Users";
+$string['listemailreports'] = "List of the sent email reports";

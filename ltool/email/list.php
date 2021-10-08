@@ -42,7 +42,7 @@ echo $OUTPUT->header();
 $sqlconditions = 'teacher=:teacher';
 $sqlparams = array('teacher' => $teacher);
 if ($courseid) {
-    $sqlconditions .= "AND course = :courseid";
+    $sqlconditions .= "AND courseid = :courseid";
     $sqlparams['courseid'] = $courseid;
 }
 $table = new \ltool_email\emailtool_table('datatable-emailtool', $courseid, $teacher);
