@@ -35,7 +35,8 @@ class ltool_email_testcase extends advanced_testcase {
      * @return void
      */
     public function setup(): void {
-        global $DB;
+        global $DB, $CFG;
+        require_once($CFG->dirroot."/local/learningtools/ltool/email/lib.php");
         $this->resetAfterTest();
         $this->setAdminUser();
         $this->user = $this->getDataGenerator()->create_user();
@@ -92,7 +93,7 @@ class ltool_email_testcase extends advanced_testcase {
         $sink->close();
 
         $this->assertSame($subject, $result[0]->subject);
-        $this->assertSame($messagetext, trim($result[0]->body));
+        $this->assertSame("DEMO MESSAGE TEXT", trim($result[0]->body));
         $this->assertSame($testuser1->email, $result[0]->to);
         $this->assertSame($supportuser->email, $result[0]->from);
     }
