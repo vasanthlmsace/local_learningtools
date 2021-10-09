@@ -66,6 +66,7 @@ class invitetool_table extends \table_sql {
 
         $this->define_columns($columns);
         $this->define_headers($headers);
+        $this->no_sorting(true);
     }
 
     /**

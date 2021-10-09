@@ -14,8 +14,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Invite ltool define js.
- * @package   ltool_invite
+ * forceactivity ltool define js.
+ * @package   ltool_forceactivity
  * @category  Classes - autoloading
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -28,26 +28,25 @@
      * Controls bookmarks tool action.
      * @param {object} params
      */
-    function learningToolInviteAction(params) {
-        showModalInvitetool(params);
+    function learningToolforceactivityAction(params) {
+        showModalforceactivitytool(params);
     }
 
     /**
-     * Display the modal to invite user emails.
+     * Display the modal to forceactivity user emails.
      * @param {object} params
      */
-    function showModalInvitetool(params) {
-        var inviteinfo = document.querySelector(".ltoolinvite-info #ltoolinvite-action");
-        if (inviteinfo) {
-            inviteinfo.addEventListener("click", function() {
-                // Strinviteusers.
+    function showModalforceactivitytool(params) {
+        var forceactivityinfo = document.querySelector(".ltoolforceactivity-info #ltoolforceactivity-action");
+        if (forceactivityinfo) {
+            forceactivityinfo.addEventListener("click", function() {
+                // Strforceactivityusers.
                 ModalFactory.create({
-                    title: getListInviteUsers(params),
+                    title: Str.get_string('forceactivity', 'local_learningtools'),
                     type: ModalFactory.types.SAVE_CANCEL,
-                    body: getInviteAction(params),
+                    body: getForceActivityModal(params),
                     large: true
                 }).then(function(modal) {
-                    modal.setSaveButtonText(Str.get_string('invitenow', 'local_learningtools'));
                     modal.show();
                     modal.getRoot().on(ModalEvents.hidden, function() {
                         modal.destroy();
@@ -70,53 +69,38 @@
      * @return {void} ajax respoltoolsnse.
      */
     function submitFormData(modal, params) {
-        var modalform = document.querySelectorAll('#invite-users-area form')[0];
+        var modalform = document.querySelectorAll('#forceactivity-modalinfo form')[0];
         var formData = new URLSearchParams(new FormData(modalform)).toString();
-        var jsonparams = JSON.stringify(params);
+        params = JSON.stringify(params);
         Ajax.call([{
-            methodname: 'ltool_invite_inviteusers',
-            args: {params: jsonparams, formdata: formData},
+            methodname: 'ltool_forceactivity_forceactivityaction',
+            args: {params: params, formdata: formData},
             done: function(response) {
                 modal.hide();
                 if (response) {
-                    var successinfo = Str.get_string('successinviteusers', 'local_learningtools');
+                    var successinfo = Str.get_string('successforceactivityusers', 'local_learningtools');
                     $.when(successinfo).done(function(localizedEditString) {
                         notification.addNotification({
                             message: localizedEditString,
                             type: "success"
                         });
                     });
-                    var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.user +
-                    "&courseid=" + params.course;
-                    window.open(listurl, '_self');
                 }
             }
         }]);
     }
     /**
-     * Get invite user emails form.
+     * Get forceactivity Modal info.
      * @param {object} params
      * @return {string} textarea html
      */
-    function getInviteAction(params) {
-        return Fragment.loadFragment('ltool_invite', 'get_inviteusers_form', params.contextid, params);
-    }
-    /**
-     * Display the list of invite users link.
-     * @param {object} params
-     * @returns {string} list of invite users link.
-     */
-    function getListInviteUsers(params) {
-        var listaction = "<p>" + params.strinviteusers + "</p>";
-        var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.user +
-        "&courseid=" + params.course;
-        listaction += "<div id='list-action-url'><a href='" + listurl + "' target='_blank'>" + params.strinvitelist + "</a></div>";
-        return listaction;
+    function getForceActivityModal(params) {
+        return Fragment.loadFragment('ltool_forceactivity', 'get_forceactivitymodal_form', params.contextid, params);
     }
 
     return {
         init: function(params) {
-            learningToolInviteAction(params);
+            learningToolforceactivityAction(params);
         }
     };
  });
