@@ -53,4 +53,3 @@ Feature: Check the Force activity ltool workflow.
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And "Student User 1" user has completed "Quiz 1" activity
-

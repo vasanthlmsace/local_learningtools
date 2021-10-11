@@ -166,3 +166,8 @@ $string['forceactivity'] = "Force activity";
 $string['courseactivity'] = "Course activity";
 $string['noactivity'] = "No force activiy";
 $string['successforceactivityusers'] = "Successfully added the force activity in the course";
+
+// Information tool.
+
+$string['information'] = "Information";
+$string['courseinfo'] = "Course Information";

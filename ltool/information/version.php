@@ -15,14 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Ltool plugin "Resume Course Tools" - string file.
+ * tool plugin "Learning Tools Information" - Version file.
  *
- * @package   ltool_resumecourse
+ * @package   ltool_information
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- defined("MOODLE_INTERNAL") || die();
+defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = "Learning Tools Resume Course";
-$string['resumecourse:createresumecourse'] = "Create the Reusme course tool";
+$plugin->component = 'ltool_information';
+$plugin->version = 2021101100;
+$plugin->requires = 2020061501;

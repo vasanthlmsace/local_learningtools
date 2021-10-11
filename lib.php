@@ -82,7 +82,6 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
             $plugin->load_js();
         }
     }
-    ltool_forceactivity_get_array_of_activities(68);
 }
 
 /**

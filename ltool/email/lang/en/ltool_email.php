@@ -25,4 +25,5 @@
  defined("MOODLE_INTERNAL") || die();
 
 $string['pluginname'] = "Learning Tools Email";
+$string['email:createemail'] = "Create the Email tool";
 $string['email:viewemail'] = "View the email tool";
