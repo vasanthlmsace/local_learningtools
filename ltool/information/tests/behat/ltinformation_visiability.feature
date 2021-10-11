@@ -24,4 +24,4 @@ Feature: Check the information ltool workflow.
     Then "#ltoolinformation-info" "css_element" should be visible
     And I click on "#ltoolinformation-info" "css_element"
     And I should see "Course Information" in the ".modal-title" "css_element"
-    Then I logout
+    And I log out

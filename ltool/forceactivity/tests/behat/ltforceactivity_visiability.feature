@@ -29,7 +29,7 @@ Feature: Check the Force activity ltool workflow.
       | Name          | Quiz 1 |
       | Description         | Quiz 1 description |
       | Completion tracking | Students can manually mark the activity as completed |
-    And "Student User 1" user has not completed "Quiz 1" activity
+    #And "Student User 1" user has not completed "Quiz 1" activity
     And I am on "Course 1" course homepage
     And I click on FAB button
     Then "#ltoolforceactivity-info" "css_element" should be visible
@@ -46,9 +46,9 @@ Feature: Check the Force activity ltool workflow.
     And I click on FAB button
     Then "#ltoolforceactivity-info" "css_element" should not be visible
     And I am on "Course 1" course homepage
-    And I vist forceactivity page "Course 1" "Quiz 1"
-    When I toggle the manual completion state of "Quiz 1"
-    Then the manual completion button of "Quiz 1" is displayed as "Done"
+    And I visit forceactivity page "Course 1" "Quiz 1"
+    Then I toggle the manual completion state of "Quiz 1"
+    And the manual completion button of "Quiz 1" is displayed as "Done"
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage

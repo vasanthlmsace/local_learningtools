@@ -38,11 +38,9 @@ class behat_forceactivity extends behat_base {
     /**
      * Check the forceactivity.
      *
-     * @When /^I visit forrceactivity page"(?P<course full name>(?:[^"]|\\")*)" "(?P<quiz name>[^"]*)"$/
-     * @throws coding_exception
+     * @When /^I visit forceactivity page "(?P<course_fullname>(?:[^"]|\\")*)" "(?P<quiz_name>[^"]*)"$/
      * @param string $coursefullname The course full name of the course.
      * @param string $quizname quiz name.
-     * @return void
      */
     public function i_visit_forceactivity_page($coursefullname, $quizname) {
         global $DB;
