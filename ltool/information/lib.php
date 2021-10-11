@@ -36,7 +36,11 @@ function ltool_information_render_template($templatecontent) {
     global $OUTPUT;
     return $OUTPUT->render_from_template('ltool_information/information', $templatecontent);
 }
-
+/**
+ * Load js for information tool
+ *
+ * @return void
+ */
 function load_information_js_config() {
     global $PAGE, $USER;
     $params = [];
@@ -47,6 +51,12 @@ function load_information_js_config() {
     }
 }
 
+/**
+ * Get the course info.
+ *
+ * @param [array] $args
+ * @return [string] display the info html
+ */
 function ltool_information_output_fragment_get_courseinformation($args) {
     global $DB;
     $content = '';
@@ -54,27 +64,44 @@ function ltool_information_output_fragment_get_courseinformation($args) {
     $summary = ltool_information_get_coursesummary($course);
     $courseelement = new core_course_list_element($course);
     $courseimg = ltool_information_get_courseimage($courseelement);
+    $coursename = $courseelement->get_formatted_fullname();
     $content .= html_writer::start_tag("div", array("id" => 'ltool-information-course-info'));
+    if (!empty($summary) || !empty($courseimg)) {
         if ($summary) {
             $content .= html_writer::start_tag("div", array("id" => 'summary-block'));
                 $content .= html_writer::tag("p", $summary);
             $content .= html_writer::end_tag("div");
         }
-        $content .= html_writer::start_tag("div", array("id" => 'image-block'));
-            $content .= html_writer::empty_tag('img', array('src' => $courseimg));
-        $content .= html_writer::end_tag("div");
+        if ($courseimg) {
+            $content .= html_writer::start_tag("div", array("id" => 'image-block'));
+                $content .= html_writer::empty_tag('img', array('src' => $courseimg));
+            $content .= html_writer::end_tag("div");
+        }
+    } else {
+        $content .= html_writer::tag('p', $coursename);
+    }
     $content .= html_writer::end_tag('div');
     return $content;
 }
-
+/**
+ * Get course summary.
+ *
+ * @param [object] $course
+ * @return string course summary
+ */
 function ltool_information_get_coursesummary($course) {
     return $course->summary;
 }
 
+/**
+ * Get course image.
+ *
+ * @param [object] $course
+ * @return string course image.
+ */
 function ltool_information_get_courseimage($course) {
     global $CFG, $OUTPUT;
     if (!empty($course)) {
-        $imgurl = $OUTPUT->image_url('no-image', 'ltool_information');
         $i = 0;
         $data = [];
         foreach ($course->get_course_overviewfiles() as $file) {
@@ -87,6 +114,6 @@ function ltool_information_get_courseimage($course) {
                 $i++;
             }
         }
-        return (!empty($data) && isset($data[0])) ? $data[0] : $imgurl;
+        return (!empty($data) && isset($data[0])) ? $data[0] : '';
     }
 }

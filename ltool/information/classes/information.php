@@ -108,3 +108,4 @@ class information extends \local_learningtools\learningtools {
         }
     }
 }
+
