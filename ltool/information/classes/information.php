@@ -55,7 +55,7 @@ class information extends \local_learningtools\learningtools {
      */
     public function get_tool_icon() {
 
-        return 'fa fa-info-circle';
+        return 'fa fa-info';
     }
 
     /**

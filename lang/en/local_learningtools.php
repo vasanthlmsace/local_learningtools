@@ -49,9 +49,9 @@ $string['ltoolsettings'] = '{$a} settings';
 $string['everywhere'] = "Everywhere";
 $string['allcourses'] = "All Courses";
 $string['specificcate'] = "Specific Categories";
-$string['visiblelearningtools'] = "Visibility of Learing Tools button";
+$string['visiblelearningtools'] = "Visibility of Learning Tools";
 $string['visiblecategories'] = "Select Visible Categories";
-$string['disablemodules'] = "Select Disable activities to hide Learnig Tools";
+$string['disablemodules'] = "Select Disable activities to hide Learning Tools";
 $string['enabledisablemodules'] = "Enable Learning Tools to hide activities";
 
 $string['bookmarksusermenu'] = "Display Bookmarks tool in user menu";

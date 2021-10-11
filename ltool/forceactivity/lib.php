@@ -126,23 +126,19 @@ function ltool_forceactivity_activityaction($params, $data) {
  *
  * @return void
  */
-function load_forceactivity_action_coursepage() {
+function load_forceactivity_action_coursepage($courseid) {
     global $PAGE, $DB, $USER;
-    $course = $PAGE->course;
-    $layout = "course-view-".$course->format;
-    if ($PAGE->pagetype == $layout) {
-        $record = $DB->get_record('learningtools_forceactivity', array('courseid' => $course->id));
-        if (!empty($record)) {
-            if (!$DB->record_exists('course_modules_completion', array('coursemoduleid' => $record->cmid,
-            'userid' => $USER->id, 'completionstate' => 1))) {
-                if (!empty($record->cmid)) {
-                    $modinfo = new stdClass();
-                    $modinfo->coursemodule = $record->cmid;
-                    $modname = get_module_name($modinfo, true);
-                    $forceurl = "/mod/".$modname."/view.php";
-                    $forceurl = new moodle_url($forceurl, ['id' => $record->cmid]);
-                    redirect($forceurl, $record->message, null, \core\output\notification::NOTIFY_WARNING);
-                }
+    $record = $DB->get_record('learningtools_forceactivity', array('courseid' => $courseid));
+    if (!empty($record)) {
+        if (!$DB->record_exists('course_modules_completion', array('coursemoduleid' => $record->cmid,
+        'userid' => $USER->id, 'completionstate' => 1))) {
+            if (!empty($record->cmid)) {
+                $modinfo = new stdClass();
+                $modinfo->coursemodule = $record->cmid;
+                $modname = get_module_name($modinfo, true);
+                $forceurl = "/mod/".$modname."/view.php";
+                $forceurl = new moodle_url($forceurl, ['id' => $record->cmid]);
+                redirect($forceurl, $record->message, null, \core\output\notification::NOTIFY_WARNING);
             }
         }
     }

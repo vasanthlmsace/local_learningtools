@@ -304,13 +304,13 @@ function local_learningtools_get_subplugins() {
  * @return string fab button html content.
  */
 function get_learningtools_info() {
-    global $PAGE;
+    global $PAGE, $SITE;
 
     $content = '';
     // Visiblity of learningtools.
     $fabvisiablestatus = get_config('local_learningtools', 'fabbuttonvisible');
     if ($fabvisiablestatus == 'allcourses') {
-        if ($PAGE->context->contextlevel != 50 && $PAGE->context->contextlevel != 70) {
+        if (empty($PAGE->course->id) || ($PAGE->course->id == $SITE->id)) {
             return '';
         }
     } else if ($fabvisiablestatus == 'specificcate') {
@@ -319,6 +319,8 @@ function get_learningtools_info() {
             if (!in_array($PAGE->category->id, $visiblecategories)) {
                 return '';
             }
+        } else {
+            return '';
         }
     }
 

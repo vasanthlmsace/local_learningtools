@@ -48,7 +48,7 @@ define([], function() {
             });
         }
 
-        var settingspage = document.querySelector("body#page-admin-setting-local_learningtools_settings");
+        var settingspage = document.querySelector("body#page-admin-setting-local_learningtools");
         if (settingspage) {
             document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
             document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function() {

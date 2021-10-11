@@ -37,7 +37,7 @@ class ltool_forceactivity_testcase extends advanced_testcase {
     public function setup(): void {
         $this->resetAfterTest();
         $this->setAdminUser();
-        $this->course = $this->getDataGenerator()->create_course();
+        $this->course = $this->getDataGenerator()->create_course(array('enablecompletion' => 1));
         $options = ['course' => $this->course->id];
         $this->quiz = $this->getDataGenerator()->create_module('quiz', $options, array('completion' => 1));
         $this->cm = get_coursemodule_from_instance('quiz', $this->quiz->id);
@@ -69,9 +69,10 @@ class ltool_forceactivity_testcase extends advanced_testcase {
         $records = $DB->count_records('learningtools_forceactivity',
             array('courseid' => $this->course->id));
         $this->assertEquals(1, $records);
-        load_forceactivity_action_coursepage();
+        load_forceactivity_action_coursepage($this->course->id);
         $sink = $this->redirectMessages();
-        $this->assertCount(1, $sink->get_messages());
+        $result = $sink->get_messages();
+        $this->assertCount(1, $result);
         $sink->close();
     }
 
