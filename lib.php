@@ -112,6 +112,7 @@ function check_instanceof_block($record) {
     }
     return $data;
 }
+
 /**
  * Get the course module id.
  * @param int $contextid context id

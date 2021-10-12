@@ -76,5 +76,4 @@ class ltool_forceactivity_testcase extends advanced_testcase {
         $this->assertCount(1, $result);
         $sink->close();
     }
-
 }
