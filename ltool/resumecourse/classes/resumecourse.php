@@ -42,6 +42,11 @@ class resumecourse extends \local_learningtools\learningtools {
     public $shortname = 'resumecourse';
 
     /**
+     * Tool context level
+     */
+    public $contextlevel = 'system';
+
+    /**
      * resumecourse name
      * @return string name
      *

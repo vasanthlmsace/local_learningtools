@@ -28,15 +28,7 @@ $capabilities = array(
     'ltool/information:createinformation' => array(
         'riskbitmask' => RISK_SPAM,
         'captype'      => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes'   => array(
-            'user' => CAP_ALLOW
-        )
-    ),
-    'ltool/information:viewinformation' => array(
-        'riskbitmask' => RISK_SPAM,
-        'captype'      => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
+        'contextlevel' => CONTEXT_COURSE,
         'archetypes'   => array(
             'manager' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
@@ -44,5 +36,4 @@ $capabilities = array(
             'student' => CAP_ALLOW
         )
     ),
-
 );

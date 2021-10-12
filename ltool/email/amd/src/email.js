@@ -21,29 +21,27 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- define(['jquery', 'core/ajax'],
- function($, Ajax) {
+ define([], function() {
 
     /**
      * Controls resume course tool action.
-     * @param {object} params
      */
-    function learningToolResumeCourseAction(params) {
+    function learningToolResumeCourseAction() {
         var emailinfo = document.querySelector(".ltoolemail-info #ltoolemail-action");
         if (emailinfo) {
-            emailinfo.addEventListener("click", function() {
-                params = JSON.stringify(params);
-                 Ajax.call([{
-                    methodname: 'ltool_email_lastaccess_activity',
-                    args: {params: params}
-                }]);
-            });
+            // hover color
+            var emailhovercolor = emailinfo.getAttribute("data-hovercolor");
+            if (emailhovercolor) {
+                emailinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltoolemail-action p').style.background = emailhovercolor;
+                });
+            }
         }
     }
 
     return {
-        init: function(params) {
-            learningToolResumeCourseAction(params);
+        init: function() {
+            learningToolResumeCourseAction();
         }
     };
 

@@ -41,11 +41,8 @@ function ltool_email_render_template($templatecontent) {
  * @return void
  */
 function load_email_js_config() {
-    global $PAGE, $USER;
-    $params = [];
-    $params['userid'] = $USER->id;
-    $params['contextid'] = $PAGE->context->id;
-    $PAGE->requires->js_call_amd('ltool_email/email', 'init', array($params));
+    global $PAGE;
+    $PAGE->requires->js_call_amd('ltool_email/email', 'init');
 }
 
 /**

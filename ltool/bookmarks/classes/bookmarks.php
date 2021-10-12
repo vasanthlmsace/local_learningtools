@@ -42,6 +42,11 @@ class bookmarks extends \local_learningtools\learningtools {
     public $shortname = 'bookmarks';
 
     /**
+     * Tool context level
+     */
+    public $contextlevel = 'system';
+
+    /**
      * Bookmarks name
      * @return string name
      *

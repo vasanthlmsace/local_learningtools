@@ -39,6 +39,11 @@ class note extends \local_learningtools\learningtools {
     public $shortname = 'note';
 
     /**
+     * Tool context level
+     */
+    public $contextlevel = 'system';
+
+    /**
      * Note name
      * @return string name
      */

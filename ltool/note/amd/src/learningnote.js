@@ -126,6 +126,13 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                 });
 
             });
+            // hover color
+            var notehovercolor = notesinfo.getAttribute("data-hovercolor");
+            if (notehovercolor) {
+                notesinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltnote-action p').style.background = notehovercolor;
+                });
+            }
         }
     }
 

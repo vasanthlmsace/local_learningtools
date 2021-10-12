@@ -28,29 +28,12 @@ $capabilities = array(
     'ltool/invite:createinvite' => array(
         'riskbitmask' => RISK_SPAM,
         'captype'      => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes'   => array(
-            'user' => CAP_ALLOW
-        )
-    ),
-    'ltool/invite:accessinvite' => array(
-        'riskbitmask' => RISK_SPAM,
-        'captype'      => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes'   => array(
             'manager' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW
+            'editingteacher' => CAP_ALLOW,
+            'student' => CAP_ALLOW
         )
     ),
-    'ltool/invite:viewinvite' => array(
-        'riskbitmask' => RISK_SPAM,
-        'captype'      => 'read',
-        'contextlevel' => CONTEXT_COURSE,
-        'archetypes'   => array(
-            'manager' => CAP_ALLOW,
-            'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW
-        )
-    )
 );

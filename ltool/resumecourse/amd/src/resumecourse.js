@@ -43,6 +43,14 @@
                     }
                 }]);
             });
+
+            // hover color
+            var resumecoursehovercolor = resumecourseinfo.getAttribute("data-hovercolor");
+            if (resumecoursehovercolor) {
+                resumecourseinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltoolresumecourse-action p').style.background = resumecoursehovercolor;
+                });
+            }
         }
     }
 

@@ -26,4 +26,5 @@
 
 $string['pluginname'] = "Learning Tools Information";
 $string['information:createinformation'] = "Create the Information tool";
+$string['information:viewinformation'] = "View the Information tool";
 

@@ -54,6 +54,13 @@
                     return modal;
                 }).catch(notification.exception);
             });
+            // hover color
+            var informationhovercolor = informationinfo.getAttribute("data-hovercolor");
+            if (informationhovercolor) {
+                informationinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltoolinformation-action p').style.background = informationhovercolor;
+                });
+            }
         }
     }
     /**

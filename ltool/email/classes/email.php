@@ -42,6 +42,11 @@ class email extends \local_learningtools\learningtools {
     public $shortname = 'email';
 
     /**
+     * Tool context level
+     */
+    public $contextlevel = 'course';
+
+    /**
      * email name
      * @return string name
      *
@@ -87,6 +92,16 @@ class email extends \local_learningtools\learningtools {
     }
 
     /**
+     * Load the required javascript files for invite.
+     *
+     * @return void
+     */
+    public function load_js() {
+        // Load invite tool js configuration.
+        load_email_js_config();
+    }
+
+    /**
      * Return the template of email fab button.
      *
      * @return string email tool fab button html.
@@ -95,7 +110,7 @@ class email extends \local_learningtools\learningtools {
         global $PAGE, $SITE;
         if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
             $coursecontext = \context_course::instance($PAGE->course->id);
-            if (has_capability("ltool/invite:viewinvite", $coursecontext)) {
+            if (has_capability("ltool/invite:createinvite", $coursecontext)) {
                 $data = $this->get_tool_records();
                 return ltool_email_render_template($data);
             }

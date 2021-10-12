@@ -28,19 +28,11 @@ $capabilities = array(
     'ltool/forceactivity:createforceactivity' => array(
         'riskbitmask' => RISK_SPAM,
         'captype'      => 'read',
-        'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes'   => array(
-            'user' => CAP_ALLOW
-        )
-    ),
-    'ltool/forceactivity:viewforceactivity' => array(
-        'riskbitmask' => RISK_SPAM,
-        'captype'      => 'read',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes'   => array(
             'manager' => CAP_ALLOW,
             'teacher' => CAP_ALLOW,
-            'editingteacher' => CAP_ALLOW
+            'editingteacher' => CAP_ALLOW,
         )
-    )
+    ),
 );

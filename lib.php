@@ -280,18 +280,14 @@ function get_mod_section($courseid, $modid) {
  * @return array $plugins List of available subplugins.
  */
 function local_learningtools_get_subplugins() {
-    global $DB;
-    $context = context_system::instance();
+    global $DB, $PAGE, $SITE;
     $learningtools = $DB->get_records('local_learningtools_products', array('status' => 1), 'sort');
     if (!empty($learningtools)) {
         foreach ($learningtools as $tool) {
-            $capability = 'ltool/'.$tool->shortname.':create'. $tool->shortname;
-            if (has_capability($capability, $context)) {
-                $plugin = 'ltool_'.$tool->shortname;
-                $classname = "\\$plugin\\$tool->shortname";
-                if (class_exists($classname)) {
-                    $plugins[$tool->shortname] = new $classname();
-                }
+            $plugin = 'ltool_'.$tool->shortname;
+            $classname = "\\$plugin\\$tool->shortname";
+            if (class_exists($classname)) {
+                $plugins[$tool->shortname] = new $classname();
             }
         }
         return isset($plugins) ? $plugins : [];
@@ -305,7 +301,7 @@ function local_learningtools_get_subplugins() {
  * @return string fab button html content.
  */
 function get_learningtools_info() {
-    global $PAGE, $SITE;
+    global $PAGE, $SITE, $USER;
 
     $content = '';
     // Visiblity of learningtools.
@@ -341,12 +337,20 @@ function get_learningtools_info() {
 
     // Get list of ltool sub plugins.
     $subplugins = local_learningtools_get_subplugins();
-
+    $context = context_system::instance();
     if (!empty($subplugins)) {
         foreach ($subplugins as $shortname => $toolobj) {
-            $content .= $toolobj->render_template();
+            $capability = 'ltool/'.$toolobj->shortname.':create'. $toolobj->shortname;
+            if ($toolobj->contextlevel == 'system') {
+                if (has_capability($capability, $context)) {
+                    $content .= $toolobj->render_template();
+                }
+            } else {
+                $content .= $toolobj->render_template();
+            }
         }
     }
+    //exit;
     $fabbackiconcolor = get_config('local_learningtools', 'fabiconbackcolor');
     $fabiconcolor = get_config('local_learningtools', 'fabiconcolor');
     $content .= html_writer::end_tag('div');

@@ -42,6 +42,11 @@ class forceactivity extends \local_learningtools\learningtools {
     public $shortname = 'forceactivity';
 
     /**
+     * Tool context level
+     */
+    public $contextlevel = 'course';
+
+    /**
      * forceactivity name
      * @return string name
      *
@@ -101,7 +106,7 @@ class forceactivity extends \local_learningtools\learningtools {
         global $PAGE, $SITE;
         if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
             $coursecontext = \context_course::instance($PAGE->course->id);
-            if (has_capability("ltool/forceactivity:viewforceactivity", $coursecontext)) {
+            if (has_capability("ltool/forceactivity:createforceactivity", $coursecontext)) {
                 $data = $this->get_tool_records();
                 return ltool_forceactivity_render_template($data);
             }

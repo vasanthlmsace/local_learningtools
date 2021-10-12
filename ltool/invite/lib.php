@@ -89,54 +89,52 @@ function invite_users_action($params, $data) {
         $plugin = enrol_get_plugin('manual');
         $instance = $DB->get_record('enrol', array('courseid' => $course->id, 'enrol' => 'manual'));
         $student = $DB->get_record('role', array('shortname' => 'student'));
-        if (has_capability('ltool/invite:accessinvite', $coursecontext)) {
-            if (!empty($useremails)) {
-                foreach ($useremails as $useremail) {
-                    $record = new stdClass;
-                    $record->teacher = $teacher->id;
-                    $record->course = $course->id;
-                    $record->timecreated = time();
-                    $useremail = trim($useremail);
-                    if ($DB->record_exists('user', array('email' => $useremail))) {
-                        $user = $DB->get_record('user', array('email' => $useremail));
-                        $record->userid = $user->id;
-                        if (!empty($user) && !$user->suspended) {
-                            if (!is_enrolled($coursecontext, $user)) {
-                                $plugin->enrol_user($instance, $user->id, $student->id);
-                                $record->status = 'enrolled';
+        if (!empty($useremails)) {
+            foreach ($useremails as $useremail) {
+                $record = new stdClass;
+                $record->teacher = $teacher->id;
+                $record->course = $course->id;
+                $record->timecreated = time();
+                $useremail = trim($useremail);
+                if ($DB->record_exists('user', array('email' => $useremail))) {
+                    $user = $DB->get_record('user', array('email' => $useremail));
+                    $record->userid = $user->id;
+                    if (!empty($user) && !$user->suspended) {
+                        if (!is_enrolled($coursecontext, $user)) {
+                            $plugin->enrol_user($instance, $user->id, $student->id);
+                            $record->status = 'enrolled';
+                            $record->enrolled = 1;
+                        } else {
+                            $record->status = "alredyenrolled";
+                            $record->enrolled = 0;
+                        }
+                    } else if ($user->suspended) {
+                        $record->status = "suspended";
+                        $record->enrolled = 0;
+                    }
+                } else {
+                    if (validate_email($useremail)) {
+                        // Create user and enroll to the instance course.
+                        $donotcreateusers = get_config('ltool_invite', 'donotcreateusers');
+                        if (!$donotcreateusers) {
+                            $newuserid = ltool_invite_create_user($useremail);
+                            $newuser = $DB->get_record('user', array('id' => $newuserid));
+                            if (!empty($newuser)) {
+                                $plugin->enrol_user($instance, $newuser->id, $student->id);
+                                $record->userid = $newuser->id;
+                                $record->status = 'registerandenrolled';
                                 $record->enrolled = 1;
-                            } else {
-                                $record->status = "alredyenrolled";
-                                $record->enrolled = 0;
                             }
-                        } else if ($user->suspended) {
-                            $record->status = "suspended";
+                        } else {
+                            $record->status = "invaildemail";
                             $record->enrolled = 0;
                         }
                     } else {
-                        if (validate_email($useremail)) {
-                            // Create user and enroll to the instance course.
-                            $donotcreateusers = get_config('ltool_invite', 'donotcreateusers');
-                            if (!$donotcreateusers) {
-                                $newuserid = ltool_invite_create_user($useremail);
-                                $newuser = $DB->get_record('user', array('id' => $newuserid));
-                                if (!empty($newuser)) {
-                                    $plugin->enrol_user($instance, $newuser->id, $student->id);
-                                    $record->userid = $newuser->id;
-                                    $record->status = 'registerandenrolled';
-                                    $record->enrolled = 1;
-                                }
-                            } else {
-                                $record->status = "invaildemail";
-                                $record->enrolled = 0;
-                            }
-                        } else {
-                            return false;
-                        }
+                        return false;
                     }
-                    $DB->insert_record('learningtools_invite', $record);
-                    return true;
                 }
+                $DB->insert_record('learningtools_invite', $record);
+                return true;
             }
         }
     }

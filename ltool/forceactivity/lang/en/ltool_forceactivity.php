@@ -26,4 +26,3 @@
 
 $string['pluginname'] = "Learning Tools Force activity";
 $string['forceactivity:createforceactivity'] = "Create the Force activity tool";
-$string['forceactivity:viewforceactivity'] = "Create the Force activity tool";

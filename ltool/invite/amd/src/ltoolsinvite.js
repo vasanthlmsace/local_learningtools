@@ -60,6 +60,14 @@
                     return modal;
                 }).catch(notification.exception);
             });
+
+            // hover color
+            var invitehovercolor = inviteinfo.getAttribute("data-hovercolor");
+            if (invitehovercolor) {
+                inviteinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltoolinvite-action p').style.background = invitehovercolor;
+                });
+            }
         }
     }
 

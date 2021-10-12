@@ -59,6 +59,14 @@
                     return modal;
                 }).catch(notification.exception);
             });
+
+            // hover color
+            var forceactivityhovercolor = forceactivityinfo.getAttribute("data-hovercolor");
+            if (forceactivityhovercolor) {
+                forceactivityinfo.addEventListener("mouseover", function() {
+                    document.querySelector('#ltoolforceactivity-action p').style.background = forceactivityhovercolor;
+                });
+            }
         }
     }
 

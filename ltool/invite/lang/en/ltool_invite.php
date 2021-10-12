@@ -26,5 +26,3 @@
 
 $string['pluginname'] = "Learning Tools Invite";
 $string['invite:createinvite'] = "Create the invite tool";
-$string['invite:accessinvite'] = "Access the invite tool";
-$string['invite:viewinvite'] = "View the invite tool";
