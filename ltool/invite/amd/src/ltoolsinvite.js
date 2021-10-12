@@ -96,11 +96,12 @@
                     });
                     var listurl = M.cfg.wwwroot + "/local/learningtools/ltool/invite/list.php?id=" + params.user +
                     "&courseid=" + params.course;
-                    window.open(listurl, '_self');
+                    //window.open(listurl, '_self');
                 }
             }
         }]);
     }
+
     /**
      * Get invite user emails form.
      * @param {object} params

@@ -129,14 +129,12 @@ function invite_users_action($params, $data) {
                             $record->status = "invaildemail";
                             $record->enrolled = 0;
                         }
-                    } else {
-                        return false;
                     }
                 }
                 $DB->insert_record('learningtools_invite', $record);
-                return true;
             }
         }
+        return true;
     }
     return false;
 }
