@@ -63,24 +63,48 @@ function ltool_information_output_fragment_get_courseinformation($args) {
     $course = $DB->get_record('course', array('id' => $args['course']));
     $summary = ltool_information_get_coursesummary($course);
     $courseelement = new core_course_list_element($course);
-    $courseimg = ltool_information_get_courseimage($courseelement);
+    $courseimgs = ltool_information_get_courseimage($courseelement);
     $coursename = $courseelement->get_formatted_fullname();
-    $content .= html_writer::start_tag("div", array("id" => 'ltool-information-course-info'));
+    $content .= html_writer::start_tag("div", array("class" => 'ltool-information-course-info'));
     if (!empty($summary) || !empty($courseimg)) {
         if ($summary) {
-            $content .= html_writer::start_tag("div", array("id" => 'summary-block'));
+            $content .= html_writer::start_tag("div", array("class" => 'summary-block'));
                 $content .= html_writer::tag("p", $summary);
             $content .= html_writer::end_tag("div");
         }
-        if ($courseimg) {
-            $content .= html_writer::start_tag("div", array("id" => 'image-block'));
-                $content .= html_writer::empty_tag('img', array('src' => $courseimg));
+        if (!empty($courseimgs)) {
+            $content .= html_writer::start_tag("div", array("class" => 'image-block'));
+            $content .= get_courses_images_slider($courseimgs);
             $content .= html_writer::end_tag("div");
         }
     } else {
         $content .= html_writer::tag('p', $coursename);
     }
     $content .= html_writer::end_tag('div');
+    return $content;
+}
+
+function get_courses_images_slider($courseimgs) {
+    $content = '';
+    if (!empty($courseimgs)) {
+        $content .= html_writer::start_tag('div', array('id' => 'carsouselcourseimg', 'class' => 'carousel slide',
+            'data-ride' => "carousel"));
+            $content .= html_writer::start_tag('ol', array('class' => 'carousel-indicators'));
+            foreach ($courseimgs as $img) {
+                $content .= html_writer::tag('li','', ['data-target' => "#carsouselcourseimg", 'data-slide-to' => $img['num'],
+                    'class' => $img['class']]);
+            }
+            $content .= html_writer::end_tag("ol");
+            $content .= html_writer::start_tag('div', array('class' => 'carousel-inner'));
+            foreach ($courseimgs as $img) {
+                $imgclass = $img['class'];
+                $content .= html_writer::start_tag('div', array('class' => "carousel-item $imgclass"));
+                    $content .= html_writer::empty_tag('img', array('class' =>"d-block w-100",'src' => $img['image']));
+                $content .= html_writer::end_tag('div');
+            }
+            $content .= html_writer::end_tag('div');
+        $content .= html_writer::end_tag("div");
+    }
     return $content;
 }
 /**
@@ -97,7 +121,7 @@ function ltool_information_get_coursesummary($course) {
  * Get course image.
  *
  * @param [object] $course
- * @return string course image.
+ * @return array course images.
  */
 function ltool_information_get_courseimage($course) {
     global $CFG, $OUTPUT;
@@ -110,10 +134,11 @@ function ltool_information_get_courseimage($course) {
                 $imgurl = file_encode_url("$CFG->wwwroot/pluginfile.php",
                 '/'. $file->get_contextid(). '/'. $file->get_component(). '/'.
                 $file->get_filearea(). $file->get_filepath(). $file->get_filename(), !$isimage);
-                $data[] = !empty($imgurl) ? $imgurl : '';
+                $imgclass = ($i == 0) ? 'active' : '';
+                $data[] = array('image' => $imgurl , 'num' => $i, 'class' => $imgclass);
                 $i++;
             }
         }
-        return (!empty($data) && isset($data[0])) ? $data[0] : '';
+        return (!empty($data)) ? $data : '';
     }
 }

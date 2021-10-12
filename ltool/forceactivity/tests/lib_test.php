@@ -69,6 +69,7 @@ class ltool_forceactivity_testcase extends advanced_testcase {
         $records = $DB->count_records('learningtools_forceactivity',
             array('courseid' => $this->course->id));
         $this->assertEquals(1, $records);
+        $this->setUser($student);
         load_forceactivity_action_coursepage($this->course->id);
         $sink = $this->redirectMessages();
         $result = $sink->get_messages();

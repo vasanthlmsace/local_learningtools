@@ -48,8 +48,8 @@ define([], function() {
             });
         }
 
-        var settingspage = document.querySelector("body#page-admin-setting-local_learningtools");
-        if (settingspage) {
+        var bodyid = document.querySelector("body").id;
+        if (bodyid == 'page-admin-setting-local_learningtools' || bodyid == 'page-admin-setting-local_learningtools_settings') {
             document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
             document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function() {
                 var val = this.value;
