@@ -83,26 +83,31 @@ function ltool_information_output_fragment_get_courseinformation($args) {
     $content .= html_writer::end_tag('div');
     return $content;
 }
-
+/**
+ * Get carousel slider html
+ *
+ * @param [type] $courseimgs
+ * @return void display html carousel
+ */
 function get_courses_images_slider($courseimgs) {
     $content = '';
     if (!empty($courseimgs)) {
         $content .= html_writer::start_tag('div', array('id' => 'carsouselcourseimg', 'class' => 'carousel slide',
             'data-ride' => "carousel"));
-            $content .= html_writer::start_tag('ol', array('class' => 'carousel-indicators'));
-            foreach ($courseimgs as $img) {
-                $content .= html_writer::tag('li','', ['data-target' => "#carsouselcourseimg", 'data-slide-to' => $img['num'],
-                    'class' => $img['class']]);
-            }
-            $content .= html_writer::end_tag("ol");
-            $content .= html_writer::start_tag('div', array('class' => 'carousel-inner'));
-            foreach ($courseimgs as $img) {
-                $imgclass = $img['class'];
-                $content .= html_writer::start_tag('div', array('class' => "carousel-item $imgclass"));
-                    $content .= html_writer::empty_tag('img', array('class' =>"d-block w-100",'src' => $img['image']));
-                $content .= html_writer::end_tag('div');
-            }
+        $content .= html_writer::start_tag('ol', array('class' => 'carousel-indicators'));
+        foreach ($courseimgs as $img) {
+            $content .= html_writer::tag('li', '', ['data-target' => "#carsouselcourseimg", 'data-slide-to' => $img['num'],
+                'class' => $img['class']]);
+        }
+        $content .= html_writer::end_tag("ol");
+        $content .= html_writer::start_tag('div', array('class' => 'carousel-inner'));
+        foreach ($courseimgs as $img) {
+            $imgclass = $img['class'];
+            $content .= html_writer::start_tag('div', array('class' => "carousel-item $imgclass"));
+                $content .= html_writer::empty_tag('img', array('class' => "d-block w-100", 'src' => $img['image']));
             $content .= html_writer::end_tag('div');
+        }
+        $content .= html_writer::end_tag('div');
         $content .= html_writer::end_tag("div");
     }
     return $content;

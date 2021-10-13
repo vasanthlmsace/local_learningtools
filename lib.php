@@ -82,11 +82,6 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
             $plugin->load_js();
         }
     }
-/*     require_once(__DIR__. "/ltool/invite/classes/external.php");
-    $data = 'sesskey=xqh4iWfFt5&_qf__ltool_inviteusers_mform=1&inviteusers=maddyvasanth5%40gmail.com%0D%0Avasanthr.lmsace%40gmail.com%0D%0Auser1%40gmail.com';
-    $params =  '{"course":"68","user":"4","contextid":1189,"contextlevel":50,"pageurl":"http://localhost/moodle/moodle-311/course/view.php?id=68","strinviteusers":"Invite Users","strinvitelist":"List of invite users"}';
-    $val = \ltool_invite\external::teachersinvite_users($params, $data);
-    //exit; */
 }
 
 /**
@@ -355,7 +350,6 @@ function get_learningtools_info() {
             }
         }
     }
-    //exit;
     $fabbackiconcolor = get_config('local_learningtools', 'fabiconbackcolor');
     $fabiconcolor = get_config('local_learningtools', 'fabiconcolor');
     $content .= html_writer::end_tag('div');

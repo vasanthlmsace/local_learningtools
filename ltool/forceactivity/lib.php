@@ -123,22 +123,27 @@ function ltool_forceactivity_activityaction($params, $data) {
 
 /**
  * Redirect the Force activity.
- *
+ * @param string $courseid course id.
+ * @param string $pagetype page type
  * @return void
  */
-function load_forceactivity_action_coursepage($courseid) {
-    global $PAGE, $DB, $USER;
-    $record = $DB->get_record('learningtools_forceactivity', array('courseid' => $courseid));
-    if (!empty($record)) {
-        if (!$DB->record_exists('course_modules_completion', array('coursemoduleid' => $record->cmid,
-        'userid' => $USER->id, 'completionstate' => 1))) {
-            if (!empty($record->cmid)) {
-                $modinfo = new stdClass();
-                $modinfo->coursemodule = $record->cmid;
-                $modname = get_module_name($modinfo, true);
-                $forceurl = "/mod/".$modname."/view.php";
-                $forceurl = new moodle_url($forceurl, ['id' => $record->cmid]);
-                redirect($forceurl, $record->message, null, \core\output\notification::NOTIFY_WARNING);
+function load_forceactivity_action_coursepage($courseid, $pagetype) {
+    global $DB, $USER;
+    $course = $DB->get_record('course', array('id' => $courseid));
+    $allowpage = 'course-view-'.$course->format;
+    if ($allowpage == $pagetype) {
+        $record = $DB->get_record('learningtools_forceactivity', array('courseid' => $courseid));
+        if (!empty($record)) {
+            if (!$DB->record_exists('course_modules_completion', array('coursemoduleid' => $record->cmid,
+            'userid' => $USER->id, 'completionstate' => 1))) {
+                if (!empty($record->cmid)) {
+                    $modinfo = new stdClass();
+                    $modinfo->coursemodule = $record->cmid;
+                    $modname = get_module_name($modinfo, true);
+                    $forceurl = "/mod/".$modname."/view.php";
+                    $forceurl = new moodle_url($forceurl, ['id' => $record->cmid]);
+                    redirect($forceurl, $record->message, null, \core\output\notification::NOTIFY_WARNING);
+                }
             }
         }
     }

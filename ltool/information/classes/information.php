@@ -43,6 +43,7 @@ class information extends \local_learningtools\learningtools {
 
     /**
      * Tool context level
+     * @var string
      */
     public $contextlevel = 'course';
 

@@ -56,8 +56,9 @@ class ltool_forceactivity_testcase extends advanced_testcase {
         $teacher = $this->getDataGenerator()->create_user();
         $studentrole = $DB->get_record('role', array('shortname' => 'student'));
         $teacherrole = $DB->get_record('role', array('shortname' => 'editingteacher'));
-        $this->getDataGenerator()->role_assign($studentrole->id, $student->id, $this->context);
         $this->getDataGenerator()->role_assign($teacherrole->id, $teacher->id, $this->context);
+        $this->getDataGenerator()->role_assign($studentrole->id, $student->id, $this->context);
+        $this->getDataGenerator()->enrol_user($student->id, $this->course->id, $studentrole->id);
         $params = new stdClass;
         $params->course = $this->course->id;
         $params->user = $teacher->id;
@@ -70,10 +71,12 @@ class ltool_forceactivity_testcase extends advanced_testcase {
             array('courseid' => $this->course->id));
         $this->assertEquals(1, $records);
         $this->setUser($student);
-        load_forceactivity_action_coursepage($this->course->id);
+        //core_completion_external::update_activity_completion_status_manually($this->cm->id, true);
+        $pagetype = 'course-view-'.$this->course->format;
+        load_forceactivity_action_coursepage($this->course->id, $pagetype);
         $sink = $this->redirectMessages();
         $result = $sink->get_messages();
-        $this->assertCount(1, $result);
         $sink->close();
+        $this->assertCount(1, $result);
     }
 }

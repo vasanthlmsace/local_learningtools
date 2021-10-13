@@ -37,9 +37,11 @@ if ($courseid) {
     $courselistelement = new core_course_list_element($courseelement);
     $PAGE->set_course($courseelement);
     $heading = $courselistelement->get_formatted_name();
+    require_capability('moodle/course:update', $setcontext);
 } else {
     $setcontext = context_system::instance();
     $heading = $SITE->fullname;
+    require_capability('moodle/site:config', $setcontext);
 }
 $PAGE->set_context($setcontext);
 $PAGE->set_title($title);

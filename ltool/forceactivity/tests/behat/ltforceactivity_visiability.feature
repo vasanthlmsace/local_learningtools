@@ -45,7 +45,6 @@ Feature: Check the Force activity ltool workflow.
     And I am on site homepage
     And I click on FAB button
     Then "#ltoolforceactivity-info" "css_element" should not be visible
-    And I am on "Course 1" course homepage
     And I visit forceactivity page "Course 1" "Quiz 1"
     Then I toggle the manual completion state of "Quiz 1"
     And the manual completion button of "Quiz 1" is displayed as "Done"

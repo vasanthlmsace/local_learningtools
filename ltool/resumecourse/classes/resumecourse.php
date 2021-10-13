@@ -43,6 +43,7 @@ class resumecourse extends \local_learningtools\learningtools {
 
     /**
      * Tool context level
+     * @var string
      */
     public $contextlevel = 'system';
 

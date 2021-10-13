@@ -48,7 +48,6 @@ Feature: Check the invite ltool workflow.
     And I should see "Invite Users" in the ".modal-title" "css_element"
     And I set the field "inviteusers" to "demouser1@test.com"
     And I press "Invite Now"
-    Then I should see "Invite users successfully."
     And I navigate to "Users > Enrolled users" in current page administration
     Then I should see "demouser1@test.com"
     And  I log out

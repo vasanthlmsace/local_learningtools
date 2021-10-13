@@ -1,0 +1,6 @@
+.modal .modal-title {
+	width: 100%;
+}
+.modal .modal-title > div#list-action-url {
+	text-align: right;
+}

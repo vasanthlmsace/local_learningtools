@@ -43,6 +43,8 @@ class forceactivity extends \local_learningtools\learningtools {
 
     /**
      * Tool context level
+     *
+     * @var string
      */
     public $contextlevel = 'course';
 
@@ -110,7 +112,7 @@ class forceactivity extends \local_learningtools\learningtools {
                 $data = $this->get_tool_records();
                 return ltool_forceactivity_render_template($data);
             }
-            load_forceactivity_action_coursepage($PAGE->course->id);
+            load_forceactivity_action_coursepage($PAGE->course->id, $PAGE->pagetype);
         }
     }
 

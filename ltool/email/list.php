@@ -30,15 +30,25 @@ require_login();
 $teacher = required_param('id', PARAM_INT);
 $courseid = optional_param('courseid', 0, PARAM_INT);
 
-$context = context_system::instance();
+if ($courseid) {
+    $setcontext = context_course::instance($courseid);
+    $courseelement = get_course($courseid);
+    $courselistelement = new core_course_list_element($courseelement);
+    $PAGE->set_course($courseelement);
+    $heading = $courselistelement->get_formatted_name();
+    require_capability('moodle/course:update', $setcontext);
+} else {
+    $setcontext = context_system::instance();
+    $heading = $SITE->fullname;
+    require_capability('moodle/site:config', $setcontext);
+}
 $title = get_string('sentemailuserslist', 'local_learningtools');
-$PAGE->set_context($context);
-$PAGE->set_url('/local/learningtools/ltool/email/list.php', array('id' => $teacher,
-    'courseid' => $courseid));
+$PAGE->set_context($setcontext);
+$PAGE->set_url('/local/learningtools/ltool/email/list.php');
 $PAGE->set_title($title);
-$PAGE->set_heading($SITE->fullname);
-
+$PAGE->set_heading($heading);
 echo $OUTPUT->header();
+
 $sqlconditions = 'teacher=:teacher';
 $sqlparams = array('teacher' => $teacher);
 if ($courseid) {
