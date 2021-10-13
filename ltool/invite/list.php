@@ -30,14 +30,21 @@ require_login();
 $teacher = required_param('id', PARAM_INT);
 $courseid = optional_param('courseid', 0, PARAM_INT);
 
-
-$context = context_system::instance();
 $title = get_string('inviteuserslist', 'local_learningtools');
-$PAGE->set_context($context);
-$PAGE->set_url('/local/learningtools/ltool/invite/list.php', array('id' => $teacher,
-    'courseid' => $courseid));
+if ($courseid) {
+    $setcontext = context_course::instance($courseid);
+    $courseelement = get_course($courseid);
+    $courselistelement = new core_course_list_element($courseelement);
+    $PAGE->set_course($courseelement);
+    $heading = $courselistelement->get_formatted_name();
+} else {
+    $setcontext = context_system::instance();
+    $heading = $SITE->fullname;
+}
+$PAGE->set_context($setcontext);
 $PAGE->set_title($title);
-$PAGE->set_heading($SITE->fullname);
+$PAGE->set_heading($heading);
+$PAGE->set_url('/local/learningtools/ltool/invite/list.php');
 
 echo $OUTPUT->header();
 $sqlconditions = 'teacher=:teacher';

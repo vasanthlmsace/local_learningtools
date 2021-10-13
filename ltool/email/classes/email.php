@@ -110,7 +110,7 @@ class email extends \local_learningtools\learningtools {
         global $PAGE, $SITE;
         if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
             $coursecontext = \context_course::instance($PAGE->course->id);
-            if (has_capability("ltool/invite:createinvite", $coursecontext)) {
+            if (has_capability("ltool/email:createemail", $coursecontext)) {
                 $data = $this->get_tool_records();
                 return ltool_email_render_template($data);
             }

@@ -94,6 +94,7 @@ function invite_users_action($params, $data) {
                 $record = new stdClass;
                 $record->teacher = $teacher->id;
                 $record->course = $course->id;
+                $record->email = $useremail;
                 $record->timecreated = time();
                 $useremail = trim($useremail);
                 if ($DB->record_exists('user', array('email' => $useremail))) {
@@ -129,6 +130,8 @@ function invite_users_action($params, $data) {
                             $record->status = "invaildemail";
                             $record->enrolled = 0;
                         }
+                    } else {
+                        continue;
                     }
                 }
                 $DB->insert_record('learningtools_invite', $record);

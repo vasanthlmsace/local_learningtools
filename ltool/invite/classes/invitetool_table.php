@@ -76,8 +76,14 @@ class invitetool_table extends \table_sql {
      * @return string Content for the column
      */
     public function col_email($row) {
-        $user = $this->get_user($row->userid);
-        return $user->email;
+        if (isset($row->userid)) {
+            $user = $this->get_user($row->userid);
+            return $user->email;
+        } else if (isset($row->email)) {
+            return $row->email;
+        } else {
+            return '';
+        }
 
     }
 
@@ -89,8 +95,10 @@ class invitetool_table extends \table_sql {
      */
     public function col_profile($row) {
         global $OUTPUT;
-        $user = $this->get_user($row->userid);
-        return $OUTPUT->user_picture($user, array('size' => 35, 'courseid' => $this->courseid, 'includefullname' => true));
+        if (isset($row->userid)) {
+            $user = $this->get_user($row->userid);
+            return $OUTPUT->user_picture($user, array('size' => 35, 'courseid' => $this->courseid, 'includefullname' => true));
+        }
     }
 
     /**
