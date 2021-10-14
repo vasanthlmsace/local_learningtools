@@ -44,7 +44,7 @@
                 }]);
             });
 
-            // hover color
+            // Hover color.
             var resumecoursehovercolor = resumecourseinfo.getAttribute("data-hovercolor");
             if (resumecoursehovercolor) {
                 resumecourseinfo.addEventListener("mouseover", function() {

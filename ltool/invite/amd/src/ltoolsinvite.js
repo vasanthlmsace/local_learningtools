@@ -61,7 +61,7 @@
                 }).catch(notification.exception);
             });
 
-            // hover color
+            // Hover color.
             var invitehovercolor = inviteinfo.getAttribute("data-hovercolor");
             if (invitehovercolor) {
                 inviteinfo.addEventListener("mouseover", function() {

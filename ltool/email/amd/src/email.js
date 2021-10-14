@@ -29,7 +29,7 @@
     function learningToolResumeCourseAction() {
         var emailinfo = document.querySelector(".ltoolemail-info #ltoolemail-action");
         if (emailinfo) {
-            // hover color
+            // Hover color.
             var emailhovercolor = emailinfo.getAttribute("data-hovercolor");
             if (emailhovercolor) {
                 emailinfo.addEventListener("mouseover", function() {

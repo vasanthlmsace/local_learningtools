@@ -54,7 +54,7 @@
                     return modal;
                 }).catch(notification.exception);
             });
-            // hover color
+            // Hover color.
             var informationhovercolor = informationinfo.getAttribute("data-hovercolor");
             if (informationhovercolor) {
                 informationinfo.addEventListener("mouseover", function() {

@@ -60,7 +60,7 @@
                 }).catch(notification.exception);
             });
 
-            // hover color
+            // Hover color.
             var forceactivityhovercolor = forceactivityinfo.getAttribute("data-hovercolor");
             if (forceactivityhovercolor) {
                 forceactivityinfo.addEventListener("mouseover", function() {

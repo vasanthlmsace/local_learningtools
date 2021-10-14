@@ -126,7 +126,7 @@ define(['jquery', 'core/modal_factory', 'core/str', 'core/fragment', 'core/modal
                 });
 
             });
-            // hover color
+            // Hover color.
             var notehovercolor = notesinfo.getAttribute("data-hovercolor");
             if (notehovercolor) {
                 notesinfo.addEventListener("mouseover", function() {

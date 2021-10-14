@@ -48,7 +48,7 @@ define(['core/str', 'core/ajax', 'core/notification'],
                 e.preventDefault();
                 submitFormdata(contextid, params);
             });
-            // hover color
+            // Hover color.
             var bookmarkshovercolor = bookmarksform.getAttribute("data-hovercolor");
             if (bookmarkshovercolor) {
                 bookmarksform.addEventListener("mouseover", function() {
