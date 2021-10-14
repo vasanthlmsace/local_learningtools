@@ -21,9 +21,7 @@
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined( 'MOODLE_INTERNAL') || die(' No direct access ');
-
 /**
  * Forceactivity subplugin for learningtools phpunit test cases defined.
  */
@@ -70,12 +68,5 @@ class ltool_forceactivity_testcase extends advanced_testcase {
         $records = $DB->count_records('learningtools_forceactivity',
             array('courseid' => $this->course->id));
         $this->assertEquals(1, $records);
-        $this->setUser($student);
-        $pagetype = 'course-view-'.$this->course->format;
-        load_forceactivity_action_coursepage($this->course->id, $pagetype);
-        $sink = $this->redirectMessages();
-        $result = $sink->get_messages();
-        $sink->close();
-        $this->assertCount(1, $result);
     }
 }
