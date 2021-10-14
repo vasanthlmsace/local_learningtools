@@ -50,8 +50,7 @@ class behat_forceactivity extends behat_base {
         $cm = $DB->get_record("course_modules", array("course" => $course->id, "module" => $module->id,
             'instance' => $quiz->id));
         $url = new moodle_url('/mod/quiz/view.php', ['id' => $cm->id]);
-        $courseurl = new moodle_url('/course/view.php', ['id' => $course->id]);
-        $this->locate_path($courseurl->out_as_local_url(false));
-        $this->getSession()->visit($this->locate_path($url->out_as_local_url(false)));
+        $courseurl = new moodle_url('/course/view.php', array('id' => $course->id));
+        $this->execute('behat_general::i_visit', $courseurl);
     }
 }

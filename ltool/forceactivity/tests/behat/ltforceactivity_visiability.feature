@@ -14,6 +14,7 @@ Feature: Check the Force activity ltool workflow.
     And the following "course enrolments" exist:
       | user | course | role           |
       | teacher1 | C1 | editingteacher |
+      | student1 | C1 | student        |
   @javascript
   Scenario: Test the force activity workflow.
     Given I log in as "teacher1"
@@ -46,9 +47,18 @@ Feature: Check the Force activity ltool workflow.
     And I click on FAB button
     Then "#ltoolforceactivity-info" "css_element" should not be visible
     And I visit forceactivity page "Course 1" "Quiz 1"
+    Then I should see "Test info message"
+    And I should see "Quiz 1"
+    And I am on "Course 1" course homepage
     Then I toggle the manual completion state of "Quiz 1"
     And the manual completion button of "Quiz 1" is displayed as "Done"
     And I log out
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And "Student User 1" user has completed "Quiz 1" activity
+    Then I log out
+    And I log in as "student1"
+    And I visit forceactivity page "Course 1" "Quiz 1"
+    And I should not see "Test info message"
+    And I should see "Course 1"
+    Then I log out
