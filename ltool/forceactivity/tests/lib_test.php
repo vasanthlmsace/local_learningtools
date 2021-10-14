@@ -71,7 +71,6 @@ class ltool_forceactivity_testcase extends advanced_testcase {
             array('courseid' => $this->course->id));
         $this->assertEquals(1, $records);
         $this->setUser($student);
-        //core_completion_external::update_activity_completion_status_manually($this->cm->id, true);
         $pagetype = 'course-view-'.$this->course->format;
         load_forceactivity_action_coursepage($this->course->id, $pagetype);
         $sink = $this->redirectMessages();
