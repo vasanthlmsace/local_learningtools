@@ -47,6 +47,7 @@ function load_email_js_config() {
 
 /**
  * Sent to the email for role users.
+ *
  * @param object $data message info.
  * @param object $context
  * @param int $courseid
@@ -67,7 +68,7 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
     $record->teacher = $USER->id;
     $record->courseid = $courseid;
     $record->timecreated = time();
-    $attachement = '';
+    $attachment = '';
     $attachementname = '';
     $fs = get_file_storage();
     if (property_exists($data, 'attachments')) {
@@ -76,12 +77,12 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
         file_save_draft_area_files($data->attachments, $context->id, 'ltool_email', 'attachments',
                    $itemid);
         $fileinfo = file_get_drafarea_files($data->attachments);
-        $attachement = isset($fileinfo->list[0]) ? $fileinfo->list[0]->url : '';
         $attachementname = isset($fileinfo->list[0]) ? $fileinfo->list[0]->filename : '';
         if (isset($fileinfo->list[0])) {
             $file = $fs->get_file($context->id, 'ltool_email', 'attachments', $itemid,
                 $fileinfo->list[0]->filepath, $fileinfo->list[0]->filename);
-            $attachement = $file->get_filename();
+            $attachementname = $file->get_filename();
+            $attachment = $file->copy_content_to_temp();
         }
     }
     $users = get_user_for_roleids($roleids, $context);
@@ -90,12 +91,13 @@ function ltool_email_sent_email_to_users($data, $context, $courseid) {
         foreach ($users as $user) {
             array_push($userids, $user->id);
             email_to_user($user, $supportuser, $subject, $message, $messagehtml,
-                $attachement, $attachementname);
+                $attachment, $attachementname);
         }
         $record->tousers = json_encode($userids);
         $DB->insert_record('learningtools_email', $record);
     }
 }
+
 /**
  * Get user info based on roleid for course context.
  * @param array $roleids roleids
