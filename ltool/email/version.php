@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'ltool_email';
-$plugin->version = 2021092803;
+$plugin->version = 2021101500;
 $plugin->requires = 2020061501;

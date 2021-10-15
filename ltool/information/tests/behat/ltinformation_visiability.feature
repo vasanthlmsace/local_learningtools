@@ -23,5 +23,5 @@ Feature: Check the information ltool workflow.
     And I click on FAB button
     Then "#ltoolinformation-info" "css_element" should be visible
     And I click on "#ltoolinformation-info" "css_element"
-    And I should see "Course Information" in the ".modal-title" "css_element"
+    And I should see "Course 1" in the ".modal-title" "css_element"
     And I log out

@@ -25,5 +25,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'ltool_resumecourse';
-$plugin->version = 2021092802;
+$plugin->version = 2021101500;
 $plugin->requires = 2020061501;
