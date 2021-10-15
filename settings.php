@@ -44,7 +44,7 @@ if ($hassiteconfig) {
         // Visiability of fab button.
         $name = "local_learningtools/fabbuttonvisible";
         $title = get_string('visiblelearningtools', 'local_learningtools');
-        $desc = "";
+        $desc = get_string('fabbuttonvisible_desc', 'local_learningtools');
         $choices = array(
             'all' => get_string('everywhere', 'local_learningtools'),
             'allcourses' => get_string('allcourses', 'local_learningtools'),
