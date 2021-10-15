@@ -42,7 +42,7 @@
             informationinfo.addEventListener("click", function() {
                 // Strinformationusers.
                 ModalFactory.create({
-                    title: Str.get_string('courseinfo', 'local_learningtools'),
+                    title: params.coursename,
                     type: ModalFactory.types.CANCEL,
                     body: getCourseInfoModal(params),
                     large: true

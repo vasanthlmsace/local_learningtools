@@ -42,11 +42,13 @@ function ltool_information_render_template($templatecontent) {
  * @return void
  */
 function load_information_js_config() {
-    global $PAGE, $USER;
+    global $PAGE, $SITE;
     $params = [];
-    if (!empty($PAGE->course->id)) {
+    if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
         $params['course'] = $PAGE->course->id;
         $params['contextid'] = $PAGE->context->id;
+        $courseelement = new core_course_list_element($PAGE->course);
+        $params['coursename'] = $courseelement->get_formatted_fullname();
         $PAGE->requires->js_call_amd('ltool_information/information', 'init', array($params));
     }
 }

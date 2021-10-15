@@ -51,7 +51,7 @@ if ($hassiteconfig) {
             'specificcate' => get_string('specificcate', 'local_learningtools')
         );
         $default = 1;
-        $setting = new admin_setting_configselect($name, $title, '', 'all', $choices);
+        $setting = new admin_setting_configselect($name, $title, $desc, 'all', $choices);
         $page->add($setting);
 
         // Select categories.
