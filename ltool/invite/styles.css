@@ -1,9 +1,0 @@
-.modal .modal-title {
-    width: 100%;
-}
-.modal .modal-title > div#list-action-url {
-    text-align: right;
-}
-.modal .modal-body #invite-users-area #inviteuser-action {
-    display: none;
-}
