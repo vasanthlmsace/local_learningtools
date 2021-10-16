@@ -179,6 +179,10 @@ class ltool_inviteusers_mform extends moodleform {
         $mform = $this->_form;
         $mform->addElement('textarea', 'inviteusers', get_string('usersemail', 'local_learningtools'),
              'wrap="virtual" rows="15" cols=50"');
+        $submitlabel = get_string('savechanges');
+        $mform->addElement('submit', 'submitbutton', $submitlabel, array('id' => 'inviteuser-action',
+            'class' => 'inviteuser-action'));
+        $mform->closeHeaderBefore('submitbutton');
     }
 }
 

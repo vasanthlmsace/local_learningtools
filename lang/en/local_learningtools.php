@@ -140,7 +140,7 @@ $string['alredyenrolled'] = "User was already enrolled";
 $string['suspended'] = "User was suspended";
 $string['timeaccess'] = "Time access";
 $string['registerandenrolled'] = "User was registered and enrolled successfully";
-$string['invaildemail'] = "Invaild email";
+$string['invaildemail'] = "User email not exists";
 $string['invaildemailadderss'] = "Email adderss should be wrong";
 
 // Resume course strings.

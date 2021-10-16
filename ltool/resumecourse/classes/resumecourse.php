@@ -95,7 +95,6 @@ class resumecourse extends \local_learningtools\learningtools {
         $data['resumecoursehovername'] = get_string('resumecourse', 'local_learningtools');
         $data['iconbackcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconbackcolor");
         $data['iconcolor'] = get_config("ltool_{$this->shortname}", "{$this->shortname}iconcolor");
-        ltool_resumecourse_store_user_access_data();
         return $data;
     }
 
@@ -107,6 +106,15 @@ class resumecourse extends \local_learningtools\learningtools {
     public function render_template() {
         $data = $this->get_tool_records();
         return ltool_resumecourse_render_template($data);
+    }
+
+    /**
+     * Defined required load the tool function.
+     *
+     * @return void
+     */
+    public function required_load_data() {
+        ltool_resumecourse_store_user_access_data();
     }
 }
 

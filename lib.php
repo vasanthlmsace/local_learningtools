@@ -81,6 +81,10 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
         if (method_exists($plugin, 'load_js')) {
             $plugin->load_js();
         }
+        // Required load tools function.
+        if (method_exists($plugin, 'required_load_data')) {
+            $plugin->required_load_data();
+        }
     }
 }
 
@@ -322,8 +326,8 @@ function get_learningtools_info() {
     }
 
     // Disable of activities.
-    $disablemodstatus = get_config('local_learningtools', 'disablemodstatus');
-    if ($disablemodstatus) {
+    $disablemodstatus = get_config('local_learningtools', 'disablemod');
+    if ($disablemodstatus != 0) {
         if (isset($PAGE->cm->module) && !empty($PAGE->cm->module)) {
             $visiblemods = explode(",", get_config('local_learningtools', 'disablemod'));
             if (in_array($PAGE->cm->module, $visiblemods)) {

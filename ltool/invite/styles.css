@@ -4,3 +4,6 @@
 .modal .modal-title > div#list-action-url {
     text-align: right;
 }
+.modal .modal-body #invite-users-area #inviteuser-action{
+    display: none;
+}

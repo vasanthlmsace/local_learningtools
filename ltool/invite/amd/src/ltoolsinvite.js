@@ -54,13 +54,17 @@
                     });
                     modal.getRoot().on(ModalEvents.save, function(e) {
                         e.preventDefault();
-                        submitFormData(modal, params);
-                        modal.getRoot().submit();
+                        document.querySelectorAll('#invite-users-area #inviteuser-action')[0].click();
+                    });
+                    modal.getRoot().on(ModalEvents.bodyRendered, function() {
+                        document.querySelector("#invite-users-area form").addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            submitFormData(modal, params);
+                        });
                     });
                     return modal;
                 }).catch(notification.exception);
             });
-
             // Hover color.
             var invitehovercolor = inviteinfo.getAttribute("data-hovercolor");
             if (invitehovercolor) {

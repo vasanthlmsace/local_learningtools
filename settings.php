@@ -63,12 +63,9 @@ if ($hassiteconfig) {
 
         // Disable specific activity types.
         $modules = $DB->get_records_menu('modules', array('visible' => 1), '', 'id,name');
+        $modules[0] = get_string('none');
+        ksort($modules);
         if (!empty($modules)) {
-            $name = "local_learningtools/disablemodstatus";
-            $title = get_string('enabledisablemodules', 'local_learningtools');
-            $setting = new admin_setting_configcheckbox($name, $title, '', 0);
-            $page->add($setting);
-
             $name = "local_learningtools/disablemod";
             $title = get_string('disablemodules', 'local_learningtools');
             $setting = new admin_setting_configmultiselect($name, $title, '', null, $modules);
