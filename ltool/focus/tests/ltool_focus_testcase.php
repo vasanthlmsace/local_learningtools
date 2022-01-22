@@ -38,6 +38,9 @@ class ltool_focus_testcase extends advanced_testcase {
         $this->setAdminUser();
     }
 
+    /**
+     * Create css file in temp directory.
+     */
     public function test_create_focus_temp_cssfile() {
         $configdata = get_config('ltool_focus', 'focusmodecss');
         $fileinfo = create_focus_temp_cssfile();
