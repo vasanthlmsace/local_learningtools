@@ -63,7 +63,6 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $toolobj = new \ltool_bookmarks\bookmarks();
         $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'bookmarks']);
         $data = $this->get_bookmarks_info($toolobj, $tool);
-        $_POST['sesskey'] = sesskey();
         $data = json_encode($data);
         // Redirect all events. Created event must trigger when the note saved.
         $sink = $this->redirectEvents();
@@ -89,7 +88,6 @@ class ltool_bookmarks_testcase extends advanced_testcase {
         $toolobj = new \ltool_bookmarks\bookmarks();
         $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'bookmarks']);
         $data = $this->get_bookmarks_info($toolobj, $tool);
-        $_POST['sesskey'] = sesskey();
 
         $sink = $this->redirectEvents();
         user_save_bookmarks($this->context->id, $data);

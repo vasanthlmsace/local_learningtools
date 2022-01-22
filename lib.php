@@ -113,6 +113,8 @@ function check_instanceof_block($record) {
 
     } else if ($record->contextlevel == 80) { // Context blocklevel.
         $data->instance = 'block';
+    } else {
+        $data->instance = '';
     }
     return $data;
 }
@@ -497,5 +499,35 @@ function delete_ltool_table($plugin) {
     if ($dbman->table_exists($table)) {
         $droptable = new xmldb_table($table);
         $dbman->drop_table($droptable);
+    }
+}
+
+/**
+ * Clean the assignment page userlist id.
+ * @param string $pageurl pageurl
+ * @param object $cm course module id.
+ * @return string pageurl
+ */
+function clean_mod_assign_userlistid($pageurl, $cm) {
+    if (!empty($cm->id)) {
+        $data = new stdClass;
+        $data->coursemodule = $cm->id;
+        $modname = get_module_name($data, true);
+        if ($modname == 'assign') {
+            $parsed = parse_url($pageurl);
+            if (isset($parsed['query'])) {
+                $query = $parsed['query'];
+                parse_str($query, $params);
+                unset($params['useridlistid']);
+            };
+            $url = $parsed['scheme'] . "://" . $parsed['host'] . $parsed['path'];
+            $urlparams = isset($parsed['query']) ? '?' . http_build_query($params, '', '&') : '';
+            $url = $url . $urlparams;
+            return $url;
+        } else {
+            return $pageurl;
+        }
+    } else {
+        return $pageurl;
     }
 }

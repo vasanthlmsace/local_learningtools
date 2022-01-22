@@ -61,7 +61,6 @@ class ltool_note_testcase extends advanced_testcase {
         $tool = $DB->get_record('local_learningtools_products', ['shortname' => 'note']);
         $data = $this->get_note_info($toolobj, $tool);
         $data['ltnoteeditor'] = 'Test note';
-        $_POST['sesskey'] = sesskey();
         return $data;
     }
 

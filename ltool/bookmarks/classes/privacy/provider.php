@@ -23,7 +23,6 @@
  */
 namespace ltool_bookmarks\privacy;
 
-use stdClass;
 use context;
 
 use core_privacy\local\metadata\collection;

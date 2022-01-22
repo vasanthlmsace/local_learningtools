@@ -15,7 +15,6 @@
 
 /**
  * Learningtools define js.
- * @package   local_learnigtools
  * @category  Classes - autoloading
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -36,6 +35,13 @@ define([], function() {
             pagewrapper.insertAdjacentHTML("beforebegin", fabbuttonhtml);
         }
 
+        // Add body class
+        var body = document.querySelector('body');
+        if (body) {
+            if (!body.classList.contains('local-learningtools')) {
+                body.classList.add('local-learningtools');
+            }
+        }
         var toolaction = document.getElementById("tool-action-button");
         if (toolaction !== null) {
             toolaction.addEventListener("click", function() {
