@@ -22,7 +22,10 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace local_learningtools\plugininfo;
-use core\plugininfo\base, part_of_admin_tree, admin_settingpage;
+
+use core\plugininfo\base;
+use part_of_admin_tree;
+use admin_settingpage;
 
 /**
  * Ltools subplugin define classes.

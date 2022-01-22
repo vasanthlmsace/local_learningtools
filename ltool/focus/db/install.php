@@ -21,7 +21,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- /**
+/**
  * ltool_focus install function.
  *
  * @return void
@@ -34,4 +34,3 @@ function xmldb_ltool_focus_install() {
     create_focus_temp_cssfile();
     add_learningtools_plugin($plugin);
 }
-
