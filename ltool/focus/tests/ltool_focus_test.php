@@ -25,7 +25,7 @@
 /**
  * focus subplugin for learningtools phpunit test cases defined.
  */
-class ltool_focus_testcase extends advanced_testcase {
+class ltool_focus_test extends advanced_testcase {
     /**
      * Create custom page instance and set admin user as loggedin user.
      *

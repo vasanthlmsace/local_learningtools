@@ -25,7 +25,7 @@
 /**
  * Bookmarks subplugin for learningtools phpunit test cases defined.
  */
-class ltool_bookmarks_testcase extends advanced_testcase {
+class ltool_bookmarks_test extends advanced_testcase {
 
     /**
      * Create custom page instance and set admin user as loggedin user.

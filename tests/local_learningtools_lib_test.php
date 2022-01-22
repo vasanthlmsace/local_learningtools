@@ -25,7 +25,7 @@
 /**
  * local learning tools main primary plugin phpunit test cases defined.
  */
-class local_learningtools_lib_testcase extends advanced_testcase {
+class local_learningtools_lib_test extends advanced_testcase {
 
     /**
      * Set the admin user as User.
