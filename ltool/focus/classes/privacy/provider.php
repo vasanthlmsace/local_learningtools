@@ -23,8 +23,6 @@
  */
 namespace ltool_focus\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The ltool_focus sub plugin does not store any data.
  */

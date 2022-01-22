@@ -23,8 +23,6 @@
  */
 namespace ltool_schedule\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * The ltool_schedule sub plugin does not store any data.
  */

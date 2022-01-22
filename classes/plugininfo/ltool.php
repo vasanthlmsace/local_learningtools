@@ -22,9 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace local_learningtools\plugininfo;
-
-defined('MOODLE_INTERNAL') || die();
-
 use core\plugininfo\base, part_of_admin_tree, admin_settingpage;
 
 /**

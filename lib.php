@@ -24,8 +24,6 @@
 
 use core_user\output\myprofile\tree;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Defines learningtools nodes for my profile navigation tree.
  *
