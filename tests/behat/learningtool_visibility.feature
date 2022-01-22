@@ -79,14 +79,14 @@ Feature: Check the learning tools features and manage sub plugins.
     Then "table#learningtool-products" "css_element" should exist
     # Bookmark order changed.
     Then I click on ".fa-arrow-down" "css_element" in the "Learning Tools Bookmarks" "table_row"
-    And "Learning Tools Note" "table_row" should appear before "Learning Tools Bookmarks" "table_row"
+    And "Learning Tools Focus mode" "table_row" should appear before "Learning Tools Bookmarks" "table_row"
     And I am on "Course 1" course homepage with editing mode on
     And I click on "#tool-action-button" "css_element"
-    And "#ltbookmarkinfo" "css_element" should appear after "#ltnoteinfo" "css_element"
-    # Note order down.
+    And "#ltbookmarkinfo" "css_element" should appear after "#ltoolfocus-info" "css_element"
+    # Focus mode order down.
     And I navigate to "Plugins > Local plugins > Manage Learning Tools" in site administration
-    Then I click on ".fa-arrow-down" "css_element" in the "Learning Tools Note" "table_row"
-    And "Learning Tools Bookmarks" "table_row" should appear before "Learning Tools Note" "table_row"
+    Then I click on ".fa-arrow-down" "css_element" in the "Learning Tools Focus mode" "table_row"
+    And "Learning Tools Bookmarks" "table_row" should appear before "Learning Tools Focus mode" "table_row"
     And I am on "Course 1" course homepage with editing mode on
     And I click on "#tool-action-button" "css_element"
-    And "#ltbookmarksinfo" "css_element" should appear before "#ltnoteinfo" "css_element"
+    And "#ltbookmarksinfo" "css_element" should appear before "#ltoolfocus-info" "css_element"
