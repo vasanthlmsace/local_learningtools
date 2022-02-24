@@ -79,7 +79,7 @@ class notetool_filter {
 
         if ($this->courseid) {
             if (!$this->childid) {
-                $students = get_students_incourse($this->courseid);
+                $students = local_learningtools_get_students_incourse($this->courseid);
                 if (!empty($students)) {
                     list($studentsql, $userparams) = $DB->get_in_or_equal($students, SQL_PARAMS_NAMED);
                     $usersql .= 'userid '. $studentsql;
@@ -113,7 +113,7 @@ class notetool_filter {
         $records = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE $usersql", $userparams);
         if (!empty($records)) {
             foreach ($records as $record) {
-                $instanceblock = check_instanceof_block($record);
+                $instanceblock = local_learningtools_check_instanceof_block($record);
                 if (isset($instanceblock->instance)) {
                     if ($instanceblock->instance == 'course' || $instanceblock->instance == 'mod') {
                         if ($instanceblock->courseid > 1) {
@@ -124,7 +124,7 @@ class notetool_filter {
             }
         }
 
-        $courses = get_courses_name(array_unique($courses),
+        $courses = local_learningtools_get_courses_name(array_unique($courses),
             '/local/learningtools/ltool/note/list.php', $this->selectcourse, $this->childid, $this->courseid);
 
         $template['courses'] = $courses;
@@ -166,7 +166,7 @@ class notetool_filter {
         if (!empty($records)) {
             foreach ($records as $record) {
                 $record->courseid = $record->course;
-                $list['mod'] = get_module_name($record);
+                $list['mod'] = local_learningtools_get_module_name($record);
                 $activityparams = $this->urlparams;
                 $activityparams['activity'] = $record->coursemodule;
                 $filterurl = new moodle_url("/local/learningtools/ltool/note/list.php", $activityparams);
@@ -253,10 +253,15 @@ class notetool_filter {
         $ordersql = '';
 
         $sorttypesql = $this->urlparams['sorttype'];
-
+        $filtersort = '';
+        if ($sorttypesql == 'asc') {
+            $filtersort = 'ASC';
+        } else if ($sorttypesql == 'desc') {
+            $filtersort = 'DESC';
+        }
         if ($this->courseid) {
             if (!$this->childid) {
-                $students = get_students_incourse($this->courseid);
+                $students = local_learningtools_get_students_incourse($this->courseid);
                 if (!empty($students)) {
                     list($studentsql, $params) = $DB->get_in_or_equal($students, SQL_PARAMS_NAMED);
                     $usersql .= 'userid '. $studentsql;
@@ -276,18 +281,18 @@ class notetool_filter {
         if ($this->sort == 'date') {
             $field = 'date';
             $select = 'FLOOR(timecreated/86400) AS date';
-            $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY FLOOR(timecreated/86400) $sorttypesql";
-            $ordersql .= "ORDER BY FLOOR(timecreated/86400) $sorttypesql";
+            $sortsql .= "GROUP BY FLOOR(timecreated/86400) ORDER BY FLOOR(timecreated/86400) $filtersort";
+            $ordersql .= "ORDER BY FLOOR(timecreated/86400) $filtersort";
         } else if ($this->sort == 'course') {
             $field = 'course';
             $select = 'course';
-            $sortsql .= "AND course != 1  GROUP BY course ORDER BY course $sorttypesql";
-            $ordersql .= "ORDER BY course $sorttypesql";
+            $sortsql .= "AND course != 1  GROUP BY course ORDER BY course $filtersort";
+            $ordersql .= "ORDER BY course $filtersort";
         } else if ($this->sort == 'activity') {
             $field = 'coursemodule';
             $select = 'coursemodule';
-            $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule ORDER BY coursemodule $sorttypesql";
-            $ordersql .= "ORDER BY coursemodule $sorttypesql";
+            $sortsql .= " AND coursemodule != 0 GROUP BY coursemodule ORDER BY coursemodule $filtersort";
+            $ordersql .= "ORDER BY coursemodule $filtersort";
         }
 
         if ($this->selectcourse) {
@@ -361,14 +366,15 @@ class notetool_filter {
                     $res['notes'] = $list;
 
                     if ($this->sort == 'date') {
-                        $head = userdate(($record->date * 86400), '%B, %dth %Y', '', false);
+                        $head = userdate(($record->date * 86400), get_string('strftimemonthdateyear', 'local_learningtools'),
+                            '', false);
                     } else if ($this->sort == 'course') {
-                        $head = get_course_name($record->course);
+                        $head = local_learningtools_get_course_name($record->course);
                     } else if ($this->sort == 'activity') {
                         $module = new stdclass;
                         $module->coursemodule = $record->coursemodule;
                         $module->courseid = $this->selectcourse;
-                        $head = get_module_name($module);
+                        $head = local_learningtools_get_module_name($module);
                     }
                     $res['title'] = $head;
                 }
@@ -464,12 +470,12 @@ class notetool_filter {
         $context = context_system::instance();
         if (!empty($records)) {
             foreach ($records as $record) {
-                $data = check_instanceof_block($record);
+                $data = local_learningtools_check_instanceof_block($record);
                 $list['id'] = $record->id;
                 $list['instance'] = $this->get_instance_note($data);
                 $list['base'] = $this->get_title_note($data, $record);
                 $list['note'] = !empty($record->note) ? $record->note : '';
-                $list['time'] = userdate($record->timecreated, '%B %d, %Y, %I:%M %p', '', false);
+                $list['time'] = userdate($record->timecreated, get_string("baseformat", "local_learningtools"), '', false);
                 $list['viewurl'] = $this->get_view_url($record);
 
                 if (!empty($this->courseid) && !$this->childid) {
@@ -557,7 +563,7 @@ class notetool_filter {
      * @return string view html
      */
     public function get_view_url($row) {
-        return get_instance_tool_view_url($row);
+        return local_learningtools_get_instance_tool_view_url($row);
     }
 
     /**
@@ -571,11 +577,11 @@ class notetool_filter {
             return $instance;
         }
         if ($data->instance == 'course') {
-            $instance = get_course_name($data->courseid);
+            $instance = local_learningtools_get_course_name($data->courseid);
         } else if ($data->instance == 'user') {
             $instance = 'user';
         } else if ($data->instance == 'mod') {
-            $instance = get_course_name($data->courseid);
+            $instance = local_learningtools_get_course_name($data->courseid);
         } else if ($data->instance == 'system') {
              $instance = 'system';
         } else if ($data->instance == 'block') {
@@ -595,9 +601,9 @@ class notetool_filter {
             return '';
         }
         if ($data->instance == 'course') {
-            $title = get_course_name($data->courseid);
+            $title = local_learningtools_get_course_name($data->courseid);
         } else if ($data->instance == 'mod') {
-            $title = get_note_module_coursesection($data, $record);
+            $title = ltool_note_get_module_coursesection($data, $record);
         } else {
             $title = $record->pagetitle;
         }

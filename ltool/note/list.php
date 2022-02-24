@@ -27,14 +27,14 @@ require_once($CFG->dirroot. '/local/learningtools/lib.php');
 require_once(dirname(__FILE__).'/lib.php');
 
 require_login();
-require_note_status();
+ltool_note_require_note_status();
 
 $context = context_system::instance();
 
 $selectcourse = optional_param('selectcourse', 0, PARAM_INT);
 $activity     = optional_param('activity', 0, PARAM_INT);
-$sort         = optional_param('sort', 'date', PARAM_TEXT);
-$sorttype     = optional_param('sorttype', 'asc', PARAM_TEXT);
+$sort         = optional_param('sort', 'date', PARAM_ALPHA);
+$sorttype     = optional_param('sorttype', 'asc', PARAM_ALPHA);
 $delete       = optional_param('delete', 0, PARAM_INT);
 $confirm      = optional_param('confirm', '', PARAM_ALPHANUM);
 $courseid     = optional_param('courseid', 0, PARAM_INT);
@@ -156,7 +156,7 @@ if ($delete && confirm_sesskey()) {
         $deleterecord = $DB->get_record('learningtools_note', array('id' => $delete));
         $deleteeventcontext = context::instance_by_id($deleterecord->contextid, MUST_EXIST);
         if ($DB->delete_records('learningtools_note', ['id' => $delete])) {
-            $eventcourseid = get_eventlevel_courseid($deleteeventcontext, $deleterecord->course);
+            $eventcourseid = local_learningtools_get_eventlevel_courseid($deleteeventcontext, $deleterecord->course);
             $deleteeventparams = [
                 'objectid' => $deleterecord->id,
                 'courseid' => $eventcourseid,

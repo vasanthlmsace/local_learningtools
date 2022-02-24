@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/learningtools/ltool/bookmarks/db" VERSION="20210721" COMMENT="XMLDB file for Moodle local/learningtools/ltool/bookmarks"
+<XMLDB PATH="local/learningtools/ltool/bookmarks/db" VERSION="20220224" COMMENT="XMLDB file for Moodle local/learningtools/ltool/bookmarks."
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+    xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
     <TABLE NAME="learningtools_bookmarks" COMMENT="Store the all learning tools in the list of user bookmarks">
@@ -23,5 +23,4 @@
       </KEYS>
     </TABLE>
   </TABLES>
-
 </XMLDB>

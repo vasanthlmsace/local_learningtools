@@ -95,12 +95,12 @@ function ltool_schedule_render_template($templatecontent) {
  *
  * @return void
  */
-function load_schedule_js_config() {
+function ltool_schedule_load_js_config() {
     global $PAGE, $USER;
     $params['pagetitle'] = $PAGE->title;
     $params['contextid'] = $PAGE->context->id;
     $params['user'] = $USER->id;
-    $params['pageurl'] = $PAGE->url->out();
+    $params['pageurl'] = $PAGE->url->out(false);
     $params['course'] = $PAGE->course->id;
     $params['cm'] = !empty($PAGE->cm->id) ? $PAGE->cm->id : 0;
     $PAGE->requires->js_call_amd('ltool_schedule/schedule', 'init', array($params));

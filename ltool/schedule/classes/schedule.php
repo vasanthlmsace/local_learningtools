@@ -111,7 +111,7 @@ class schedule extends \local_learningtools\learningtools {
      */
     public function load_js() {
         // Load schedule tool js configuration.
-        load_schedule_js_config();
+        ltool_schedule_load_js_config();
     }
 }
 
