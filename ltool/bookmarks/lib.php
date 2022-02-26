@@ -193,7 +193,7 @@ function ltool_bookmarks_check_view_bookmarks() {
  * @param array $data bookmarks info data
  * @return void
  */
-function load_bookmarks_js_config($data) {
+function ltool_bookmarks_load_bookmarks_js_config($data) {
     global $PAGE, $USER;
     $pagebookmarks = $data['pagebookmarks'];
     $PAGE->requires->data_for_js('pagebookmarks', $pagebookmarks, true);

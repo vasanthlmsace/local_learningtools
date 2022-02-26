@@ -111,7 +111,7 @@ class bookmarks extends \local_learningtools\learningtools {
     public function load_js() {
         $data = $this->get_tool_records();
         // Load bookmarks tool js configuration.
-        load_bookmarks_js_config($data);
+        ltool_bookmarks_load_bookmarks_js_config($data);
     }
 
     /**
