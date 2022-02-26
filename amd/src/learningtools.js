@@ -28,7 +28,7 @@
      * Controls Learning Tools action.
      * @param {bool} loggedin login status
      */
-    function learningToolsAction(loggedin) {
+    function learningToolsActionHandler(loggedin) {
         fabbuttonhtml = JSON.parse(fabbuttonhtml);
         // Add fab button.
         if (loggedin) {
@@ -42,6 +42,7 @@
                     enablesticky = true;
                 }
             }
+
             if (listtools) {
                if (listtools.childElementCount == 0 || listtools.childElementCount == 1 && !enablesticky) {
                     let fabbutton = document.querySelectorAll(".floating-button #tool-action-button")[0];
@@ -71,7 +72,7 @@
                 }
             });
         }
-
+        // Visible of learningtools.
         var bodyid = document.querySelector("body").id;
         if (bodyid == 'page-admin-setting-local_learningtools' || bodyid == 'page-admin-setting-local_learningtools_settings') {
             document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
@@ -92,9 +93,10 @@
             }
         }
     }
+
     return {
         init: function(loggedin) {
-            learningToolsAction(loggedin);
+            learningToolsActionHandler(loggedin);
         }
     };
 
