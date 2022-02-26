@@ -38,7 +38,7 @@ require_once($CFG->dirroot. '/local/learningtools/ltool/note/lib.php');
 /**
  *  List of the user notes filter action.
  */
-class notetool_filter {
+class ltool_note_filter {
     /**
      * Loads the notes info data.
      * @param int $userid current user id
@@ -104,19 +104,19 @@ class notetool_filter {
      */
     public function get_course_selector() {
 
-        global $DB, $OUTPUT;
+        global $DB, $OUTPUT, $SITE;
         $template = [];
         $courses = [];
         $usercondition = $this->get_user_sql();
         $usersql = $usercondition['sql'];
         $userparams = $usercondition['params'];
-        $records = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE $usersql", $userparams);
+        $records = $DB->get_records_sql("SELECT * FROM {ltool_note_data} WHERE $usersql", $userparams);
         if (!empty($records)) {
             foreach ($records as $record) {
                 $instanceblock = local_learningtools_check_instanceof_block($record);
                 if (isset($instanceblock->instance)) {
                     if ($instanceblock->instance == 'course' || $instanceblock->instance == 'mod') {
-                        if ($instanceblock->courseid > 1) {
+                        if ($instanceblock->courseid > $SITE->id) {
                             $courses[] = $instanceblock->courseid;
                         }
                     }
@@ -153,7 +153,7 @@ class notetool_filter {
         $usercondition = $this->get_user_sql($this->courseid, $this->childid);
         $usersql = $usercondition['sql'];
         $userparams = $usercondition['params'];
-        $sql = "SELECT coursemodule, course FROM {learningtools_note}
+        $sql = "SELECT coursemodule, course FROM {ltool_note_data}
         WHERE $usersql AND course = :course AND coursemodule != 0 GROUP BY coursemodule, course";
         $params = [
         'course' => $this->selectcourse,
@@ -304,8 +304,7 @@ class notetool_filter {
             }
         }
         // We can't use group concat in pgsql. We need to fetch the set of notes id by group.
-        $sql = "SELECT  $select FROM {learningtools_note} WHERE $usersql $coursesql $sortsql ";
-
+        $sql = "SELECT  $select FROM {ltool_note_data} WHERE $usersql $coursesql $sortsql ";
         $records = $DB->get_records_sql($sql, $params, $this->urlparams['page']
         * $this->urlparams['perpage'], $this->urlparams['perpage']);
         // List of available keys.
@@ -314,7 +313,7 @@ class notetool_filter {
         if (!empty($inkeys)) {
             list($insql, $inparams) = $DB->get_in_or_equal($inkeys, SQL_PARAMS_NAMED);
             $wherefield = ($field == 'date') ? 'FLOOR(timecreated/86400)' : $field;
-            $sql = "SELECT id, $select FROM {learningtools_note} WHERE $usersql $coursesql AND $wherefield $insql $ordersql";
+            $sql = "SELECT id, $select FROM {ltool_note_data} WHERE $usersql $coursesql AND $wherefield $insql $ordersql";
             $groupparams = array_merge($params, $inparams);
             $groups = $DB->get_records_sql($sql, $groupparams);
             $notegroups = [];
@@ -333,7 +332,7 @@ class notetool_filter {
             }
         }
         // Get the total notes.
-        $countreports = $DB->get_records_sql("SELECT $select FROM {learningtools_note}
+        $countreports = $DB->get_records_sql("SELECT $select FROM {ltool_note_data}
             WHERE $usersql $coursesql $sortsql", $params);
 
         $this->totalnotes = count($countreports);
@@ -362,11 +361,11 @@ class notetool_filter {
                 $res = [];
                 if (isset($record->notesgroup)) {
                     list($dbsql, $dbparam) = $DB->get_in_or_equal(explode(",", $record->notesgroup), SQL_PARAMS_NAMED);
-                    $list = $DB->get_records_sql("SELECT * FROM {learningtools_note} WHERE id $dbsql $sortsql", $dbparam);
+                    $list = $DB->get_records_sql("SELECT * FROM {ltool_note_data} WHERE id $dbsql $sortsql", $dbparam);
                     $res['notes'] = $list;
 
                     if ($this->sort == 'date') {
-                        $head = userdate(($record->date * 86400), get_string('strftimemonthdateyear', 'local_learningtools'),
+                        $head = userdate(($record->date * DAYSECS), get_string('strftimemonthdateyear', 'local_learningtools'),
                             '', false);
                     } else if ($this->sort == 'course') {
                         $head = local_learningtools_get_course_name($record->course);

@@ -4,7 +4,7 @@
     xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="learningtools_bookmarks" COMMENT="Store the all learning tools in the list of user bookmarks">
+    <TABLE NAME="ltool_bookmarks_data" COMMENT="Store the all learning tools in the list of user bookmarks">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>

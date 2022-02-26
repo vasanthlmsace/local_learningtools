@@ -63,9 +63,9 @@ if ($delete && confirm_sesskey()) {
 
     } else if (data_submitted()) {
 
-        $deleterecord = $DB->get_record('learningtools_note', array('id' => $delete));
+        $deleterecord = $DB->get_record('ltool_note_data', array('id' => $delete));
         $deleteeventcontext = context::instance_by_id($deleterecord->contextid, MUST_EXIST);
-        if ($DB->delete_records('learningtools_note', ['id' => $delete])) {
+        if ($DB->delete_records('ltool_note_data', ['id' => $delete])) {
             $eventcourseid = local_learningtools_get_eventlevel_courseid($deleteeventcontext, $deleterecord->course);
             $deleteeventparams = [
                 'objectid' => $deleterecord->id,

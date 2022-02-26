@@ -77,7 +77,7 @@ class bookmarkstool_filter {
         $template = [];
         $courses = [];
         $urlparams = [];
-        $records = $DB->get_records_sql("SELECT * FROM {learningtools_bookmarks} WHERE $usercondition", $userparams);
+        $records = $DB->get_records_sql("SELECT * FROM {ltool_bookmarks_data} WHERE $usercondition", $userparams);
 
         if (!empty($records)) {
             foreach ($records as $record) {
@@ -176,11 +176,11 @@ class bookmarkstool_filter {
         }
 
         $sql = "SELECT b.*, c.fullname
-        FROM {learningtools_bookmarks} b
+        FROM {ltool_bookmarks_data} b
         LEFT JOIN {course} c ON c.id = b.course
         WHERE $sqlconditions $orderconditions";
         $records = $DB->get_records_sql($sql, $sqlparams);
-        $totalbookmarks = $DB->count_records_sql("SELECT count(*) FROM {learningtools_bookmarks}
+        $totalbookmarks = $DB->count_records_sql("SELECT count(*) FROM {ltool_bookmarks_data}
             WHERE $sqlconditions", $sqlparams);
         $pageingbar = $OUTPUT->paging_bar($totalbookmarks, $page, $perpage, $this->baseurl);
 

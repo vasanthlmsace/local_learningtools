@@ -555,16 +555,8 @@ function local_learningtools_add_learningtools_plugin($plugin) {
  */
 function local_learningtools_delete_ltool_table($plugin) {
     global $DB;
-
     if ($DB->record_exists('local_learningtools_products', array('shortname' => $plugin)) ) {
         $DB->delete_records('local_learningtools_products', array('shortname' => $plugin));
-    }
-
-    $table = "learningtools_". $plugin;
-    $dbman = $DB->get_manager();
-    if ($dbman->table_exists($table)) {
-        $droptable = new xmldb_table($table);
-        $dbman->drop_table($droptable);
     }
 }
 

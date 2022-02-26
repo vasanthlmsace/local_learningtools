@@ -107,7 +107,7 @@ function ltool_bookmarks_user_save_bookmarks($contextid, $data) {
         }
     }
     $sql = "SELECT *
-        FROM {learningtools_bookmarks}
+        FROM {ltool_bookmarks_data}
         WHERE " . $DB->sql_compare_text('pageurl', 255). " = " . $DB->sql_compare_text('?', 255) . "
         AND contextid = ?
         AND userid = ?";
@@ -115,7 +115,7 @@ function ltool_bookmarks_user_save_bookmarks($contextid, $data) {
     $bookrecord = $DB->get_record_sql($sql, $params);
     if (empty($bookrecord)) {
         $record = new stdclass();
-        $record->userid = $data['user'];
+        $record->userid = $USER->id;
         $record->course = $data['course'];
         $record->coursemodule = $data['coursemodule'];
         $record->contextlevel = $data['contextlevel'];
@@ -129,7 +129,7 @@ function ltool_bookmarks_user_save_bookmarks($contextid, $data) {
         $record->pagetitle = $data['pagetitle'];
         $record->pageurl = $data['pageurl'];
         $record->timecreated = time();
-        $bookmarksrecord = $DB->insert_record('learningtools_bookmarks', $record);
+        $bookmarksrecord = $DB->insert_record('ltool_bookmarks_data', $record);
         $eventcourseid = local_learningtools_get_eventlevel_courseid($context, $data['course']);
         // Add event to user create the bookmark.
         $event = \ltool_bookmarks\event\ltbookmarks_created::create([
@@ -149,7 +149,7 @@ function ltool_bookmarks_user_save_bookmarks($contextid, $data) {
         $selectdelete = $DB->sql_compare_text('pageurl', 255). " = " . $DB->sql_compare_text('?', 255).
             "AND contextid = ? AND userid = ?";
         $delteparams = [$data['pageurl'], $contextid, $data['user']];
-        $DB->delete_records_select('learningtools_bookmarks', $selectdelete, $delteparams);
+        $DB->delete_records_select('ltool_bookmarks_data', $selectdelete, $delteparams);
             // Add event to user delete the bookmark.
         $relateduserid = ($bookrecord->userid != $USER->id) ? $USER->id : 0;
         $eventcourseid = local_learningtools_get_eventlevel_courseid($context, $data['course']);
@@ -221,7 +221,7 @@ function ltool_bookmarks_check_page_bookmarks_exist($contextid, $pageurl, $useri
     global $DB;
     $pagebookmarks = false;
     $sql = "SELECT id
-        FROM {learningtools_bookmarks}
+        FROM {ltool_bookmarks_data}
         WHERE " . $DB->sql_compare_text('pageurl', 255). " = " . $DB->sql_compare_text('?', 255) . "
         AND contextid = ?
         AND userid = ?";
@@ -263,8 +263,8 @@ function ltool_bookmarks_require_bookmarks_status() {
  */
 function ltool_bookmarks_delete_course_bookmarks($courseid) {
     global $DB;
-    if ($DB->record_exists('learningtools_bookmarks', array('course' => $courseid))) {
-        $DB->delete_records('learningtools_bookmarks', array('course' => $courseid));
+    if ($DB->record_exists('ltool_bookmarks_data', array('course' => $courseid))) {
+        $DB->delete_records('ltool_bookmarks_data', array('course' => $courseid));
     }
 }
 
@@ -277,8 +277,8 @@ function ltool_bookmarks_delete_course_bookmarks($courseid) {
 function ltool_bookmarks_delete_module_bookmarks($module) {
     global $DB;
 
-    if ($DB->record_exists('learningtools_bookmarks', array('coursemodule' => $module))) {
-        $DB->delete_records('learningtools_bookmarks', array('coursemodule' => $module));
+    if ($DB->record_exists('ltool_bookmarks_data', array('coursemodule' => $module))) {
+        $DB->delete_records('ltool_bookmarks_data', array('coursemodule' => $module));
     }
 }
 
