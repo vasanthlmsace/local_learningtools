@@ -69,7 +69,7 @@ function local_learningtools_extend_settings_navigation($settingnav, $context) {
         $loggedin = true;
     }
     $viewcapability = array('loggedin' => $loggedin);
-    $PAGE->requires->js_call_amd('local_learningtools/learningtools', 'init', $viewcapability);
+    $PAGE->requires->js_call_amd('local_learningtools/learningtoolsinfo', 'init', $viewcapability);
     // List of subplugins.
     // Load available subplugins javascript.
     $subplugins = local_learningtools_get_subplugins();

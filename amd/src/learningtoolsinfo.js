@@ -65,10 +65,12 @@
         if (toolaction !== null) {
             toolaction.addEventListener("click", function() {
                 var list = document.getElementsByClassName("list-learningtools")[0];
-                if (list.classList.contains('show')) {
-                    list.classList.remove('show');
-                } else {
-                    list.classList.add('show');
+                if (list) {
+                    if (list.classList.contains('show')) {
+                        list.classList.remove('show');
+                    } else {
+                        list.classList.add('show');
+                    }
                 }
             });
         }
