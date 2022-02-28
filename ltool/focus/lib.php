@@ -40,12 +40,9 @@ function ltool_focus_render_template($templatecontent) {
  * @return void
  */
 function ltool_focus_load_focus_config() {
-    global $SESSION, $CFG, $PAGE;
-    $enablefocusmode = $SESSION->focusmode;
-    $url = ltool_focus_get_focus_css_url();
-    $focuscssurl = $enablefocusmode ? $url : "";
+    global $PAGE;
     $disableclass = 'disable-focus d-none';
-    $focuscsshtml = '<link id="ltool-focuscss" rel="stylesheet" type="text/css" href="'. $focuscssurl . '">';
+    $focuscsshtml = '<link id="ltool-focuscss" rel="stylesheet" type="text/css" href="">';
     $PAGE->add_header_action($focuscsshtml);
     $focusdisable = html_writer::start_tag('div', array('id' => 'disable-focusmode', 'class' => $disableclass));
     $focusdisable .= html_writer::start_tag('button', array('class' => 'btn btn-primary'));

@@ -604,3 +604,19 @@ function local_learningtools_core_calendar_is_event_visible($event, $requestingu
     $userid = $DB->get_field('event', 'userid', ['id' => $event->id]);
     return ($userid == $requestinguserid) ? true : false;
 }
+
+/**
+ * Can access the Course tool for current page.
+ *
+ * @return void
+ */
+function local_learningtools_can_visible_tool_incourse() {
+    global $SITE, $PAGE, $USER;
+    $access = false;
+    if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
+        if (can_access_course($PAGE->course, $USER, '', true)) {
+            $access = true;
+        }
+    }
+    return $access;
+}

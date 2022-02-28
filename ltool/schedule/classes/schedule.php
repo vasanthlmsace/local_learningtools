@@ -95,7 +95,7 @@ class schedule extends \local_learningtools\learningtools {
      */
     public function render_template() {
         global $PAGE, $SITE;
-        if (!empty($PAGE->course->id) && $PAGE->course->id != $SITE->id) {
+        if (local_learningtools_can_visible_tool_incourse()) {
             $coursecontext = \context_course::instance($PAGE->course->id);
             if (has_capability("ltool/schedule:createschedule", $coursecontext)) {
                 $data = $this->get_tool_records();

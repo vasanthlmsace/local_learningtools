@@ -127,7 +127,7 @@ if ($courseid && !$childid) {
                 if ($deleterecord->userid == $USER->id) {
                     require_capability('ltool/bookmarks:manageownbookmarks', $context);
                 } else {
-                    redirect(new moodle_url('/'));
+                    require_capability('ltool/bookmarks:managebookmarks', $context);
                 }
             }
         }
@@ -138,7 +138,7 @@ if ($courseid && !$childid) {
         if ($deleterecord->userid == $USER->id) {
             require_capability('ltool/bookmarks:manageownbookmarks', $context);
         } else {
-            redirect(new moodle_url('/'));
+            require_capability('ltool/bookmarks:managebookmarks', $context);
         }
     }
 }
