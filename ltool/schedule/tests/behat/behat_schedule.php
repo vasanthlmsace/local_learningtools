@@ -18,7 +18,6 @@
  * Behat Schedule Tool related steps definitions.
  *
  * @package   ltool_schedule
- * @covers    \ltool_schedule\workflow
  * @copyright 2021, bdecent gmbh bdecent.de
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -56,7 +56,7 @@ class local_learningtools_test extends \advanced_testcase {
 
     /**
      * Test the get_module id function returns the module id from module context id.
-     *
+     * @covers ::local_learningtools_get_moduleid
      * @return void
      */
     public function test_local_learningtools_get_moduleid(): void {
@@ -77,6 +77,7 @@ class local_learningtools_test extends \advanced_testcase {
 
     /**
      * Test function local_learningtools_get_courses_name which returns list of course names from list of course ids.
+     * @covers ::local_learningtools_get_courses_name
      *
      * @return void
      */
@@ -96,7 +97,7 @@ class local_learningtools_test extends \advanced_testcase {
 
     /**
      * Test the function get_students_incouser which returns the list of enroled users in course.
-     *
+     * @covers ::local_learningtools_get_students_incourse
      * @return void
      */
     public function test_local_learningtools_get_students_incourse(): void {

@@ -53,7 +53,7 @@ class ltool_bookmarks_test extends \advanced_testcase {
 
     /**
      * Case to test the external method to create/delete bookmarks.
-     *
+     * @covers ::ltool_bookmarks_check_page_bookmarks_exist
      * @return void
      */
     public function test_external_test(): void {
@@ -78,7 +78,7 @@ class ltool_bookmarks_test extends \advanced_testcase {
 
     /**
      * Case to test the save function to create/delete bookmarks.
-     *
+     * @covers ::ltool_bookmarks_user_save_bookmarks
      * @return void
      */
     public function test_bookmark_save(): void {
