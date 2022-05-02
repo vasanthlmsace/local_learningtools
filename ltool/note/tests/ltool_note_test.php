@@ -18,6 +18,7 @@
  * Note ltool lib test cases defined.
  *
  * @package   ltool_note
+ * @covers    \ltool_note\workflow
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

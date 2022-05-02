@@ -18,6 +18,7 @@
  * Learning tools lib test cases defined.
  *
  * @package   local_learningtools
+ * @covers    \local_learningtools\workflow
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

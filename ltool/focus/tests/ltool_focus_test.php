@@ -18,6 +18,7 @@
  * focus ltool lib test cases defined.
  *
  * @package   ltool_focus
+ * @covers    \ltool_focus\workflow
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
