@@ -72,7 +72,7 @@ $pagetitle = !empty($pagetitle) ? $pagetitle : $SITE->shortname;
 $pageheading = !empty($pageheading) ? $pageheading : $SITE->fullname;
 $course = !empty($course) ? $course : $SITE;
 $url->params($params);
-
+$PAGE->add_body_class('ltool-note-popout');
 $PAGE->set_context($context);
 $PAGE->set_url($url);
 $PAGE->set_course($course);
