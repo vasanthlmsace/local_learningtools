@@ -18,7 +18,6 @@
  * Note ltool lib test cases defined.
  *
  * @package   ltool_note
- * @covers    \ltool_note\workflow
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -81,7 +80,7 @@ class ltool_note_test extends \advanced_testcase {
 
     /**
      * Test created notes count.
-     * @covers ::ltool_note_user_save_notes
+     * @covers ::ltool_note_get_userpage_countnotes
      * @return void
      */
     public function test_note_count(): void {

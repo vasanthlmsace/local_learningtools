@@ -18,7 +18,6 @@
  * Learning tools lib test cases defined.
  *
  * @package   local_learningtools
- * @covers    \local_learningtools\workflow
  * @copyright bdecent GmbH 2021
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -78,7 +77,6 @@ class local_learningtools_test extends \advanced_testcase {
     /**
      * Test function local_learningtools_get_courses_name which returns list of course names from list of course ids.
      * @covers ::local_learningtools_get_courses_name
-     *
      * @return void
      */
     public function test_local_learningtools_get_courses_name(): void {
