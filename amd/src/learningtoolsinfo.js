@@ -72,6 +72,28 @@
                 }
             });
         }
+        // Visible of learningtools.
+        var bodyid = document.querySelector("body").id;
+        if (bodyid) {
+            if (bodyid == 'page-admin-setting-local_learningtools' || bodyid == 'page-admin-setting-local_learningtools_settings') {
+                document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
+                document.querySelectorAll("#admin-fabbuttonvisible select")[0].addEventListener("change", function() {
+                    var val = this.value;
+                    if (val == 'specificcate') {
+                        document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
+                    } else {
+                        document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'none';
+                    }
+                });
+
+                var select = document.querySelectorAll("#admin-fabbuttonvisible select")[0];
+                var option = select.options[select.selectedIndex];
+                var optionval = option.value;
+                if (optionval == 'specificcate') {
+                    document.querySelectorAll("#admin-visiblecategories")[0].style.display = 'flex';
+                }
+            }
+        }
     }
 
     return {
