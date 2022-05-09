@@ -20,8 +20,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- define(['core/fragment', 'core/modal_factory', 'core/str', 'core/modal_events', 'core/notification'],
- function(Fragment, ModalFactory, String, ModalEvents, Notification) {
+ define(['jquery', 'core/fragment', 'core/modal_factory', 'core/str', 'core/modal_events', 'core/notification'],
+ function($, Fragment, ModalFactory, String, ModalEvents, Notification) {
+    /* global ltools */
 
     /**
      * Controls Schedule tool action.
