@@ -141,7 +141,7 @@ function local_learningtools_get_coursemodule_id($record) {
     global $DB;
 
     $contextinfo = $DB->get_record('context', array('id' => $record->contextid, 'contextlevel' => $record->contextlevel));
-    return $contextinfo->instanceid;
+    return isset($contextinfo->instanceid) ? $contextinfo->instanceid : 0;
 }
 /**
  * Get the courses name.
