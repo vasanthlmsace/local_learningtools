@@ -221,13 +221,19 @@ function local_learningtools_get_course_categoryname($courseid) {
 function local_learningtools_get_module_name($data, $mod = false) {
     global $DB;
     $coursemoduleinfo = $DB->get_record('course_modules', array('id' => $data->coursemodule));
-    $moduleinfo = $DB->get_record('modules', array('id' => $coursemoduleinfo->module));
-    if ($mod) {
-        return $moduleinfo->name;
+    if (empty($coursemoduleinfo)) {
+        return "";
     }
-    // Get module instance name.
-    $report = get_coursemodule_from_instance($moduleinfo->name, $coursemoduleinfo->instance, $data->courseid);
-    return $report->name;
+    $moduleinfo = $DB->get_record('modules', array('id' => $coursemoduleinfo->module));
+    if ($moduleinfo) {
+        if ($mod) {
+            return $moduleinfo->name;
+        }
+        // Get module instance name.
+        $report = get_coursemodule_from_instance($moduleinfo->name, $coursemoduleinfo->instance, $data->courseid);
+        return $report->name;
+    }
+    return "";
 }
 
 

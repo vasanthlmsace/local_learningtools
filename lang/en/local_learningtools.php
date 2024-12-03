@@ -243,3 +243,4 @@ $string['strftimemonthdateyear'] = '%B, %dth %Y';
 $string['strftimeyearmonth'] = '%Y/%m/%d';
 $string['strftimemonthnamedate'] = '%B %d, %Y';
 $string['subplugintype_ltool'] = "Learning Tools";
+$string['subplugintype_ltool_plural'] = "ltools";
